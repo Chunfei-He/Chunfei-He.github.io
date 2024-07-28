@@ -21,7 +21,7 @@
     <link href="/2021/06/10/%E6%B5%8B%E8%AF%95%E6%96%87%E7%AB%A0/"/>
     <url>/2021/06/10/%E6%B5%8B%E8%AF%95%E6%96%87%E7%AB%A0/</url>
     
-    <content type="html"><![CDATA[<p>这是一篇测试文章</p><p><img src="https://obsidian-1319504291.cos.ap-beijing.myqcloud.com/20240728190439.png" alt="image.png"></p>]]></content>
+    <content type="html"><![CDATA[<p>这是一篇测试文章</p><p><img src="https://obsidian-1319504291.cos.ap-beijing.myqcloud.com/20240728190439.png" alt="image.png"><br>hexo clean<br>hexo generate<br>hexo deploy</p>]]></content>
     
     
     <categories>
