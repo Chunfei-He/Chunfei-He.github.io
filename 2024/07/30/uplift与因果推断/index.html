@@ -19,21 +19,23 @@
   <meta name="author" content="Chunfei He">
   <meta name="keywords" content="">
   
-    <meta name="description" content="0728test">
+    <meta name="description" content="在通常的预测任务中，我们拟合的实际是Y与X的相关关系，X甚至可以是Y的结果，如GDP和发电量之间可能有一系列复杂的关系，但只要二者相关就可以互相预测。在另一些场景中则有所区别，如预测任务要指导干预(Treatment)决策时，我们所能掌控的只有Treatment变量，此时我们希望知道的是执行干预与否的效果差异(通常看增量，uplift)，目的是决策是否执行或执行何种干预。如在“发券&amp;下单”">
 <meta property="og:type" content="article">
-<meta property="og:title" content="728">
-<meta property="og:url" content="https://chunfei-he.github.io/2024/07/28/0728/index.html">
+<meta property="og:title" content="uplift与因果推断">
+<meta property="og:url" content="https://chunfei-he.github.io/2024/07/30/uplift%E4%B8%8E%E5%9B%A0%E6%9E%9C%E6%8E%A8%E6%96%AD/index.html">
 <meta property="og:site_name" content="blog">
-<meta property="og:description" content="0728test">
+<meta property="og:description" content="在通常的预测任务中，我们拟合的实际是Y与X的相关关系，X甚至可以是Y的结果，如GDP和发电量之间可能有一系列复杂的关系，但只要二者相关就可以互相预测。在另一些场景中则有所区别，如预测任务要指导干预(Treatment)决策时，我们所能掌控的只有Treatment变量，此时我们希望知道的是执行干预与否的效果差异(通常看增量，uplift)，目的是决策是否执行或执行何种干预。如在“发券&amp;下单”">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2024-07-28T11:43:40.000Z">
-<meta property="article:modified_time" content="2024-07-28T12:06:42.993Z">
+<meta property="og:image" content="https://obsidian-1319504291.cos.ap-beijing.myqcloud.com/20240730165623.png">
+<meta property="article:published_time" content="2024-07-30T08:42:08.000Z">
+<meta property="article:modified_time" content="2024-07-30T08:59:48.033Z">
 <meta property="article:author" content="Chunfei He">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://obsidian-1319504291.cos.ap-beijing.myqcloud.com/20240730165623.png">
   
   
   
-  <title>728 - blog</title>
+  <title>uplift与因果推断 - blog</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -199,7 +201,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="728"></span>
+            <span id="subtitle" data-typed-text="uplift与因果推断"></span>
           
         </div>
 
@@ -210,8 +212,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2024-07-28 19:43" pubdate>
-          2024年7月28日 晚上
+        <time datetime="2024-07-30 16:42" pubdate>
+          2024年7月30日 下午
         </time>
       </span>
     
@@ -222,7 +224,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1 字
+          592 字
         
       </span>
     
@@ -233,7 +235,7 @@
         
         
         
-          1 分钟
+          5 分钟
         
       </span>
     
@@ -270,12 +272,13 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">728</h1>
+            <h1 id="seo-header">uplift与因果推断</h1>
             
             
               <div class="markdown-body">
                 
-                <p>0728test</p>
+                <p>在通常的预测任务中，我们拟合的实际是Y与X的相关关系，X甚至可以是Y的结果，如GDP和发电量之间可能有一系列复杂的关系，但只要二者相关就可以互相预测。在另一些场景中则有所区别，如预测任务要指导干预(Treatment)决策时，我们所能掌控的只有Treatment变量，此时我们希望知道的是执行干预与否的效果差异(通常看增量，uplift)，目的是决策是否执行或执行何种干预。如在“发券&amp;下单”的问题中，用户的历史订单数对下单率预估有较大帮助，但对是否发券的指导意义可能会大打折扣。</p>
+<h2 id="相关、因果、辛普森悖论"><a href="#相关、因果、辛普森悖论" class="headerlink" title="相关、因果、辛普森悖论"></a>相关、因果、辛普森悖论</h2><p>因果关系要求“原因”先于并导致“结果”，而相关关系对顺序不做要求。参考材料中提到了很多示例，如“溺水死亡人数与冰激凌销量正相关”，显然二者不是因果关系，而是由“气温(或季节)”联系起来的相关关系。<br><strong>辛普森悖论(Simpson Paradox)</strong><br>趋势出现在几组数据中，但当这些组被合并后趋势消失或反转。<br>案例：<br>总共的志愿者有700个人（相当于小白鼠），分为两个组，第一组给350个人服用新生产的药物，第二组给另外350个人不用药物（或者说服用糖之类的东西，俗称安慰剂）。服药的第一组350个人中，男性患者87位，女性患者350-87 &#x3D;263位。未服药的第二组350个人中，男性患者270位，女性患者350-270&#x3D;80位，实验结果如表所示<br><img src="https://obsidian-1319504291.cos.ap-beijing.myqcloud.com/20240730165623.png" srcset="/img/loading.gif" lazyload alt="image.png"><br>总数据中，服药的患者痊愈率是78%，未服药的患者痊愈率是83%<br>但是在服药的患者中，男性患者的痊愈率是93%，而未服药的男性患者痊愈率是87%，证明药物有效；女性服药的患者痊愈率是73%，而未服药的患者痊愈率是69%，药物同样有效。<br>整体的效果而言，竟然是不服药的效果好。<br><strong>从数据的角度来说</strong>，此次服用药物患者的350人和不服用药物的350人中，男女比例是不一样的。</p>
 
                 
               </div>
@@ -293,8 +296,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>728</div>
-      <div>https://chunfei-he.github.io/2024/07/28/0728/</div>
+      <div>uplift与因果推断</div>
+      <div>https://chunfei-he.github.io/2024/07/30/uplift与因果推断/</div>
     </div>
     <div class="license-meta">
       
@@ -306,7 +309,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2024年7月28日</div>
+          <div>2024年7月30日</div>
         </div>
       
       
@@ -338,15 +341,15 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2024/07/30/uplift%E4%B8%8E%E5%9B%A0%E6%9E%9C%E6%8E%A8%E6%96%AD/" title="uplift与因果推断">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">uplift与因果推断</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
+                    
+                      <a href="/2024/07/28/0728/" title="728">
+                        <span class="hidden-mobile">728</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
                     
                   </article>
                 </div>
