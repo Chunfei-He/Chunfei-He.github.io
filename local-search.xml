@@ -23,6 +23,25 @@
   
   
   <entry>
+    <title>大模型实战-函数调用</title>
+    <link href="/2024/07/13/%E5%A4%A7%E6%A8%A1%E5%9E%8B%E5%AE%9E%E6%88%98-%E5%87%BD%E6%95%B0%E8%B0%83%E7%94%A8/"/>
+    <url>/2024/07/13/%E5%A4%A7%E6%A8%A1%E5%9E%8B%E5%AE%9E%E6%88%98-%E5%87%BD%E6%95%B0%E8%B0%83%E7%94%A8/</url>
+    
+    <content type="html"><![CDATA[<p><a href="https://github.com/openai/openai-cookbook/blob/main/examples/How_to_call_functions_with_chat_models.ipynb">https://github.com/openai/openai-cookbook/blob/main/examples/How_to_call_functions_with_chat_models.ipynb</a><br>Chat聊天：纯粹的Chat,像是一个主要由“大脑和嘴”构成的智能体，专注于信息处理和语言交流。比如ChatGPT这样的系统，它能够理解用户的查询，给出有用和连贯的回答，但它本身不直接执行任务。<br>Agent代理：像一个具有“手、脚”的智能体，它能够进行思考、决策，并且能执行具体的任务</p><p>总结一下，这里面的流程步骤：<br>1.用户把问题和函数功能交给openai<br>2.openai通过json格式返回能处理的问题（比如，一个模糊的地点，转换为准确的城市和<br>省)<br>3.用户通过返回的具体答案，调用自己的数据库，或是第三方api,获取json格式的数据<br>4.把上下文和返回的json数据汇总给openai<br>5.openai通过自然语言返回用户提出的问题</p>]]></content>
+    
+    
+    
+    <tags>
+      
+      <tag>LLM</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>大模型实战-文本分类和聚类</title>
     <link href="/2024/07/05/%E5%A4%A7%E6%A8%A1%E5%9E%8B%E5%AE%9E%E6%88%98-%E6%96%87%E6%9C%AC%E5%88%86%E7%B1%BB%E5%92%8C%E8%81%9A%E7%B1%BB/"/>
     <url>/2024/07/05/%E5%A4%A7%E6%A8%A1%E5%9E%8B%E5%AE%9E%E6%88%98-%E6%96%87%E6%9C%AC%E5%88%86%E7%B1%BB%E5%92%8C%E8%81%9A%E7%B1%BB/</url>
