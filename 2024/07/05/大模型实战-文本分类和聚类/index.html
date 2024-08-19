@@ -19,24 +19,21 @@
   <meta name="author" content="Chunfei He">
   <meta name="keywords" content="">
   
-    <meta name="description" content="在通常的预测任务中，我们拟合的实际是Y与X的相关关系，X甚至可以是Y的结果，如GDP和发电量之间可能有一系列复杂的关系，但只要二者相关就可以互相预测。在另一些场景中则有所区别，如预测任务要指导干预(Treatment)决策时，我们所能掌控的只有Treatment变量，此时我们希望知道的是执行干预与否的效果差异(通常看增量，uplift)，目的是决策是否执行或执行何种干预。如在“发券&amp;下单”">
+    <meta name="description" content="https:&#x2F;&#x2F;zhuanlan.zhihu.com&#x2F;p&#x2F;629024155 openai的completion与embedding接口1.Completion可以让模型根据用户的输入进行目动续写，Completion接口，一万面可以直接当作天机器人使用，另一方面，只要善用prompt提示词，就能完成文案撰写、文本摘要、机器翻译等工作2.Embedding可以将用户输入的文本转化成向量。Embed">
 <meta property="og:type" content="article">
-<meta property="og:title" content="uplift与因果推断">
-<meta property="og:url" content="https://chunfei-he.github.io/2024/07/30/uplift%E4%B8%8E%E5%9B%A0%E6%9E%9C%E6%8E%A8%E6%96%AD/index.html">
+<meta property="og:title" content="大模型实战-文本分类和聚类">
+<meta property="og:url" content="https://chunfei-he.github.io/2024/07/05/%E5%A4%A7%E6%A8%A1%E5%9E%8B%E5%AE%9E%E6%88%98-%E6%96%87%E6%9C%AC%E5%88%86%E7%B1%BB%E5%92%8C%E8%81%9A%E7%B1%BB/index.html">
 <meta property="og:site_name" content="blog">
-<meta property="og:description" content="在通常的预测任务中，我们拟合的实际是Y与X的相关关系，X甚至可以是Y的结果，如GDP和发电量之间可能有一系列复杂的关系，但只要二者相关就可以互相预测。在另一些场景中则有所区别，如预测任务要指导干预(Treatment)决策时，我们所能掌控的只有Treatment变量，此时我们希望知道的是执行干预与否的效果差异(通常看增量，uplift)，目的是决策是否执行或执行何种干预。如在“发券&amp;下单”">
+<meta property="og:description" content="https:&#x2F;&#x2F;zhuanlan.zhihu.com&#x2F;p&#x2F;629024155 openai的completion与embedding接口1.Completion可以让模型根据用户的输入进行目动续写，Completion接口，一万面可以直接当作天机器人使用，另一方面，只要善用prompt提示词，就能完成文案撰写、文本摘要、机器翻译等工作2.Embedding可以将用户输入的文本转化成向量。Embed">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://obsidian-1319504291.cos.ap-beijing.myqcloud.com/20240730165623.png">
-<meta property="article:published_time" content="2024-07-30T08:42:08.000Z">
-<meta property="article:modified_time" content="2024-08-19T03:07:45.671Z">
+<meta property="article:published_time" content="2024-07-05T12:53:16.000Z">
+<meta property="article:modified_time" content="2024-08-19T03:13:52.296Z">
 <meta property="article:author" content="Chunfei He">
-<meta property="article:tag" content="DS">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://obsidian-1319504291.cos.ap-beijing.myqcloud.com/20240730165623.png">
   
   
   
-  <title>uplift与因果推断 - blog</title>
+  <title>大模型实战-文本分类和聚类 - blog</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -202,7 +199,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="uplift与因果推断"></span>
+            <span id="subtitle" data-typed-text="大模型实战-文本分类和聚类"></span>
           
         </div>
 
@@ -213,8 +210,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2024-07-30 16:42" pubdate>
-          2024年7月30日 下午
+        <time datetime="2024-07-05 20:53" pubdate>
+          2024年7月5日 晚上
         </time>
       </span>
     
@@ -225,7 +222,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          592 字
+          1.4k 字
         
       </span>
     
@@ -236,7 +233,7 @@
         
         
         
-          5 分钟
+          12 分钟
         
       </span>
     
@@ -273,13 +270,23 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">uplift与因果推断</h1>
+            <h1 id="seo-header">大模型实战-文本分类和聚类</h1>
             
             
               <div class="markdown-body">
                 
-                <p>在通常的预测任务中，我们拟合的实际是Y与X的相关关系，X甚至可以是Y的结果，如GDP和发电量之间可能有一系列复杂的关系，但只要二者相关就可以互相预测。在另一些场景中则有所区别，如预测任务要指导干预(Treatment)决策时，我们所能掌控的只有Treatment变量，此时我们希望知道的是执行干预与否的效果差异(通常看增量，uplift)，目的是决策是否执行或执行何种干预。如在“发券&amp;下单”的问题中，用户的历史订单数对下单率预估有较大帮助，但对是否发券的指导意义可能会大打折扣。</p>
-<h2 id="相关、因果、辛普森悖论"><a href="#相关、因果、辛普森悖论" class="headerlink" title="相关、因果、辛普森悖论"></a>相关、因果、辛普森悖论</h2><p>因果关系要求“原因”先于并导致“结果”，而相关关系对顺序不做要求。参考材料中提到了很多示例，如“溺水死亡人数与冰激凌销量正相关”，显然二者不是因果关系，而是由“气温(或季节)”联系起来的相关关系。<br><strong>辛普森悖论(Simpson Paradox)</strong><br>趋势出现在几组数据中，但当这些组被合并后趋势消失或反转。<br>案例：<br>总共的志愿者有700个人（相当于小白鼠），分为两个组，第一组给350个人服用新生产的药物，第二组给另外350个人不用药物（或者说服用糖之类的东西，俗称安慰剂）。服药的第一组350个人中，男性患者87位，女性患者350-87 &#x3D;263位。未服药的第二组350个人中，男性患者270位，女性患者350-270&#x3D;80位，实验结果如表所示<br><img src="https://obsidian-1319504291.cos.ap-beijing.myqcloud.com/20240730165623.png" srcset="/img/loading.gif" lazyload alt="image.png"><br>总数据中，服药的患者痊愈率是78%，未服药的患者痊愈率是83%<br>但是在服药的患者中，男性患者的痊愈率是93%，而未服药的男性患者痊愈率是87%，证明药物有效；女性服药的患者痊愈率是73%，而未服药的患者痊愈率是69%，药物同样有效。<br>整体的效果而言，竟然是不服药的效果好。<br><strong>从数据的角度来说</strong>，此次服用药物患者的350人和不服用药物的350人中，男女比例是不一样的。</p>
+                <p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/629024155">https://zhuanlan.zhihu.com/p/629024155</a></p>
+<h3 id="openai的completion与embedding接口"><a href="#openai的completion与embedding接口" class="headerlink" title="openai的completion与embedding接口"></a>openai的completion与embedding接口</h3><p>1.Completion可以让模型根据用户的输入进行目动续写，Completion接口，一万面可以直接当作天机器人使用，另一方面，只要善用prompt提示词，就能完成文案撰写、文本摘要、机器翻译等工作2.Embedding可以将用户输入的文本转化成向量。Embedding向量适合作为一个中间结果，用于传统的机器学习场景，比如分类、聚类。</p>
+<p>OpenAI 支持批量调用接口，可以在一个请求里一次批量处理很多个请求。通过将 1000 条记录打包在一起处理，速度将会快很多。<br>对于大数据集，我们不应该存储成 CSV 格式。特别是获取到的 Embedding 数据，它是由很多浮点数组成的。如果存储成 CSV 格式，那么它会把本来只需要 4 个字节的浮点数都用字符串的形式存储下来，这会浪费好几倍的空间，并且写入的速度也会变得很慢。因此，我在这里采用了 parquet 这个序列化的格式。使用 parquet 格式可以节省空间并提高写入速度，整个存储的过程只需要 1 分钟左右。另外，为了确保数据的安全，我们还可以对 parquet 文件进行加密和压缩，这样可以进一步减小存储空间，并且保护数据的机密性。</p>
+<h3 id="指标含义"><a href="#指标含义" class="headerlink" title="指标含义"></a>指标含义</h3><p>准确率表示模型正确判断为该类别的标题所占的比例，即在所有判断为该类别的标题中有多少是真正属于该类别。举个例子，模型判断有100个标题属于农业新闻，但实际上只有83个标题是农业新闻，那么准确率就是0.83。准确率越高越好，但是并不意味着准确率达到100%就代表模型完全正确，因为模型可能会漏判，所以我们还需要考虑召回率。</p>
+<p>召回率表示模型正确判断为该类别的标题占实际该类别下所有标题的比例，即没有漏掉的比例。例如，模型判断有100个标题属于农业新闻，这100个标题实际上都是农业新闻。准确率已经达到100%，但是实际上我们共有200条农业新闻。因此，在农业新闻类别中，我们的召回率只有100&#x2F;200 &#x3D; 50%。</p>
+<p>因此，评估模型效果时需要考虑准确率和召回率，综合考虑这两个指标得出的结果就是F1分数。F1分数是准确率和召回率的调和平均数，即 F1 Score &#x3D; 2 * (Precision * Recall) &#x2F; (Precision + Recall)。当准确率和召回率都为100%时，F1分数也为1。如果准确率为100%，召回率为80%，那么计算得到的F1分数为0.88。F1分数越高越好。</p>
+<p>支持样本量表示数据中实际属于该类别的样本数量。一般来说，样本数量越多，该类别的训练结果就越准确。</p>
+<p>accuracy：总体上判断正确的分类数除以测试样本数，即模型的整体准确率。<br>macro average是宏平均，它将每个类别计算得到的指标加在一起取平均。宏平均对于数据分类不平衡的情况非常有用。比如，假设我们进行情感分析，其中90%的样本属于正面情感，而10%的样本属于负面情感。在这种情况下，如果我们的模型在正面情感方面的预测效果很好，准确率达到了90%，但在负面情感方面的准确率只有50%。如果只看整体数据，准确率似乎很高，因为正面情感的样本很多。但是对于我们的目标来说，即找到具有负面情感的客户并与他们沟通、进行赔偿，整体准确率就没有什么用了。而宏平均会将整体准确率计算为(90% + 50%)&#x2F;2 &#x3D; 70%。这并不是一个很好的预测结果，我们需要进一步优化模型。宏平均在处理数据样本不平衡的情况下非常有用</p>
+<h3 id="文本聚类"><a href="#文本聚类" class="headerlink" title="文本聚类"></a>文本聚类</h3><p>K-Means:是一种无监督的聚类算法，其中的K代表类簇个数，Means代表类簇内数据对象的均值。算法基本原理是：先从样本集中随机选取K个样本作为簇中心，并计算所有样本与这K个“簇中心”的距离；对于每一个样本，将其划分到与其距离最近的“簇中心”所在的簇中；然后再计算每个簇的新的“簇中心”。迭代进行上述过程，直到达到某个终止条件（如迭代次数、簇中心的移动距离小于某个阈值等）为止。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-number">1</span> <span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np<br><span class="hljs-number">2</span> <span class="hljs-keyword">from</span> sklearn.cluster <span class="hljs-keyword">import</span> KMeans<br><span class="hljs-number">3</span><br><span class="hljs-number">4</span> embedding_df pd.read_parquet(<span class="hljs-string">&quot;data/20newsgroups.parquet&quot;</span>)<br><span class="hljs-number">5</span><br><span class="hljs-number">6</span> matrix np.vstack(embedding_df.embedding.values)<br>7num_of_clusters =<span class="hljs-number">20</span><br><span class="hljs-number">8</span><br><span class="hljs-number">9</span> kmeans KMeans(n_clusters=num_of_clusters,init=<span class="hljs-string">&quot;k-means++&quot;</span>,n_init=<span class="hljs-number">10</span>, random_state=<span class="hljs-number">42</span>)<br><span class="hljs-number">10</span> kmeans.fit(matrix)<br><span class="hljs-number">11</span> labels kmeans.labels_<br><span class="hljs-number">12</span> embedding_df[<span class="hljs-string">&quot;cluster&quot;</span>]=labels<br><span class="hljs-number">13</span><br><span class="hljs-number">14</span><span class="hljs-comment">#统计每个clusteri的数量</span><br><span class="hljs-number">15</span> new_df embedding_df.groupby(<span class="hljs-string">&#x27;cluster&#x27;</span>)[<span class="hljs-string">&#x27;cluster&#x27;</span>].count().reset_ind<br><span class="hljs-number">16</span><span class="hljs-comment">#输出结果</span><br><span class="hljs-number">17</span> <span class="hljs-keyword">from</span> IPython.display <span class="hljs-keyword">import</span> display<br><span class="hljs-number">18</span> display(new_df)<br></code></pre></td></tr></table></figure>
+
+<p>上述代码通过numPy的stack函数，把所有的Embedding)放到一个矩阵里面，并设置了要聚<br>合出来的类的数量，最后调用了一下K-Means:算法的ft方法。</p>
 
                 
               </div>
@@ -289,13 +296,6 @@
               <div class="post-metas my-3">
   
   
-    <div class="post-meta">
-      <i class="iconfont icon-tags"></i>
-      
-        <a href="/tags/DS/" class="print-no-link">#DS</a>
-      
-    </div>
-  
 </div>
 
 
@@ -304,8 +304,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>uplift与因果推断</div>
-      <div>https://chunfei-he.github.io/2024/07/30/uplift与因果推断/</div>
+      <div>大模型实战-文本分类和聚类</div>
+      <div>https://chunfei-he.github.io/2024/07/05/大模型实战-文本分类和聚类/</div>
     </div>
     <div class="license-meta">
       
@@ -317,7 +317,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2024年7月30日</div>
+          <div>2024年7月5日</div>
         </div>
       
       
@@ -349,12 +349,18 @@
                   <article class="post-prev col-6">
                     
                     
+                      <a href="/2024/07/30/uplift%E4%B8%8E%E5%9B%A0%E6%9E%9C%E6%8E%A8%E6%96%AD/" title="uplift与因果推断">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">uplift与因果推断</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2024/07/05/%E5%A4%A7%E6%A8%A1%E5%9E%8B%E5%AE%9E%E6%88%98-%E6%96%87%E6%9C%AC%E5%88%86%E7%B1%BB%E5%92%8C%E8%81%9A%E7%B1%BB/" title="大模型实战-文本分类和聚类">
-                        <span class="hidden-mobile">大模型实战-文本分类和聚类</span>
+                      <a href="/2024/06/30/token%E4%BB%8B%E7%BB%8D/" title="token介绍">
+                        <span class="hidden-mobile">token介绍</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
