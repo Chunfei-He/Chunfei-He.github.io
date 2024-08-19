@@ -4,6 +4,25 @@
   
   
   <entry>
+    <title>GPT名称含义</title>
+    <link href="/2024/08/19/GPT%E5%90%8D%E7%A7%B0%E5%90%AB%E4%B9%89/"/>
+    <url>/2024/08/19/GPT%E5%90%8D%E7%A7%B0%E5%90%AB%E4%B9%89/</url>
+    
+    <content type="html"><![CDATA[<h3 id="generative"><a href="#generative" class="headerlink" title="generative"></a>generative</h3><p>Generative这个单词，揭示了Chat Gpt的本质就是一个词语接龙器。<br>比如，问：今天天气很糟。<br>GPT的工作是步骤是：<br>1)检查句子是不是完整。假如我问的是：“今年天气很”，那么GPT的回答很可能是：很抱<br>歉，您的信息不完整。<br>2)把“今天天气很糟”作为输入，从众多中文字里面选出一个频率最高的单词，这里是“很”；<br>3)然后把“今天天气很糟，很作为输入，得到今天天气很糟，很遗憾”；<br>4)重复2、3两步，直到碰到一个“END”结束。<br>GPT一定是一个字一个字崩出来的，我们在网页版的时候会看到答案输出是一个字一个字来<br>的。<br>GPT按照事前设置的模型，套出后文，而这个模型就是pre-trained出来的。</p><h3 id="pre-trained"><a href="#pre-trained" class="headerlink" title="pre-trained"></a>pre-trained</h3><p>预训练又称为学习，有三种模式：无监督学习、监督学习、增强学习。<br>GPT起先是无监督学习，就是喂给机器各种文本，在1.0，喂的数据是1GB;到了2.0这个数<br>据是40GB;而到了GPT3,是570GB。<br>无监督学习的目的，就是根据“公式”算出下一个出现的词的概率，然后选择排名靠前的词。<br>既然公式，那就必然有参数，比如，f(x)&#x3D;ax+b,这里的a和b就是参数。我们知道，语言是<br>一个很复杂的表达，根据前文要能算出后文，这个公式就会很复杂，牵涉到的参数会很多。<br>具体是：GPT1.0117M参数，到了2.0是1542M参数，而到了GPT3是175B的参数。理论上<br>讲，参数越多，输出的结果就越准确。<br>但是，仅仅是无监督学习是完全不够的。<br>比如：<br>如果问7+9&#x3D;，机器很可能会输出（)，因为，它接受的训练里面，大量的句子就是7+9&#x3D;<br>()<br>很正确，但是这不是我们想要的答案。<br>这时候就需要引入“导师”，告诉它这个答案不对，应该回答16，这需要人工干预，纠正机器<br>的错误。<br>当然，这个所谓的“人工干预”，通常不是“人肉干预”，会有另外一段代码去干预，比如的计<br>算器。这个过程就是监督学习了。<br>对于有确定答案的问句，监督学习当然很好。但是有些问题是没有标准答案的，比如：<br>给我写首李白风格的诗。<br>这时候需要“增强学习”，增强学习告诉机器的不是正确答案，而是给机器点赞。</p><h3 id="transformer"><a href="#transformer" class="headerlink" title="transformer"></a>transformer</h3><p>语言，其实就是一个文字序列。<br>所以，问答，就是从一个文字序列到另一个文字序列。人工智能里面有个大名鼎鼎的词：<br>Seq2Seq,说得就是这个算法。<br>两个句子体会下：<br>句子A:小马没能瞠过河流，因为它太累了；<br>句子B:小马没能蹚过河流，因为它太宽了；<br>显然，第一个句子中的它是小马，而第二个句子中的它是河流。<br>一个词的含义和它的前后文都有关系，为了处理这个东西，起先是用的RNN算法循环神经<br>网络(Recurrent Neural Network,.RNW)。各位大佬前赴后继，一通折腾，总算算法搞的<br>比较好了。<br>RNN是个没法并行计算的网络架构，前一个算完了才能算后一个，它唯一问题就是：这玩<br>意很难并行计算。不能并行计算就没多大价值，因为太慢了。<br>直到有一篇论文横空出世，论文题目也是相当霸道，《Attention Is All You Need)》。<br>绝对的超级大招，彻底解决了这个问题。这个模型就是Transformer.。Transformer中存在6<br>层的encode.与6层的decode,每一个decode都直接跟encode连接上，那么6个decode可以<br>直接并行计算，在decode层面速度就可以提升6倍。而GPU可以支持并行处理。<br><a href="https://www.youtube.com/watch?v=zxQyTK8quyY">https://www.youtube.com/watch?v=zxQyTK8quyY</a></p><h3 id="术语整理"><a href="#术语整理" class="headerlink" title="术语整理"></a>术语整理</h3><ol><li>in-context learning 上下文学习<br>在prompt里面写几个例子，模型就可以照着这些例子做生成，即在给定的上下文中使用新的输入来改善模型的输出。这种学习方式并不涉及到梯度更新或微调模型的参数，而是通过提供一些具有特定格式或结构的示例输入，使模型能够在生成输出时利用这些信息。例如，如果你在对话中包含一些英法翻译的例子，然后问模型一个新的翻译问题，模型可能会根据你提供的上下文示例生成正确的翻译</li><li>few-shot learning 少样本学习<br>用极少量的标注样本来训练机器学习模型的技术。在GPT-3的案例中，少样本学习的实现方式是向模型提供少量的输入输出对示例，这些示例作为对话的一部分，描述了模型应该执行的任务。然后模型会生成一个输出，该输出是对与示例类似的新输入的响应。例如，你可以给模型提供几个英法翻译的例子，然后给出一个新的英文单词让模型翻译，模型会尝试产生一个正确的翻译</li><li>prompt engineering 提示工程<br>提示工程是指设计和优化模型的输入提示以改善模型的输出。在大型语言模型中，如何提问或构造输入的方式可能对模型的输出有重大影响。因此，选择正确的提示对于获取有用的输出至关重要。例如，为了让GPT3生成一个诗歌，你可能需要提供一个详细的、引导性的提示，如“写一首关于春天的十四行诗，而不仅仅是“写诗</li><li>prompt 提示词<br>把prompt输入给大模型，大模型给出completion</li><li>instruction tuning 指令微调<br>用instruction 来fine-tune大模型</li><li>code tuning 代码微调<br>用代码来fine-tune大模型</li><li>reinforcement learning with human feedback(RLHF) 基于人类反馈到强化学习<br>让人给模型生成的结果打分，用人打的分来调整模型</li><li>chain of thought 思维链<br>在写prompt时，不仅给出结果，还要一步一步地写结果时怎么推出来的</li><li>scaling laws 缩放法则<br>模型的效果的线性增长要求模型的大小指数增长</li><li>alignment 与人类对齐<br>让机器生成符合人类期望的，符合人类价值观的句子</li><li>emergent ability 突现能力<br>小模型没有，只有模型达到一定规模才会出现的能力</li></ol>]]></content>
+    
+    
+    
+    <tags>
+      
+      <tag>LLM</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>uplift与因果推断</title>
     <link href="/2024/07/30/uplift%E4%B8%8E%E5%9B%A0%E6%9E%9C%E6%8E%A8%E6%96%AD/"/>
     <url>/2024/07/30/uplift%E4%B8%8E%E5%9B%A0%E6%9E%9C%E6%8E%A8%E6%96%AD/</url>
@@ -12,18 +31,11 @@
     
     
     
-  </entry>
-  
-  
-  
-  <entry>
-    <title>728</title>
-    <link href="/2024/07/28/0728/"/>
-    <url>/2024/07/28/0728/</url>
-    
-    <content type="html"><![CDATA[<p>0728test</p>]]></content>
-    
-    
+    <tags>
+      
+      <tag>DS</tag>
+      
+    </tags>
     
   </entry>
   
@@ -38,6 +50,12 @@
     
     
     
+    <tags>
+      
+      <tag>LLM</tag>
+      
+    </tags>
+    
   </entry>
   
   
@@ -50,6 +68,12 @@
     <content type="html"><![CDATA[<h3 id="NLP语言模型发展一览"><a href="#NLP语言模型发展一览" class="headerlink" title="NLP语言模型发展一览"></a>NLP语言模型发展一览</h3><p>深度学习阶段：encoder-decoder&#x2F;word2vec&#x2F;attention<br>预训练模型阶段：transformer&#x2F;bert&#x2F;GPT-2&#x2F;GPT-3，pre- training+fine-tuning<br>大语言模型阶段：GPT3.5&#x2F;GPT4，instruction-tuning&#x2F;prompt-training</p><pre><code class="hljs">深度学习的训练：inference得到预测值与标注数据对比，使用loss function得到差，使用back propagation修改。过程中进行梯度下降（SGD）</code></pre><p>预训练语言模型首先使用大量未标注数据进行自监督学习，学习出的语言模型针对特定的下游任务进行微调。</p><h3 id="prompt-tuning和fine-tuning的区别"><a href="#prompt-tuning和fine-tuning的区别" class="headerlink" title="prompt tuning和fine tuning的区别"></a>prompt tuning和fine tuning的区别</h3><p>prompt tuning会固定预训练模型的参数<br>Prompt Tuning和Fine Tuning虽然都是微调，但是有区别。提示学习(PromptTuning)的灵感源于GPT-3,就是在Prompt中插入一段task specific的可以tune的prompt token。由于这个token对于每个任务都是不同的，所以可以帮助机器识别任务到底是什么。又因为机器自己学习(tune)这个prompt token,所以这个token对于机器会有非常好的效果。</p><p>提出Prompt Tuning的动机是，语言模型（Language Models）越来越大，Fine-tune的成本也越来越高。<br>Fine-tuning的本质是改变预训练模型的weights。由于预训练模型在原域上已经有非常好的性能了，域的迁移会受到原域的阻力，因为使用fine-tune改变的weight是原域上的weight。这样，想要在新域上获得较好的性能，预训练模型越大，fine-tune需要的数据也越多。</p><h4 id="prompt的分类"><a href="#prompt的分类" class="headerlink" title="prompt的分类"></a>prompt的分类</h4><h5 id="硬提示-离散提示（Hard-Prompt-Discrete-Prompt）"><a href="#硬提示-离散提示（Hard-Prompt-Discrete-Prompt）" class="headerlink" title="硬提示&#x2F;离散提示（Hard Prompt&#x2F;Discrete Prompt）"></a>硬提示&#x2F;离散提示（Hard Prompt&#x2F;Discrete Prompt）</h5><p>人为设计<br>根据2021年的两份研究，硬提示有两个性质：</p><ul><li>人类认为不错的硬提示对于LM来说不一定是一个好的硬提示，这个性质被称为硬提示的sub-optimal（次优）性。</li><li>硬提示的选择对于预训练模型的影响非常大。</li></ul><h5 id="软提示-连续提示（Soft-Prompt-Continuous-Prompt）"><a href="#软提示-连续提示（Soft-Prompt-Continuous-Prompt）" class="headerlink" title="软提示&#x2F;连续提示（Soft Prompt&#x2F;Continuous Prompt）"></a>软提示&#x2F;连续提示（Soft Prompt&#x2F;Continuous Prompt）</h5><p>把Prompt的生成本身作为一个任务进行学习，相当于把Prompt的生成从人类一个一个尝试（离散）变换成机器自己进行学习、尝试（连续）。由于需要机器自己学习，软提示不可避免地往模型内引入了新的参数。这里就又出来一个问题：如何<strong>参数有效</strong>地学习软提示？目前的研究热点有：</p><ul><li>P-tuning：将prompt变成token，用BiLSTM进行学习。</li><li>P-tuning：使用混合的prompt初始化策略（如CLInit和SelectInit）。</li><li>Prefix-tuning：对于不同模型，将prompt注入输入的不同位置。</li></ul><h4 id="从Prompt到Prompt-Tuning：让机器学习写Prompt"><a href="#从Prompt到Prompt-Tuning：让机器学习写Prompt" class="headerlink" title="从Prompt到Prompt Tuning：让机器学习写Prompt"></a>从Prompt到Prompt Tuning：让机器学习写Prompt</h4><p><strong><em>所谓Prompt Tuning，就是在Prompt中插入一段task-specific的可以tune的prompt token。</em></strong><br>由于这个token对于每个任务都是不同的，所以可以帮助机器识别任务到底是什么。又因为机器自己学习（tune）这个prompt token，所以这个token对于机器会有非常好的效果。</p><h5 id="参数有效性（Parameter-efficiency）"><a href="#参数有效性（Parameter-efficiency）" class="headerlink" title="参数有效性（Parameter-efficiency）"></a>参数有效性（Parameter-efficiency）</h5><p>所谓“参数有效”，本质就是“节约参数”。怎样算节约参数呢？复用预训练模型越多，节约的参数越多。这是因为Fine-tune预训练模型相当于改变整个预训练模型，而这需要改变非常多的参数。想要进行Transfer Learning的话，改变这么多参数是不能接受的。因此，Prompt Learning的一大好处就叫Parameter Efficient。</p><h3 id="预训练模型三种网络架构"><a href="#预训练模型三种网络架构" class="headerlink" title="预训练模型三种网络架构"></a>预训练模型三种网络架构</h3><p>1.Encoders编码器：编码器主要用于处理和理解输入信息。这些模型可以获得双向的上下文，即可以同时考虑一个词的前面和后面的信息。由于编码器可以考虑到未来的信息，它们非常适合用于需要理解整个句子的任务，如文本分类、命名实体识别等。预训练编码器需要使其能够构建强大的表示，这通常通过预测某个被遮蔽的单词、预测下一个句子或者其它的预训练任务来实现。BERT就是一种典型的预训练编码器，如RoBERTa、ALBERT。百度的ERNIE也跟BERT类似。<br>2.Decoders解码器：解码器主要用于生成输出信息。它们是语言模型的基础，用于预测下一个单词。解码器只能考虑到过去的词，而不能考虑到未来的词，这使得它们非常适合于生成任务，如文本生成、对话系统等。GPT就是一种典型的预训练解码器。如GPT-1、GPT-2、GPT-3三代。所以说GPT名称叫作预训练的解码器也是可以的。<br>3.Encoders-Decoders编码器-解码器：编码器-解码器结构结合了编码器和解码器的优点。编码器首先处理输入信息，然后解码器生成输出信息。这种结构可以考虑到全局的上下文信息，因此非常适合于需要理解输入信息并生成相应的Decoders输出的任务，如机器翻译、文本摘要等。如何预训练编码器解码器模型是一个开放的问题，因为需要考虑到如何有效地使用编码器和解码器的特点。T5和BART都是典型的预训练编码器解码器模型。</p>]]></content>
     
     
+    
+    <tags>
+      
+      <tag>LLM</tag>
+      
+    </tags>
     
   </entry>
   
