@@ -4,6 +4,25 @@
   
   
   <entry>
+    <title>通过指令原则提升大模型输出质量</title>
+    <link href="/2024/08/01/%E9%80%9A%E8%BF%87%E6%8C%87%E4%BB%A4%E5%8E%9F%E5%88%99%E6%8F%90%E5%8D%87%E5%A4%A7%E6%A8%A1%E5%9E%8B%E8%BE%93%E5%87%BA%E8%B4%A8%E9%87%8F/"/>
+    <url>/2024/08/01/%E9%80%9A%E8%BF%87%E6%8C%87%E4%BB%A4%E5%8E%9F%E5%88%99%E6%8F%90%E5%8D%87%E5%A4%A7%E6%A8%A1%E5%9E%8B%E8%BE%93%E5%87%BA%E8%B4%A8%E9%87%8F/</url>
+    
+    <content type="html"><![CDATA[<p>大语言模型如ChatGPT在多个领域和任务中展现出卓越的能力，但在普通用户设计最优指令或提示时，它们的应用和使用有时可能并不清晰。而他们的工作是为开发人员或普通用户揭示与LLMs询问和交互时时“神秘的黑盒”，并通过简单地策划更好的提示来进一步提高预训练LLMs的响应质量。</p><p>研究团队提出了<strong>26条用于 LLM 提示的原则：</strong></p><ol><li><p>与LLM交流时，无需使用礼貌性语言，如“请”、“如果你不介意”、“谢谢”等，<strong>直接陈述要点</strong>。</p></li><li><p>在提示中<strong>整合预期的听众</strong>，例如“听众是该领域的专家”。</p></li><li><p><strong>将复杂任务分解为一系列更简单的提示，并通过互动式对话进行</strong>。</p></li><li><p><strong>使用肯定的指令</strong>，如“做”，避免使用否定语言，如“不要”。</p></li><li><p>当你需要清晰理解某个主题、想法或任何信息时，使用以下提示：简单地解释[具体主题]。像我是11岁的孩子一样向我解释。像我是[领域]新手一样向我解释。</p></li><li><p>添加“I’m going to tip $xxx for a better solution!”（我会给xxx小费以获得更好的解决方案！）。</p></li><li><p>实施<strong>示例驱动的提示</strong>（使用少数示例提示）。</p></li><li><p>在格式化提示时，首先使用‘###Instruction###’，然后是‘###Example###’或‘###Question###’（如果相关），然后呈现内容。<strong>使用一个或多个换行符来分隔指令、示例、问题、上下文和输入数据</strong>。</p></li><li><p>加入以下短语：<strong>“Your task is”（你的任务是）和“You MUST”（你必须）</strong>。</p></li><li><p>加入以下短语：“You will be penalized”（你将受到惩罚）。</p></li><li><p>在提示中使用短语<strong>“Answer a question in a natural human-like manner”（以自然的人类方式回答问题）</strong>。</p></li><li><p>使用引导性词汇，如写<strong>“think step by step”（逐步思考）</strong>。</p></li><li><p>在你的提示中添加以下短语：“Ensure that your answer is unbiased and does not rely on stereotypes”（<strong>确保你的回答是无偏见的，不依赖于刻板印象</strong>）。</p></li><li><p>允许模型通过向你提问直到获得足够的信息来提供所需输出，例如“From now on I would like you to ask me questions to…”（**从现在开始，我希望你向我提问，直到…**）。</p></li><li><p>要了解特定主题或想法或任何信息，并且你想测试你的理解，你可以使用以下短语：“Teach me the [Any theorem&#x2F;topic&#x2F;rule name] and include a test at the end but don’t give me the answers and then tell me if I got the answer right when I respond”（教我[任何定理&#x2F;主题&#x2F;规则名称]并在最后包括一个测试，但不要给我答案，然后在我回答时告诉我是否正确）。</p></li><li><p>为大语言模型<strong>分配一个角色</strong>。</p></li><li><p><strong>使用分隔符</strong>。</p></li><li><p>在提示中<strong>多次重复特定单词或短语</strong>。</p></li><li><p>结合<strong>思维链（CoT）与少数示例提示</strong>。</p></li><li><p>使用输出引导器，它涉及<strong>以期望输出的开始结束你的提示</strong>。通过以预期响应的开始结束你的提示来使用输出引导器。</p></li><li><p>要编写详细的[论文&#x2F;文本&#x2F;段落&#x2F;文章]或任何需要详细的文本类型：“为我详细写一篇关于[主题]的详细[论文&#x2F;文本&#x2F;段落]，添加所有必要的信息”。</p></li><li><p>要更正&#x2F;更改特定文本而不改变其风格：“尝试修改用户发送的每个段落。你只应该改善用户的语法和词汇，确保它听起来自然。你不应该改变写作风格，例如将正式段落变得非正式”。</p></li><li><p>当你有一个可能涉及不同文件的复杂编码提示时：“**从现在开始，每当你生成跨越多个文件的代码时，生成一个[编程语言]脚本，可以运行以自动创建指定的文件或对现有文件进行更改以插入生成的代码。[你的问题]**”。</p></li><li><p>当你想使用特定单词、短语或句子开始或继续文本时，使用以下提示：我为你提供了开始[歌词&#x2F;故事&#x2F;段落&#x2F;论文…]：[插入歌词&#x2F;单词&#x2F;句子]。根据提供的词汇完成它。保持流畅一致。</p></li><li><p><strong>明确陈述模型必须遵循的要求，以便根据关键词、规则、提示或指令产生内容</strong>。</p></li><li><p>要写任何文本，如文章或段落，且内容与提供的样本相似，请包含以下指示：”<strong>请根据提供的段落[&#x2F;标题&#x2F;文本&#x2F;文章&#x2F;答案]使用相同的语言基础。</strong>“</p></li></ol><p>根据这些原则特有的性质，研究团队将它们分为五个类别：</p><p>(1) <strong>提示结构和清晰度</strong>，例如，在提示中整合预期的听众，如听众是该领域的专家；</p><p>(2) <strong>具体性和信息</strong>，例如，在你的提示中添加以下短语“确保你的回答是无偏见的，不依赖于刻板印象。”；</p><p>(3) <strong>用户互动和参与</strong>，例如，允许模型通过向你提问来获取精确的细节和要求，直到它有足够的信息来提供所需的输出“从现在开始，我希望你向我提出问题…”；</p><p>(4) <strong>内容和语言风格</strong>，例如，与LLM交流无需礼貌，因此无需添加诸如“请”、“如果你不介意”、“谢谢”、“我想要”等短语，直接切入主题；</p><p>(5) <strong>复杂任务和编码提示</strong>，例如，将复杂任务分解为一个互动对话中的一系列更简单的提示。</p>]]></content>
+    
+    
+    
+    <tags>
+      
+      <tag>LLM</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>uplift与因果推断</title>
     <link href="/2024/07/30/uplift%E4%B8%8E%E5%9B%A0%E6%9E%9C%E6%8E%A8%E6%96%AD/"/>
     <url>/2024/07/30/uplift%E4%B8%8E%E5%9B%A0%E6%9E%9C%E6%8E%A8%E6%96%AD/</url>
