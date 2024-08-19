@@ -19,24 +19,22 @@
   <meta name="author" content="Chunfei He">
   <meta name="keywords" content="">
   
-    <meta name="description" content="在通常的预测任务中，我们拟合的实际是Y与X的相关关系，X甚至可以是Y的结果，如GDP和发电量之间可能有一系列复杂的关系，但只要二者相关就可以互相预测。在另一些场景中则有所区别，如预测任务要指导干预(Treatment)决策时，我们所能掌控的只有Treatment变量，此时我们希望知道的是执行干预与否的效果差异(通常看增量，uplift)，目的是决策是否执行或执行何种干预。如在“发券&amp;下单”">
+    <meta name="description" content="https:&#x2F;&#x2F;www.youtube.com&#x2F;playlist?list&#x3D;PLtBw6njQRU-rwp5__7C0oIVt26ZgjG9NI 从递归的关系开始如何定义一个关系，将网络在特定时间步长的计算与来自先前时间步长的历史记忆联系起来?我们简单地将网络所理解的计算和信息通过我们称之为递归关系的方式链接到其他副本。这意味着在特定时间的网络计算的某些方面被传递给稍后的时间步长。这意味着网络的输">
 <meta property="og:type" content="article">
-<meta property="og:title" content="uplift与因果推断">
-<meta property="og:url" content="https://chunfei-he.github.io/2024/07/30/uplift%E4%B8%8E%E5%9B%A0%E6%9E%9C%E6%8E%A8%E6%96%AD/index.html">
+<meta property="og:title" content="序列模型，自注意力，transformer">
+<meta property="og:url" content="https://chunfei-he.github.io/2024/07/25/%E5%BA%8F%E5%88%97%E6%A8%A1%E5%9E%8B%EF%BC%8C%E8%87%AA%E6%B3%A8%E6%84%8F%E5%8A%9B%EF%BC%8Ctransformer/index.html">
 <meta property="og:site_name" content="blog">
-<meta property="og:description" content="在通常的预测任务中，我们拟合的实际是Y与X的相关关系，X甚至可以是Y的结果，如GDP和发电量之间可能有一系列复杂的关系，但只要二者相关就可以互相预测。在另一些场景中则有所区别，如预测任务要指导干预(Treatment)决策时，我们所能掌控的只有Treatment变量，此时我们希望知道的是执行干预与否的效果差异(通常看增量，uplift)，目的是决策是否执行或执行何种干预。如在“发券&amp;下单”">
+<meta property="og:description" content="https:&#x2F;&#x2F;www.youtube.com&#x2F;playlist?list&#x3D;PLtBw6njQRU-rwp5__7C0oIVt26ZgjG9NI 从递归的关系开始如何定义一个关系，将网络在特定时间步长的计算与来自先前时间步长的历史记忆联系起来?我们简单地将网络所理解的计算和信息通过我们称之为递归关系的方式链接到其他副本。这意味着在特定时间的网络计算的某些方面被传递给稍后的时间步长。这意味着网络的输">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://obsidian-1319504291.cos.ap-beijing.myqcloud.com/20240730165623.png">
-<meta property="article:published_time" content="2024-07-30T08:42:08.000Z">
-<meta property="article:modified_time" content="2024-08-19T03:07:45.671Z">
+<meta property="article:published_time" content="2024-07-25T00:48:31.000Z">
+<meta property="article:modified_time" content="2024-08-19T03:33:20.272Z">
 <meta property="article:author" content="Chunfei He">
-<meta property="article:tag" content="DS">
+<meta property="article:tag" content="LLM">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://obsidian-1319504291.cos.ap-beijing.myqcloud.com/20240730165623.png">
   
   
   
-  <title>uplift与因果推断 - blog</title>
+  <title>序列模型，自注意力，transformer - blog</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -202,7 +200,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="uplift与因果推断"></span>
+            <span id="subtitle" data-typed-text="序列模型，自注意力，transformer"></span>
           
         </div>
 
@@ -213,8 +211,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2024-07-30 16:42" pubdate>
-          2024年7月30日 下午
+        <time datetime="2024-07-25 08:48" pubdate>
+          2024年7月25日 早上
         </time>
       </span>
     
@@ -225,7 +223,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          592 字
+          243 字
         
       </span>
     
@@ -236,7 +234,7 @@
         
         
         
-          5 分钟
+          3 分钟
         
       </span>
     
@@ -273,13 +271,15 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">uplift与因果推断</h1>
+            <h1 id="seo-header">序列模型，自注意力，transformer</h1>
             
             
               <div class="markdown-body">
                 
-                <p>在通常的预测任务中，我们拟合的实际是Y与X的相关关系，X甚至可以是Y的结果，如GDP和发电量之间可能有一系列复杂的关系，但只要二者相关就可以互相预测。在另一些场景中则有所区别，如预测任务要指导干预(Treatment)决策时，我们所能掌控的只有Treatment变量，此时我们希望知道的是执行干预与否的效果差异(通常看增量，uplift)，目的是决策是否执行或执行何种干预。如在“发券&amp;下单”的问题中，用户的历史订单数对下单率预估有较大帮助，但对是否发券的指导意义可能会大打折扣。</p>
-<h2 id="相关、因果、辛普森悖论"><a href="#相关、因果、辛普森悖论" class="headerlink" title="相关、因果、辛普森悖论"></a>相关、因果、辛普森悖论</h2><p>因果关系要求“原因”先于并导致“结果”，而相关关系对顺序不做要求。参考材料中提到了很多示例，如“溺水死亡人数与冰激凌销量正相关”，显然二者不是因果关系，而是由“气温(或季节)”联系起来的相关关系。<br><strong>辛普森悖论(Simpson Paradox)</strong><br>趋势出现在几组数据中，但当这些组被合并后趋势消失或反转。<br>案例：<br>总共的志愿者有700个人（相当于小白鼠），分为两个组，第一组给350个人服用新生产的药物，第二组给另外350个人不用药物（或者说服用糖之类的东西，俗称安慰剂）。服药的第一组350个人中，男性患者87位，女性患者350-87 &#x3D;263位。未服药的第二组350个人中，男性患者270位，女性患者350-270&#x3D;80位，实验结果如表所示<br><img src="https://obsidian-1319504291.cos.ap-beijing.myqcloud.com/20240730165623.png" srcset="/img/loading.gif" lazyload alt="image.png"><br>总数据中，服药的患者痊愈率是78%，未服药的患者痊愈率是83%<br>但是在服药的患者中，男性患者的痊愈率是93%，而未服药的男性患者痊愈率是87%，证明药物有效；女性服药的患者痊愈率是73%，而未服药的患者痊愈率是69%，药物同样有效。<br>整体的效果而言，竟然是不服药的效果好。<br><strong>从数据的角度来说</strong>，此次服用药物患者的350人和不服用药物的350人中，男女比例是不一样的。</p>
+                <p><a target="_blank" rel="noopener" href="https://www.youtube.com/playlist?list=PLtBw6njQRU-rwp5__7C0oIVt26ZgjG9NI">https://www.youtube.com/playlist?list=PLtBw6njQRU-rwp5__7C0oIVt26ZgjG9NI</a></p>
+<h3 id="从递归的关系开始"><a href="#从递归的关系开始" class="headerlink" title="从递归的关系开始"></a>从递归的关系开始</h3><p>如何定义一个关系，将网络在特定时间步长的计算与来自先前时间步长的历史记忆联系起来?<br>我们简单地将网络所理解的计算和信息通过我们称之为递归关系的方式链接到其他副本。这意味着在特定时间的网络计算的某些方面被传递给稍后的时间步长。<br>这意味着网络的输出、预测和计算不仅是输入数据X 的函数，而且还有这个其他变量H。它捕获了状态的概念，捕获了网络计算和传递在时间上的记忆概念。</p>
+<h3 id="循环神经网络"><a href="#循环神经网络" class="headerlink" title="循环神经网络"></a>循环神经网络</h3><h3 id="为神经网络编码自然语言"><a href="#为神经网络编码自然语言" class="headerlink" title="为神经网络编码自然语言"></a>为神经网络编码自然语言</h3><p>独热编码-&gt;embedding</p>
+<h3 id="处理可变长度序列数据"><a href="#处理可变长度序列数据" class="headerlink" title="处理可变长度序列数据"></a>处理可变长度序列数据</h3><p><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzIxODUzNTg2MA==&mid=2247484925&idx=1&sn=f2ff4e9bc8086e82db7f624195606b8b&chksm=97e84726a09fce30b8a09dcb14b4380895ce7248b80dd5e96407d90e3ca94d5fc37cc95e3ec6&scene=21#wechat_redirect">https://mp.weixin.qq.com/s?__biz=MzIxODUzNTg2MA==&amp;mid=2247484925&amp;idx=1&amp;sn=f2ff4e9bc8086e82db7f624195606b8b&amp;chksm=97e84726a09fce30b8a09dcb14b4380895ce7248b80dd5e96407d90e3ca94d5fc37cc95e3ec6&amp;scene=21#wechat_redirect</a></p>
 
                 
               </div>
@@ -292,7 +292,7 @@
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/tags/DS/" class="print-no-link">#DS</a>
+        <a href="/tags/LLM/" class="print-no-link">#LLM</a>
       
     </div>
   
@@ -304,8 +304,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>uplift与因果推断</div>
-      <div>https://chunfei-he.github.io/2024/07/30/uplift与因果推断/</div>
+      <div>序列模型，自注意力，transformer</div>
+      <div>https://chunfei-he.github.io/2024/07/25/序列模型，自注意力，transformer/</div>
     </div>
     <div class="license-meta">
       
@@ -317,7 +317,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2024年7月30日</div>
+          <div>2024年7月25日</div>
         </div>
       
       
@@ -349,12 +349,18 @@
                   <article class="post-prev col-6">
                     
                     
+                      <a href="/2024/07/30/uplift%E4%B8%8E%E5%9B%A0%E6%9E%9C%E6%8E%A8%E6%96%AD/" title="uplift与因果推断">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">uplift与因果推断</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2024/07/25/%E5%BA%8F%E5%88%97%E6%A8%A1%E5%9E%8B%EF%BC%8C%E8%87%AA%E6%B3%A8%E6%84%8F%E5%8A%9B%EF%BC%8Ctransformer/" title="序列模型，自注意力，transformer">
-                        <span class="hidden-mobile">序列模型，自注意力，transformer</span>
+                      <a href="/2024/07/23/%E6%8F%90%E7%A4%BA%E8%AF%8D%E5%B7%A5%E7%A8%8BPLUS/" title="提示词工程PLUS">
+                        <span class="hidden-mobile">提示词工程PLUS</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
