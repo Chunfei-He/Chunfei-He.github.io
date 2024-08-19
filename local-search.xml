@@ -23,6 +23,25 @@
   
   
   <entry>
+    <title>漫谈大模型中的训练</title>
+    <link href="/2024/07/19/%E6%BC%AB%E8%B0%88%E5%A4%A7%E6%A8%A1%E5%9E%8B%E4%B8%AD%E7%9A%84%E8%AE%AD%E7%BB%83/"/>
+    <url>/2024/07/19/%E6%BC%AB%E8%B0%88%E5%A4%A7%E6%A8%A1%E5%9E%8B%E4%B8%AD%E7%9A%84%E8%AE%AD%E7%BB%83/</url>
+    
+    <content type="html"><![CDATA[<h3 id="pretraining，SFT-RLHF"><a href="#pretraining，SFT-RLHF" class="headerlink" title="pretraining，SFT, RLHF"></a>pretraining，SFT, RLHF</h3><p>1.Pretraining:第一阶段预训练所需的语料是各种类型的世界知识，包括网页、书籍、新闻、论文期刊、对话文本、代码等形式，通过大量学习世界知识，构建模型的基础能力，使得模型能够“漂亮地说话”。该阶段的语料特征可以概括为“广“。给模型海量的文本进行训练，99%的计算量花费在这个阶段，输出的模型叫做base model，能做的事情就是像成语接龙一样不断的完成一段话；2.SFT(Supervised Fine-tuning):第二阶段SFT,通过标注人员设计问答，编写正确答案，将例题投喂给模型，并希望模型在没有见过的任务中”举一反三”，提升泛化能力。通俗的讲，就是人工介入，给出高质量的文本问答例子。经过问答式训练的Mode叫做SFT model,就可以正常回答人的问题了；<br>3.RLHF(Reinforcement Learning from Human Feedback):第三阶段RLHF,训练目标是让模型的价值观与人类对齐，需要人类对模型的回答进行打分、排序，让模型知道”怎么说更好”。第二和第三阶段的数据质量要求较高，需要来自人类的高质量反馈，语料特征可以概括为“齐“。第三阶段人工先介入，通过对同一个Prompt生成答案的排序来训练一个Reward Model。.再用Reward Model:去反馈给SFT Model,,通过评价生成结果的好坏，让模型更倾向于生成人们喜好的结果。最终生成的Modell叫做RLHF model,</p><p><a href="https://bce.bdstatic.com/p3m/common-service/uploads/SFT-8_fec7948.mp4">https://bce.bdstatic.com/p3m/common-service/uploads/SFT-8_fec7948.mp4</a><br><a href="https://www.youtube.com/watch?v=bZQun8Y4L2A">https://www.youtube.com/watch?v=bZQun8Y4L2A</a><br><a href="https://www.youtube.com/watch?v=zjkBMFhNj_g&t=937s">https://www.youtube.com/watch?v=zjkBMFhNj_g&amp;t=937s</a></p><p>数据长度95%以上在4k以内：4k版本<br>超过4k的数据较多（20%以上）或需长文本处理：8k版本</p><p>全量更新：更新模型所有参数<br>lora：一小部分参数调整<br>prompt tuning：预训练参数不变，优化提示词</p><p>样本数量少于1000且需注重大模型本身的通用能力：lora<br>特定任务数据样本较多且主要关注这些特定任务的效果：全量</p><p>llama-2:<br>epoch：100条数据epoch为15，1000条为10，10000条为2（特殊任务，如自然语言生成sql除外）<br>batchsize越大越好</p><p>如果模型只会回答训练见过的内容，可能是过拟合<br>成功的训练一般training loss和perlexity有明显收敛过程，出现在后半部分，下降且平稳</p><p>rouge<br>bleu<br>看答案的文本相似度，在简单任务中，回答准会比较高，100左右；复杂任务如写故事，50-60就很高了。</p>]]></content>
+    
+    
+    
+    <tags>
+      
+      <tag>LLM</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>大模型实战-函数调用</title>
     <link href="/2024/07/13/%E5%A4%A7%E6%A8%A1%E5%9E%8B%E5%AE%9E%E6%88%98-%E5%87%BD%E6%95%B0%E8%B0%83%E7%94%A8/"/>
     <url>/2024/07/13/%E5%A4%A7%E6%A8%A1%E5%9E%8B%E5%AE%9E%E6%88%98-%E5%87%BD%E6%95%B0%E8%B0%83%E7%94%A8/</url>
