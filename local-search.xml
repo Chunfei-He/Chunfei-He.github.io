@@ -30,9 +30,22 @@
   
   
   <entry>
+    <title>embedding</title>
+    <link href="/2024/06/24/embedding/"/>
+    <url>/2024/06/24/embedding/</url>
+    
+    <content type="html"><![CDATA[<p>将高维数据映射到低维空间。Embedding的最大价值是降维：在许多实际问题中，原始数据的维度往往非常高。例如，在自然语言处理中，如果使用One-hot编码来表示词汇，其维度等于词汇表的大小，可能达到数十万甚至更高。通过Embedding,我们可以将这些高维数据映射到一个低维空间，大大减少了模型的复杂度。</p>]]></content>
+    
+    
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>预训练语言模型</title>
-    <link href="/2024/07/19/%E9%A2%84%E8%AE%AD%E7%BB%83%E8%AF%AD%E8%A8%80%E6%A8%A1%E5%9E%8B/"/>
-    <url>/2024/07/19/%E9%A2%84%E8%AE%AD%E7%BB%83%E8%AF%AD%E8%A8%80%E6%A8%A1%E5%9E%8B/</url>
+    <link href="/2024/06/19/%E9%A2%84%E8%AE%AD%E7%BB%83%E8%AF%AD%E8%A8%80%E6%A8%A1%E5%9E%8B/"/>
+    <url>/2024/06/19/%E9%A2%84%E8%AE%AD%E7%BB%83%E8%AF%AD%E8%A8%80%E6%A8%A1%E5%9E%8B/</url>
     
     <content type="html"><![CDATA[<h3 id="NLP语言模型发展一览"><a href="#NLP语言模型发展一览" class="headerlink" title="NLP语言模型发展一览"></a>NLP语言模型发展一览</h3><p>深度学习阶段：encoder-decoder&#x2F;word2vec&#x2F;attention<br>预训练模型阶段：transformer&#x2F;bert&#x2F;GPT-2&#x2F;GPT-3，pre- training+fine-tuning<br>大语言模型阶段：GPT3.5&#x2F;GPT4，instruction-tuning&#x2F;prompt-training</p><pre><code class="hljs">深度学习的训练：inference得到预测值与标注数据对比，使用loss function得到差，使用back propagation修改。过程中进行梯度下降（SGD）</code></pre><p>预训练语言模型首先使用大量未标注数据进行自监督学习，学习出的语言模型针对特定的下游任务进行微调。</p><h3 id="prompt-tuning和fine-tuning的区别"><a href="#prompt-tuning和fine-tuning的区别" class="headerlink" title="prompt tuning和fine tuning的区别"></a>prompt tuning和fine tuning的区别</h3><p>prompt tuning会固定预训练模型的参数<br>Prompt Tuning和Fine Tuning虽然都是微调，但是有区别。提示学习(PromptTuning)的灵感源于GPT-3,就是在Prompt中插入一段task specific的可以tune的prompt token。由于这个token对于每个任务都是不同的，所以可以帮助机器识别任务到底是什么。又因为机器自己学习(tune)这个prompt token,所以这个token对于机器会有非常好的效果。</p><p>提出Prompt Tuning的动机是，语言模型（Language Models）越来越大，Fine-tune的成本也越来越高。<br>Fine-tuning的本质是改变预训练模型的weights。由于预训练模型在原域上已经有非常好的性能了，域的迁移会受到原域的阻力，因为使用fine-tune改变的weight是原域上的weight。这样，想要在新域上获得较好的性能，预训练模型越大，fine-tune需要的数据也越多。</p><h4 id="prompt的分类"><a href="#prompt的分类" class="headerlink" title="prompt的分类"></a>prompt的分类</h4><h5 id="硬提示-离散提示（Hard-Prompt-Discrete-Prompt）"><a href="#硬提示-离散提示（Hard-Prompt-Discrete-Prompt）" class="headerlink" title="硬提示&#x2F;离散提示（Hard Prompt&#x2F;Discrete Prompt）"></a>硬提示&#x2F;离散提示（Hard Prompt&#x2F;Discrete Prompt）</h5><p>人为设计<br>根据2021年的两份研究，硬提示有两个性质：</p><ul><li>人类认为不错的硬提示对于LM来说不一定是一个好的硬提示，这个性质被称为硬提示的sub-optimal（次优）性。</li><li>硬提示的选择对于预训练模型的影响非常大。</li></ul><h5 id="软提示-连续提示（Soft-Prompt-Continuous-Prompt）"><a href="#软提示-连续提示（Soft-Prompt-Continuous-Prompt）" class="headerlink" title="软提示&#x2F;连续提示（Soft Prompt&#x2F;Continuous Prompt）"></a>软提示&#x2F;连续提示（Soft Prompt&#x2F;Continuous Prompt）</h5><p>把Prompt的生成本身作为一个任务进行学习，相当于把Prompt的生成从人类一个一个尝试（离散）变换成机器自己进行学习、尝试（连续）。由于需要机器自己学习，软提示不可避免地往模型内引入了新的参数。这里就又出来一个问题：如何<strong>参数有效</strong>地学习软提示？目前的研究热点有：</p><ul><li>P-tuning：将prompt变成token，用BiLSTM进行学习。</li><li>P-tuning：使用混合的prompt初始化策略（如CLInit和SelectInit）。</li><li>Prefix-tuning：对于不同模型，将prompt注入输入的不同位置。</li></ul><h4 id="从Prompt到Prompt-Tuning：让机器学习写Prompt"><a href="#从Prompt到Prompt-Tuning：让机器学习写Prompt" class="headerlink" title="从Prompt到Prompt Tuning：让机器学习写Prompt"></a>从Prompt到Prompt Tuning：让机器学习写Prompt</h4><p><strong><em>所谓Prompt Tuning，就是在Prompt中插入一段task-specific的可以tune的prompt token。</em></strong><br>由于这个token对于每个任务都是不同的，所以可以帮助机器识别任务到底是什么。又因为机器自己学习（tune）这个prompt token，所以这个token对于机器会有非常好的效果。</p><h5 id="参数有效性（Parameter-efficiency）"><a href="#参数有效性（Parameter-efficiency）" class="headerlink" title="参数有效性（Parameter-efficiency）"></a>参数有效性（Parameter-efficiency）</h5><p>所谓“参数有效”，本质就是“节约参数”。怎样算节约参数呢？复用预训练模型越多，节约的参数越多。这是因为Fine-tune预训练模型相当于改变整个预训练模型，而这需要改变非常多的参数。想要进行Transfer Learning的话，改变这么多参数是不能接受的。因此，Prompt Learning的一大好处就叫Parameter Efficient。</p><h3 id="预训练模型三种网络架构"><a href="#预训练模型三种网络架构" class="headerlink" title="预训练模型三种网络架构"></a>预训练模型三种网络架构</h3><p>1.Encoders编码器：编码器主要用于处理和理解输入信息。这些模型可以获得双向的上下文，即可以同时考虑一个词的前面和后面的信息。由于编码器可以考虑到未来的信息，它们非常适合用于需要理解整个句子的任务，如文本分类、命名实体识别等。预训练编码器需要使其能够构建强大的表示，这通常通过预测某个被遮蔽的单词、预测下一个句子或者其它的预训练任务来实现。BERT就是一种典型的预训练编码器，如RoBERTa、ALBERT。百度的ERNIE也跟BERT类似。<br>2.Decoders解码器：解码器主要用于生成输出信息。它们是语言模型的基础，用于预测下一个单词。解码器只能考虑到过去的词，而不能考虑到未来的词，这使得它们非常适合于生成任务，如文本生成、对话系统等。GPT就是一种典型的预训练解码器。如GPT-1、GPT-2、GPT-3三代。所以说GPT名称叫作预训练的解码器也是可以的。<br>3.Encoders-Decoders编码器-解码器：编码器-解码器结构结合了编码器和解码器的优点。编码器首先处理输入信息，然后解码器生成输出信息。这种结构可以考虑到全局的上下文信息，因此非常适合于需要理解输入信息并生成相应的Decoders输出的任务，如机器翻译、文本摘要等。如何预训练编码器解码器模型是一个开放的问题，因为需要考虑到如何有效地使用编码器和解码器的特点。T5和BART都是典型的预训练编码器解码器模型。</p>]]></content>
     
