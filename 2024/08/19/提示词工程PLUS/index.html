@@ -19,24 +19,22 @@
   <meta name="author" content="Chunfei He">
   <meta name="keywords" content="">
   
-    <meta name="description" content="在通常的预测任务中，我们拟合的实际是Y与X的相关关系，X甚至可以是Y的结果，如GDP和发电量之间可能有一系列复杂的关系，但只要二者相关就可以互相预测。在另一些场景中则有所区别，如预测任务要指导干预(Treatment)决策时，我们所能掌控的只有Treatment变量，此时我们希望知道的是执行干预与否的效果差异(通常看增量，uplift)，目的是决策是否执行或执行何种干预。如在“发券&amp;下单”">
+    <meta name="description" content="prompt当前大模型是没有“心算”能力的，无法探知自然语言背后的“隐含信息”，对于中文隐含信息量又是及其庞大的。但我们可以通过提示词让模型将心算能力摆在前台，通过上下文将隐含信息摆在前台。举个例子：  36 * 12等于几，人类通过心算时大部分会拆成3610&#x3D;360放在心里某个位置，然后在算362&#x3D;72放在心里某个位置，最终相加得出结果，而模型没有地方可以放这个临时值  这种">
 <meta property="og:type" content="article">
-<meta property="og:title" content="uplift与因果推断">
-<meta property="og:url" content="https://chunfei-he.github.io/2024/07/30/uplift%E4%B8%8E%E5%9B%A0%E6%9E%9C%E6%8E%A8%E6%96%AD/index.html">
+<meta property="og:title" content="提示词工程PLUS">
+<meta property="og:url" content="https://chunfei-he.github.io/2024/08/19/%E6%8F%90%E7%A4%BA%E8%AF%8D%E5%B7%A5%E7%A8%8BPLUS/index.html">
 <meta property="og:site_name" content="blog">
-<meta property="og:description" content="在通常的预测任务中，我们拟合的实际是Y与X的相关关系，X甚至可以是Y的结果，如GDP和发电量之间可能有一系列复杂的关系，但只要二者相关就可以互相预测。在另一些场景中则有所区别，如预测任务要指导干预(Treatment)决策时，我们所能掌控的只有Treatment变量，此时我们希望知道的是执行干预与否的效果差异(通常看增量，uplift)，目的是决策是否执行或执行何种干预。如在“发券&amp;下单”">
+<meta property="og:description" content="prompt当前大模型是没有“心算”能力的，无法探知自然语言背后的“隐含信息”，对于中文隐含信息量又是及其庞大的。但我们可以通过提示词让模型将心算能力摆在前台，通过上下文将隐含信息摆在前台。举个例子：  36 * 12等于几，人类通过心算时大部分会拆成3610&#x3D;360放在心里某个位置，然后在算362&#x3D;72放在心里某个位置，最终相加得出结果，而模型没有地方可以放这个临时值  这种">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://obsidian-1319504291.cos.ap-beijing.myqcloud.com/20240730165623.png">
-<meta property="article:published_time" content="2024-07-30T08:42:08.000Z">
-<meta property="article:modified_time" content="2024-08-19T03:07:45.671Z">
+<meta property="article:published_time" content="2024-08-19T03:30:37.000Z">
+<meta property="article:modified_time" content="2024-08-19T03:31:23.566Z">
 <meta property="article:author" content="Chunfei He">
-<meta property="article:tag" content="DS">
+<meta property="article:tag" content="LLM">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://obsidian-1319504291.cos.ap-beijing.myqcloud.com/20240730165623.png">
   
   
   
-  <title>uplift与因果推断 - blog</title>
+  <title>提示词工程PLUS - blog</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -202,7 +200,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="uplift与因果推断"></span>
+            <span id="subtitle" data-typed-text="提示词工程PLUS"></span>
           
         </div>
 
@@ -213,8 +211,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2024-07-30 16:42" pubdate>
-          2024年7月30日 下午
+        <time datetime="2024-08-19 11:30" pubdate>
+          2024年8月19日 中午
         </time>
       </span>
     
@@ -225,7 +223,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          592 字
+          526 字
         
       </span>
     
@@ -273,14 +271,32 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">uplift与因果推断</h1>
+            <h1 id="seo-header">提示词工程PLUS</h1>
             
             
               <div class="markdown-body">
                 
-                <p>在通常的预测任务中，我们拟合的实际是Y与X的相关关系，X甚至可以是Y的结果，如GDP和发电量之间可能有一系列复杂的关系，但只要二者相关就可以互相预测。在另一些场景中则有所区别，如预测任务要指导干预(Treatment)决策时，我们所能掌控的只有Treatment变量，此时我们希望知道的是执行干预与否的效果差异(通常看增量，uplift)，目的是决策是否执行或执行何种干预。如在“发券&amp;下单”的问题中，用户的历史订单数对下单率预估有较大帮助，但对是否发券的指导意义可能会大打折扣。</p>
-<h2 id="相关、因果、辛普森悖论"><a href="#相关、因果、辛普森悖论" class="headerlink" title="相关、因果、辛普森悖论"></a>相关、因果、辛普森悖论</h2><p>因果关系要求“原因”先于并导致“结果”，而相关关系对顺序不做要求。参考材料中提到了很多示例，如“溺水死亡人数与冰激凌销量正相关”，显然二者不是因果关系，而是由“气温(或季节)”联系起来的相关关系。<br><strong>辛普森悖论(Simpson Paradox)</strong><br>趋势出现在几组数据中，但当这些组被合并后趋势消失或反转。<br>案例：<br>总共的志愿者有700个人（相当于小白鼠），分为两个组，第一组给350个人服用新生产的药物，第二组给另外350个人不用药物（或者说服用糖之类的东西，俗称安慰剂）。服药的第一组350个人中，男性患者87位，女性患者350-87 &#x3D;263位。未服药的第二组350个人中，男性患者270位，女性患者350-270&#x3D;80位，实验结果如表所示<br><img src="https://obsidian-1319504291.cos.ap-beijing.myqcloud.com/20240730165623.png" srcset="/img/loading.gif" lazyload alt="image.png"><br>总数据中，服药的患者痊愈率是78%，未服药的患者痊愈率是83%<br>但是在服药的患者中，男性患者的痊愈率是93%，而未服药的男性患者痊愈率是87%，证明药物有效；女性服药的患者痊愈率是73%，而未服药的患者痊愈率是69%，药物同样有效。<br>整体的效果而言，竟然是不服药的效果好。<br><strong>从数据的角度来说</strong>，此次服用药物患者的350人和不服用药物的350人中，男女比例是不一样的。</p>
-
+                <h3 id="prompt"><a href="#prompt" class="headerlink" title="prompt"></a>prompt</h3><p>当前大模型是没有“心算”能力的，无法探知自然语言背后的“隐含信息”，对于中文隐含信息量又是及其庞大的。但我们可以通过提示词让模型将心算能力摆在前台，通过上下文将隐含信息摆在前台。<br><strong>举个例子：</strong></p>
+<ul>
+<li><p>36 * 12等于几，人类通过心算时大部分会拆成36<em>10&#x3D;360放在心里某个位置，然后在算36</em>2&#x3D;72放在心里某个位置，最终相加得出结果，而模型没有地方可以放这个临时值</p>
+<ul>
+<li>这种情况下可以在提示词上说：请分步给出答案，通过step by step的方式让模型有放临时值的“地方”</li>
+</ul>
+</li>
+<li><p>“老王儿子明天摆宴席，让我上台讲两句，我该说点什么词？”，在这个提问背后如果是人与人之间的沟通它背后隐含着老王儿子和提问者是什么关系、摆的什么宴席（结婚、升学…..）可能马上就知道怎么回事，但是模型是无法探知的</p>
+<ul>
+<li>这种情况下可以在提示词上说：老王儿子是我外甥，明天要摆升学宴，通过给出隐含信息让模型输出结果更精准</li>
+</ul>
+</li>
+</ul>
+<h3 id="ReAct"><a href="#ReAct" class="headerlink" title="ReAct"></a>ReAct</h3><p>ReAct 是 Reasoning 和 Acting 的缩写。这个框架的基本思想是给一个 Prompt，这个 Prompt 将 Question 拆成几个步骤。分别是：</p>
+<ul>
+<li><strong>Tought</strong>： 面对这个 Question 我下一步应该做什么。</li>
+<li><strong>Action</strong>：执行某个动作。在 ReAct 里有三种动作，第一个是 Search[entity] 如果存在对应实体的维基页面，则返回前5句话，否则使用<a target="_blank" rel="noopener" href="https://www.zhihu.com/search?q=%E7%BB%B4%E5%9F%BA%E7%99%BE%E7%A7%91&search_source=Entity&hybrid_search_source=Entity&hybrid_search_extra=%7B%22sourceType%22:%22answer%22,%22sourceId%22:2984412161%7D">维基百科</a>搜索引擎搜索前5个类似的实体；第二个是 Look[string] 它将返回包含该字符串的页面中的下一句话，模拟浏览器上的 Ctrl+F 功能。第三个是 Finish[answer] 它将使用答案完成当前任务。</li>
+<li><strong>Observation</strong>：观察到的外部工具给到的结果，将作为新的提示输入给 ChatGPT</li>
+</ul>
+<h3 id="Embedding"><a href="#Embedding" class="headerlink" title="Embedding"></a>Embedding</h3><p>[基于embeddings+GPT的Q&amp;A探索]</p>
+<h3 id="Langchain"><a href="#Langchain" class="headerlink" title="Langchain"></a>Langchain</h3>
                 
               </div>
             
@@ -292,7 +308,7 @@
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/tags/DS/" class="print-no-link">#DS</a>
+        <a href="/tags/LLM/" class="print-no-link">#LLM</a>
       
     </div>
   
@@ -304,8 +320,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>uplift与因果推断</div>
-      <div>https://chunfei-he.github.io/2024/07/30/uplift与因果推断/</div>
+      <div>提示词工程PLUS</div>
+      <div>https://chunfei-he.github.io/2024/08/19/提示词工程PLUS/</div>
     </div>
     <div class="license-meta">
       
@@ -317,7 +333,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2024年7月30日</div>
+          <div>2024年8月19日</div>
         </div>
       
       
@@ -349,18 +365,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2024/08/19/%E6%8F%90%E7%A4%BA%E8%AF%8D%E5%B7%A5%E7%A8%8BPLUS/" title="提示词工程PLUS">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">提示词工程PLUS</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2024/07/19/%E6%BC%AB%E8%B0%88%E5%A4%A7%E6%A8%A1%E5%9E%8B%E4%B8%AD%E7%9A%84%E8%AE%AD%E7%BB%83/" title="漫谈大模型中的训练">
-                        <span class="hidden-mobile">漫谈大模型中的训练</span>
+                      <a href="/2024/07/30/uplift%E4%B8%8E%E5%9B%A0%E6%9E%9C%E6%8E%A8%E6%96%AD/" title="uplift与因果推断">
+                        <span class="hidden-mobile">uplift与因果推断</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
