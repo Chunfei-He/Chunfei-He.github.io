@@ -19,22 +19,22 @@
   <meta name="author" content="Chunfei He">
   <meta name="keywords" content="">
   
-    <meta name="description" content="将高维数据映射到低维空间。Embedding的最大价值是降维：在许多实际问题中，原始数据的维度往往非常高。例如，在自然语言处理中，如果使用One-hot编码来表示词汇，其维度等于词汇表的大小，可能达到数十万甚至更高。通过Embedding,我们可以将这些高维数据映射到一个低维空间，大大减少了模型的复杂度。">
+    <meta name="description" content="引言https:&#x2F;&#x2F;platform.openai.com&#x2F;tokenizerOpeA的大型语言模型（即GPT)使用标记处理文本，标记是一组文本中常见的字符序列。模型学习理解这些标记之间的统计关系，并擅长生成标记序列中的下一个标记。您可以使用相关工具来了解语言模型如何对一段文本进行标记，以及该段文本中标记的总数 token是什么在自然语言处理(NLP)中，token是指一组相关的字符序列，例如一个">
 <meta property="og:type" content="article">
-<meta property="og:title" content="embedding">
-<meta property="og:url" content="https://chunfei-he.github.io/2024/06/24/embedding/index.html">
+<meta property="og:title" content="token介绍">
+<meta property="og:url" content="https://chunfei-he.github.io/2024/06/30/token%E4%BB%8B%E7%BB%8D/index.html">
 <meta property="og:site_name" content="blog">
-<meta property="og:description" content="将高维数据映射到低维空间。Embedding的最大价值是降维：在许多实际问题中，原始数据的维度往往非常高。例如，在自然语言处理中，如果使用One-hot编码来表示词汇，其维度等于词汇表的大小，可能达到数十万甚至更高。通过Embedding,我们可以将这些高维数据映射到一个低维空间，大大减少了模型的复杂度。">
+<meta property="og:description" content="引言https:&#x2F;&#x2F;platform.openai.com&#x2F;tokenizerOpeA的大型语言模型（即GPT)使用标记处理文本，标记是一组文本中常见的字符序列。模型学习理解这些标记之间的统计关系，并擅长生成标记序列中的下一个标记。您可以使用相关工具来了解语言模型如何对一段文本进行标记，以及该段文本中标记的总数 token是什么在自然语言处理(NLP)中，token是指一组相关的字符序列，例如一个">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2024-06-24T05:05:57.000Z">
-<meta property="article:modified_time" content="2024-08-19T03:07:36.441Z">
+<meta property="article:published_time" content="2024-06-30T09:28:52.000Z">
+<meta property="article:modified_time" content="2024-08-19T03:12:02.501Z">
 <meta property="article:author" content="Chunfei He">
 <meta property="article:tag" content="LLM">
 <meta name="twitter:card" content="summary_large_image">
   
   
   
-  <title>embedding - blog</title>
+  <title>token介绍 - blog</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -200,7 +200,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="embedding"></span>
+            <span id="subtitle" data-typed-text="token介绍"></span>
           
         </div>
 
@@ -211,8 +211,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2024-06-24 13:05" pubdate>
-          2024年6月24日 下午
+        <time datetime="2024-06-30 17:28" pubdate>
+          2024年6月30日 下午
         </time>
       </span>
     
@@ -223,7 +223,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          120 字
+          1.8k 字
         
       </span>
     
@@ -234,7 +234,7 @@
         
         
         
-          2 分钟
+          15 分钟
         
       </span>
     
@@ -271,12 +271,37 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">embedding</h1>
+            <h1 id="seo-header">token介绍</h1>
             
             
               <div class="markdown-body">
                 
-                <p>将高维数据映射到低维空间。Embedding的最大价值是降维：在许多实际问题中，原始数据的维度往往非常高。例如，在自然语言处理中，如果使用One-hot编码来表示词汇，其维度等于词汇表的大小，可能达到数十万甚至更高。通过Embedding,我们可以将这些高维数据映射到一个低维空间，大大减少了模型的复杂度。</p>
+                <h3 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h3><p><a target="_blank" rel="noopener" href="https://platform.openai.com/tokenizer">https://platform.openai.com/tokenizer</a><br>OpeA的大型语言模型（即GPT)使用标记处理文本，标记是一组文本中常见的字符序列。模型学习理解这些标记之间的统计关系，并擅长生成标记序列中的下一个标记。您可以使用相关工具来了解语言模型如何对一段文本进行标记，以及该段文本中标记的总数</p>
+<h3 id="token是什么"><a href="#token是什么" class="headerlink" title="token是什么"></a>token是什么</h3><p>在自然语言处理(NLP)中，token是指一组相关的字符序列，例如一个单词或一个标点符号。将文本分解为token是NLP的一项基本任务，因为它是许多其他任务的先决条件，例如词性标注、命名实体识别和机器翻译。在文本处理中，token可以是一个词语、数字、标点符号、单个字母或任何可以成为文本分析的单个元素。</p>
+<p>在分解文本时，通常会根据空格、标点符号和其他特定的分割符号来确定token的边界。<br>例如，在以下句子中，标点符号和空格用于分解成为不同的token:<br>“我喜欢吃冰淇淋。”<br>这个句子中，每个汉字和标点符号都可以切分开成一个tokn。但是，一个字一个字去理解整句话的意思，可能反而会理解错误。<br>例如“冰淇淋”，就是一个完整的词，分开成“冰”“淇”“淋”三个字反而无法理解了。<br>类似的，NLP中，token还可以是比词更高级别的语言单位，例如短语或句子。例如，对于短语token,“红色的苹果”可以被视为一个token,而不是单独的“红色”和“苹果”token.。因为存在不同的切分方式，所以“红色的苹果”，就需要切分成“红”“红色”的”苹果””“果”“红色的苹果”等多个token:去理解。<br>在处理文本时，理解token的概念是非常重要的，因为它是许多文本分析任务的基础。NLP算法会使用token来构建文本的表示形式，理解自然语言，以便进行其他分析任务。<br>因此，对于NLP系统来说，选择正确的分词方法(tokenization)非常重要，它将直接影响到其他任务的准确性和效率。<br>我们结合Chatgpt进一步了解下token和tokenization。</p>
+<h3 id="ChatGPT中的token"><a href="#ChatGPT中的token" class="headerlink" title="ChatGPT中的token"></a>ChatGPT中的token</h3><p>一句话输入大模型之后后先拆分成token，ChatGPT的词表一共有100256个不同符号（BPE格式）。<br>常见单词对应的token索引id小。如果一个单词单独出现时被拆分成了两个token，但是前面加上空格后可以分配到一个token，说明该单词在段落中间出现的概率高。<br>token 其实还包括了一些空白字符，因此在边界容易出问题，这是在应用时需要注意的。<br>以前面「Once upon a time」的例子说明，”Once “（后面有空格）的 token id 是 <code>[7454, 220]</code>，其中空格的 id 是 220，但如果是 <code>&quot;Once upon&quot;</code>，token id 就是 <code>[7454, 2402]</code>，其中 <code>&quot; upon&quot;</code>（前面有空格） 的 id 是 2402，而 “upon” 这个不加前面空格的单词 token 是 27287，前面提到过 id 值大意味着概率低，在大模型眼里，提示词结尾加不加空格是完全不同，加了就是用 <code>[7454, 220]</code> 预测 27287，不加就是用 <code>[7454]</code> 预测 2402，第一种是概率更低更难的，因此在写提示词的时候<strong>结尾不要加空格</strong></p>
+<p><a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=zduSFxRajkE">https://www.youtube.com/watch?v=zduSFxRajkE</a></p>
+<p>看完了 token，接下来介绍选词，前面提到大模型最终输出结果是每个 token 的概率，要选择哪个 token 作为下一个词呢？最简单的想法是选择概率最大的，但这样并不好，一方面是单次概率最大不代表全局最优，另一方面导致大模型同一个问题每次输出结果都一样，对于创意类的场景不合适。因此目前的做法是根据输出概率来做采样，概率高的 token 更容易输出。</p>
+<p>在实际应用的时候，大模型通常会有个可调整的参数叫 <code>Temperature</code>，它可以控制大模型输出结果更稳定还是更多样，它是怎么实现的呢？这里用代码来解释一下，比如我们假设大模型输出了这个向量</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs python">output = torch.FloatTensor([<span class="hljs-number">0.1</span>, <span class="hljs-number">0.2</span>, <span class="hljs-number">0.3</span>, <span class="hljs-number">0.4</span>, <span class="hljs-number">0.5</span>])<br></code></pre></td></tr></table></figure>
+<p>通过 softmax 函数我们可以将输出结果转成总和为 1 的小数，每个小数就是输出概率，这就是大模型最后算出的结果</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs python">torch.nn.functional.softmax(output, -<span class="hljs-number">1</span>) <br><span class="hljs-comment"># 输出为 [0.1621, 0.1792, 0.1980, 0.2188, 0.2419]</span><br></code></pre></td></tr></table></figure>
+
+<p>比如第五个值被选中的概率是 24.19%，这里每个数组的索引就是前面提到的 token id，第五个值代表 token id 为 5。</p>
+<p>如果我们将输出结果除以 0.1，结果就变成如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs python">temperature = <span class="hljs-number">0.1</span><br>torch.nn.functional.softmax(output / temperature, -<span class="hljs-number">1</span>)<br><span class="hljs-comment"># 输出为 [0.0117, 0.0317, 0.0861, 0.2341, 0.6364]</span><br></code></pre></td></tr></table></figure>
+
+<p>这时第五个值的概率变成 63.64% 了，被选中的概率大幅增加，输出结果更为稳定</p>
+<p>而如果是除以 2，就变成：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs python">temperature = <span class="hljs-number">2</span><br>torch.nn.functional.softmax(output / temperature, -<span class="hljs-number">1</span>)<br><span class="hljs-comment"># 输出为 [0.1805, 0.1898, 0.1995, 0.2097, 0.2205]</span><br></code></pre></td></tr></table></figure>
+<p>这时各个列的输出概率就被压平了，第五个值的的概率变成 22%，而之前第一个值的概率从 1% 变成了 18.05%，比之前更有可能被选中了，这就使得大模型输出结果更多样，也意味着跟容易瞎说。<br>因此将 <code>temperature</code> 值设小一点模型就能很稳定输出，另外 <code>temperature</code> 是被除数，所以不可以为 0，有些平台支持 0 是做了特殊处理，比如可以转成 <code>top_k</code> 为 1。</p>
+<p>不过改成 0 也不能完全保证结果唯一，根据 OpenAI 员工 <a href="https://link.zhihu.com/?target=https://community.openai.com/t/a-question-on-determinism/8185">boris</a> 的说法，GPU 浮点数计算的时候有不确定性，而且多个 GPU 推理时 <code>a*b*c</code> 可能被计算为 <code>(a*b)*c</code> 或 <code>a*(b*c)</code>，这两个结果可能会微小不同，导致最终结果不唯一。</p>
+<p>前面花了很多篇幅介绍 token 及选词策略，因为这是在大模型应用时控制输出的重要机制，在不改变大模型参数的情况下，我们可以：</p>
+<ol>
+<li>提升推理速度，比如 <a href="https://link.zhihu.com/?target=https://arxiv.org/abs/2302.01318">Speculative Sampling</a>，它的原理是用个小模型来生成一段，再让大模型来挑选是否可用，这个方式能提升 2-3 倍推理速度。</li>
+<li>优化推理效果，比如使用 <a href="https://link.zhihu.com/?target=https://en.wikipedia.org/wiki/Beam_search">Beam search</a> 来搜索更好的结果，它通过多次搜索来找到更优结果，但会牺牲性能，因此实际应用中比较少见。</li>
+<li>控制输出格式，在应用中我们通常需要大模型输出 JSON 格式，而大模型有时候会幻觉导致输出错误，这时可以在解码时进行干预，比如发现新 token 会导致 JSON 语法错误就自动修正，比起全部输出后再修正效果更好。</li>
+</ol>
 
                 
               </div>
@@ -301,8 +326,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>embedding</div>
-      <div>https://chunfei-he.github.io/2024/06/24/embedding/</div>
+      <div>token介绍</div>
+      <div>https://chunfei-he.github.io/2024/06/30/token介绍/</div>
     </div>
     <div class="license-meta">
       
@@ -314,7 +339,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2024年6月24日</div>
+          <div>2024年6月30日</div>
         </div>
       
       
@@ -346,9 +371,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2024/06/25/GPT%E5%90%8D%E7%A7%B0%E5%90%AB%E4%B9%89/" title="GPT名称含义">
+                      <a href="/2024/07/30/uplift%E4%B8%8E%E5%9B%A0%E6%9E%9C%E6%8E%A8%E6%96%AD/" title="uplift与因果推断">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">GPT名称含义</span>
+                        <span class="hidden-mobile">uplift与因果推断</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -356,8 +381,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2024/06/19/%E9%A2%84%E8%AE%AD%E7%BB%83%E8%AF%AD%E8%A8%80%E6%A8%A1%E5%9E%8B/" title="预训练语言模型">
-                        <span class="hidden-mobile">预训练语言模型</span>
+                      <a href="/2024/06/25/GPT%E5%90%8D%E7%A7%B0%E5%90%AB%E4%B9%89/" title="GPT名称含义">
+                        <span class="hidden-mobile">GPT名称含义</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
