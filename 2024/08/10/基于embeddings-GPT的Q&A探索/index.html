@@ -19,25 +19,26 @@
   <meta name="author" content="Chunfei He">
   <meta name="keywords" content="">
   
-    <meta name="description" content="一 推荐场景Xu 等 - 2024 - Prompting Large Language Models for Recommender Sy.pdf 1 LLM作为推荐模型1）判别式推荐discriminative recommendation item scoring re-ranking tasks click-through rate prediction [tips]https:&#x2F;&#x2F;git">
+    <meta name="description" content="https:&#x2F;&#x2F;liaoxuefeng.com&#x2F;blogs&#x2F;all&#x2F;2023-07-31-qa-using-embeddings&#x2F;index.html 1、当前存在的问题我们希望把API文档、帮助文档等“事实回忆”的内容，通过Chat的方式可以快速获得。当前的GPT、一言等存在以下几个问题：  【时效性】训练数据是基于某个时间之前的数据，缺少最新的数据，而且每一次增加最新的数据都会带来高昂的训练成">
 <meta property="og:type" content="article">
-<meta property="og:title" content="LLM调研">
-<meta property="og:url" content="https://chunfei-he.github.io/2024/03/19/LLM%E8%B0%83%E7%A0%94/index.html">
+<meta property="og:title" content="基于embeddings+GPT的Q&amp;A探索">
+<meta property="og:url" content="https://chunfei-he.github.io/2024/08/10/%E5%9F%BA%E4%BA%8Eembeddings-GPT%E7%9A%84Q&A%E6%8E%A2%E7%B4%A2/index.html">
 <meta property="og:site_name" content="blog">
-<meta property="og:description" content="一 推荐场景Xu 等 - 2024 - Prompting Large Language Models for Recommender Sy.pdf 1 LLM作为推荐模型1）判别式推荐discriminative recommendation item scoring re-ranking tasks click-through rate prediction [tips]https:&#x2F;&#x2F;git">
+<meta property="og:description" content="https:&#x2F;&#x2F;liaoxuefeng.com&#x2F;blogs&#x2F;all&#x2F;2023-07-31-qa-using-embeddings&#x2F;index.html 1、当前存在的问题我们希望把API文档、帮助文档等“事实回忆”的内容，通过Chat的方式可以快速获得。当前的GPT、一言等存在以下几个问题：  【时效性】训练数据是基于某个时间之前的数据，缺少最新的数据，而且每一次增加最新的数据都会带来高昂的训练成">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://obsidian-1319504291.cos.ap-beijing.myqcloud.com/Pasted%20image%2020240815161156.png">
-<meta property="article:published_time" content="2024-03-19T03:46:18.000Z">
-<meta property="article:modified_time" content="2024-08-19T03:53:17.720Z">
+<meta property="og:image" content="https://obsidian-1319504291.cos.ap-beijing.myqcloud.com/Pasted%20image%2020240814171036.png">
+<meta property="og:image" content="https://obsidian-1319504291.cos.ap-beijing.myqcloud.com/Pasted%20image%2020240814171805.png">
+<meta property="article:published_time" content="2024-08-10T04:03:12.000Z">
+<meta property="article:modified_time" content="2024-08-19T04:05:49.752Z">
 <meta property="article:author" content="Chunfei He">
 <meta property="article:tag" content="LLM">
-<meta property="article:tag" content="推荐">
+<meta property="article:tag" content="RAG">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://obsidian-1319504291.cos.ap-beijing.myqcloud.com/Pasted%20image%2020240815161156.png">
+<meta name="twitter:image" content="https://obsidian-1319504291.cos.ap-beijing.myqcloud.com/Pasted%20image%2020240814171036.png">
   
   
   
-  <title>LLM调研 - blog</title>
+  <title>基于embeddings+GPT的Q&amp;A探索 - blog</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -203,7 +204,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="LLM调研"></span>
+            <span id="subtitle" data-typed-text="基于embeddings+GPT的Q&amp;A探索"></span>
           
         </div>
 
@@ -214,8 +215,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2024-03-19 11:46" pubdate>
-          2024年3月19日 中午
+        <time datetime="2024-08-10 12:03" pubdate>
+          2024年8月10日 中午
         </time>
       </span>
     
@@ -226,7 +227,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          360 字
+          2.3k 字
         
       </span>
     
@@ -237,7 +238,7 @@
         
         
         
-          4 分钟
+          19 分钟
         
       </span>
     
@@ -274,41 +275,115 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">LLM调研</h1>
+            <h1 id="seo-header">基于embeddings+GPT的Q&amp;A探索</h1>
             
             
               <div class="markdown-body">
                 
-                <h2 id="一-推荐场景"><a href="#一-推荐场景" class="headerlink" title="一 推荐场景"></a>一 推荐场景</h2><p>Xu 等 - 2024 - Prompting Large Language Models for Recommender Sy.pdf</p>
-<h3 id="1-LLM作为推荐模型"><a href="#1-LLM作为推荐模型" class="headerlink" title="1 LLM作为推荐模型"></a>1 LLM作为推荐模型</h3><p>1）判别式推荐discriminative recommendation</p>
-<p>item scoring</p>
-<p>re-ranking tasks</p>
-<p>click-through rate prediction</p>
-<p>[tips]<a target="_blank" rel="noopener" href="https://github.com/RUCAIBox/LLMRank">https://github.com/RUCAIBox/LLMRank</a> for questions : (1)很难感知历史交互的顺序，(2)可能会受到提示符中流行度或项目位置的影响。</p>
-<p>2）生成式推荐generative recommendation<br>Li 等 - 2023 - Large Language Models for Generative Recommendatio.pdf</p>
-<p><em>A generative recommender system directly generates recommendations or recommendation-related content without the need to calculate each candidate’s ranking score one by one for sorting and ranking.</em></p>
-<p>分类</p>
+                <p><a target="_blank" rel="noopener" href="https://liaoxuefeng.com/blogs/all/2023-07-31-qa-using-embeddings/index.html">https://liaoxuefeng.com/blogs/all/2023-07-31-qa-using-embeddings/index.html</a></p>
+<h1 id="1、当前存在的问题"><a href="#1、当前存在的问题" class="headerlink" title="1、当前存在的问题"></a>1、当前存在的问题</h1><p>我们希望把API文档、帮助文档等“事实回忆”的内容，通过Chat的方式可以快速获得。当前的GPT、一言等存在以下几个问题：</p>
 <ul>
-<li><p>non-tuning paradigm</p>
-</li>
-<li><p>tuning paradigm</p>
+<li>【时效性】训练数据是基于某个时间之前的数据，缺少最新的数据，而且每一次增加最新的数据都会带来高昂的训练成本</li>
+<li>【安全性】无法访问企业内部私密的文档，且这些文档是不能用来Fine-Tunning的</li>
+<li>【Token限制】每次会话会有Token限制，而文档内容是比较多的，使用Prompt的方式会远超Token限制</li>
+</ul>
+<h6 id="事实回忆是指什么？"><a href="#事实回忆是指什么？" class="headerlink" title="事实回忆是指什么？"></a>事实回忆是指什么？</h6><p>可以理解为通过Chat的方式做检索。举个例子来说，如果手里有大批的iPipe、iCafe、iCode帮助文档和问答语料，我们希望用户在获取相关功能的内容介绍时、编译失败查看为什么失败时、代码合入冲突如何解决时、查看某个产品有哪些OpenAPI时等等，这些都算是事实回忆。</p>
+<h1 id="2、可行方案"><a href="#2、可行方案" class="headerlink" title="2、可行方案"></a>2、可行方案</h1><h2 id="2-1、什么是Embeddings"><a href="#2-1、什么是Embeddings" class="headerlink" title="2.1、什么是Embeddings"></a>2.1、什么是Embeddings</h2><p>重点了解Embeddings是做什么、怎么用，对其内部原理不做过多分析。</p>
+<p><strong>Embedding</strong> 是一种以向量的方式表示“数据”的策略，这里的“数据”可以是一个物体、一个词语、一段对话、一部电影等等。无需完全理解其原理，可以简单的记为Embeddings是通过向量的方式来表示真实数据，它可以将简单的数据升维，让数据特征更明显，也可以让复杂的数据降维，让它更容易理解和计算。同时Embeddings还有“相加”、“相减”的能力，这些能力都是通过他的本质数据结构——向量来完成的。</p>
+<ul>
+<li><strong>升维：升维的目的是将低维数据一些特征放大，便于提取</strong></li>
+<li><strong>降维：降维的目的让复杂的数据更容易理解和计算，并且减少无效空间的占用_（比如一篇文章1w字，其中1000个字是“的”，那么可以通过降维的手段来把它压缩）</strong></li>
+<li><strong>相加和相减</strong></li>
+<li><strong>相似性计算</strong>：相似性比较有很多算法，比如比较简单<a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Cosine_similarity">余弦相似度</a>，本质也是在通过向量计算。</li>
+</ul>
+<h2 id="2-2、详细方案"><a href="#2-2、详细方案" class="headerlink" title="2.2、详细方案"></a>2.2、详细方案</h2><p>之所以用大段文字描述Embeddings，是因为我们需要使用Embeddings方式来压缩大文本数据，同时做检索，从而解决Prompt Token过长的问题。<br>方案分为<strong>准备Embeddings数据、检索Embeddings数据、发起Query获得响应</strong>三部分，具体如下：</p>
+<ul>
+<li><strong>准备Embeddings数据</strong><ul>
+<li><strong>收集：</strong> 将帮助文档、API文档、用户问答语料统一收集，或者需要其他知识文档也可以收集起来</li>
+<li><strong>切片：将文档切片，因为收集的文档普遍较大，不建议将整个文档转换为Embeddings，而是切分成若干段落，这样在后续的检索、组装Prompt也更有效</strong></li>
+<li><strong>生成：通过调用OpenAI的接口将各个切片生成Embeddings</strong></li>
+<li><strong>存储：将生成的Embeddings存储，可以使用向量数据库</strong></li>
+</ul>
 </li>
 </ul>
-<p>计算成本高、推理时间慢</p>
-<h3 id="2-LLM改进推荐模型"><a href="#2-LLM改进推荐模型" class="headerlink" title="2 LLM改进推荐模型"></a>2 LLM改进推荐模型</h3><p>1）LLM as feature encoder</p>
-<p>2）LLM for data augmentation</p>
-<p>如通过学习用户过往影视偏好，生成个性化摘要</p>
-<h3 id="3-LLM作为推荐模拟器"><a href="#3-LLM作为推荐模拟器" class="headerlink" title="3 LLM作为推荐模拟器"></a>3 LLM作为推荐模拟器</h3><p>agent映射了真实世界用户的基本行为。</p>
-<h3 id="4-case"><a href="#4-case" class="headerlink" title="4 case"></a>4 case</h3><p>1 </p>
-<p>Xi 等 - 2023 - Towards Open-World Recommendation with Knowledge A.pdf<br>2 </p>
-<p>Yin 等 - 2023 - Heterogeneous Knowledge Fusion A Novel Approach f.pdf<br>3 </p>
-<p>Agent4Rec，一个拥有1000个 LLM 授权生成代理的推荐系统模拟器。这些代理从 MovieLens-1M 数据集初始化，包含不同的社会特征和偏好。每个代理以逐页的方式与个性化电影推荐进行交互，并采取各种行动，如观看、评级、评估、退出和面试。通过 Agent4Rec，我们希望探索 LLM 授权的生成代理在模拟推荐环境中真正独立的人类行为方面的潜力。</p>
-<p>﻿<a target="_blank" rel="noopener" href="https://github.com/LehengTHU/Agent4Rec">https://github.com/LehengTHU/Agent4Rec</a>﻿</p>
-<p>5</p>
-<p>使用开源 LLM，我们利用它们的深层作为内容编码器，丰富了内容在嵌入级别的表示。对于闭源 LLM，我们使用提示技术在令牌级别上丰富训练数据。</p>
-<p>﻿<a target="_blank" rel="noopener" href="https://github.com/Jyonn/ONCE">https://github.com/Jyonn/ONCE</a><br>﻿## 二 LLM功能归纳</p>
-<p>﻿<a target="_blank" rel="noopener" href="https://github.com/TamSiuhin/LLM-UM-Reading">https://github.com/TamSiuhin/LLM-UM-Reading</a>﻿</p>
-<h3 id="LLMs-as-Predictors"><a href="#LLMs-as-Predictors" class="headerlink" title="LLMs as Predictors"></a>LLMs as Predictors</h3><h3 id="LLMs-as-Enhancer"><a href="#LLMs-as-Enhancer" class="headerlink" title="LLMs as Enhancer"></a>LLMs as Enhancer</h3><h3 id="LLMs-as-Controllers-Evaluators"><a href="#LLMs-as-Controllers-Evaluators" class="headerlink" title="LLMs as Controllers &amp;&amp; Evaluators"></a>LLMs as Controllers &amp;&amp; Evaluators</h3><h3 id="Applications-of-LLM-UM"><a href="#Applications-of-LLM-UM" class="headerlink" title="Applications of LLM-UM"></a>Applications of LLM-UM</h3><p><img src="https://obsidian-1319504291.cos.ap-beijing.myqcloud.com/Pasted%20image%2020240815161156.png" srcset="/img/loading.gif" lazyload alt="Pasted image 20240815161156.png"></p>
+<p>这一步其实是在构建一个检索库，也可以把<strong>Embeddings</strong>当成索引，向量数据库想象成ES。</p>
+<ul>
+<li><strong>检索Embeddings数据</strong><ul>
+<li>用户提问获得Query，调用OpenAI的API获取Query的Embeddings</li>
+<li>使用这个Embeddings去向量数据库中做相似性计算，获取权重最高的n个切片</li>
+</ul>
+</li>
+<li><strong>发起Query获得响应</strong><ul>
+<li>将n个切片和用户原始Query组装成Prompt，注意Prompt不能超出Token限制，如果超出限制要多n个切片进行低权重淘汰</li>
+<li>发送信息获取响应<br><img src="https://obsidian-1319504291.cos.ap-beijing.myqcloud.com/Pasted%20image%2020240814171036.png" srcset="/img/loading.gif" lazyload alt="Pasted image 20240814171036.png"></li>
+</ul>
+</li>
+</ul>
+<p>一种基于搜索-提问的两步法，使GPT能够使用参考文本库回答问题。</p>
+<ol>
+<li>搜索：在文本库中搜索相关文本片段；</li>
+<li>提问：将检索到的文本片段连同消息一并发送至GPT并提问问题。<br>文本搜索相对于微调的一个缺点是每个模型都受到一次可以读取的最大文本量的限制。</li>
+</ol>
+<h2 id="2-3、Embeddings的缺陷"><a href="#2-3、Embeddings的缺陷" class="headerlink" title="2.3、Embeddings的缺陷"></a>2.3、Embeddings的缺陷</h2><ul>
+<li>多次调用模型API生成Embeddings，会耗费大量的资源（Money）</li>
+<li>对于切片的粒度要求很高，不能太粗或太细，同时高度依赖于Embeddings的生成质量</li>
+</ul>
+<h1 id="3、AutoGPT的方案"><a href="#3、AutoGPT的方案" class="headerlink" title="3、AutoGPT的方案"></a>3、AutoGPT的方案</h1><p>最近大火的AutoGPT实现方案和以上内容也有相似之处，其实并不是一个算法、策略的创新，而是一种工程、产品的创新，为了方便理解，做简要分析对比：<em>理论上说，ChatPDF、AgentGPT等各种工具都是通过类似的方式完成。</em></p>
+<ul>
+<li>用户输入ai_name（角色）、ai_role（角色描述）、ai_goal（5个目标）</li>
+<li>让ChatGPT根据输入的角色和目标，分步生成操作序列</li>
+<li>根据操作序列，调用不同的命令组件（如Shell脚本、网页爬虫、语音播报、Google搜索等）</li>
+<li>组件调用后的输出存储到缓存或长期记忆中，作为下一个组件的输入</li>
+<li>直到最后一个组件执行完成，任务结束<br><img src="https://obsidian-1319504291.cos.ap-beijing.myqcloud.com/Pasted%20image%2020240814171805.png" srcset="/img/loading.gif" lazyload alt="Pasted image 20240814171805.png"></li>
+</ul>
+<ol>
+<li><a target="_blank" rel="noopener" href="https://github.com/openai/openai-cookbook/blob/d67c4181abe9dfd871d382930bb778b7014edc66/examples/Embedding_long_inputs.ipynb">https://github.com/openai/openai-cookbook/blob/d67c4181abe9dfd871d382930bb778b7014edc66/examples/Embedding_long_inputs.ipynb</a></li>
+<li>﻿<a target="_blank" rel="noopener" href="https://github.com/openai/openai-cookbook/blob/d67c4181abe9dfd871d382930bb778b7014edc66/examples/Embedding_Wikipedia_articles_for_search.ipynb">https://github.com/openai/openai-cookbook/blob/d67c4181abe9dfd871d382930bb778b7014edc66/examples/Embedding_Wikipedia_articles_for_search.ipynb</a>﻿</li>
+<li>﻿<a target="_blank" rel="noopener" href="https://github.com/openai/openai-cookbook/blob/main/examples/Question_answering_using_embeddings.ipynb">https://github.com/openai/openai-cookbook/blob/main/examples/Question_answering_using_embeddings.ipynb</a>﻿</li>
+<li>﻿<a target="_blank" rel="noopener" href="https://simonwillison.net/2023/Jan/13/semantic-search-answers/">https://simonwillison.net/2023/Jan/13/semantic-search-answers/</a></li>
+</ol>
+<h3 id="存在的问题"><a href="#存在的问题" class="headerlink" title="存在的问题"></a>存在的问题</h3><h4 id="知识库原始数据向量化的过程中"><a href="#知识库原始数据向量化的过程中" class="headerlink" title="知识库原始数据向量化的过程中"></a>知识库原始数据向量化的过程中</h4><ul>
+<li>如何选择合适的向量库<br>  选择向量库，主要可以通过以下几个方面考虑：<ul>
+<li>向量库本身的可扩展性和可靠性，以及引入向量库怎么保持多个系统之间的一致性</li>
+<li>是否能在相似度搜索基础上支持 metadata 条件查询</li>
+<li>是否支持多种类型的用户 query，例如关键词搜索，文档总结，多个文档之间的对比等</li>
+<li>是否能支持复杂的 index 结构，例如有层级关系的 index</li>
+</ul>
+</li>
+<li>如何进行巧妙的切分（chunks）<br>  对于帮助文档存在API文档、用户手册（包含大量图片、视频）、FAQ等类型，不同的文档内容结构是不一样的，因此选择通用的切分方案会将连贯的数据进行切散，如下是一个典型的MD文档，如果复用MD通用拆分方法，直接使用“#”关键词做切割，那么会切割成5部分，这种切法已经把文档一个连贯的描述切散<ul>
+<li><strong>方案一：直接使用chunk size作为切割条件</strong><ul>
+<li>完整的描述被切碎</li>
+<li>用户的问题和切碎后的文本做相似性匹配时召回率非常低</li>
+</ul>
+</li>
+<li><strong>方案二：基于MD的标准格式进行切分</strong><ul>
+<li>保证了每个文本块的连续性描述</li>
+<li>用户的问题往往很短且形式多样，但完整的文本块描述比较长，仍然会导致做相似性匹配时召回率非常低</li>
+</ul>
+</li>
+<li><strong>方案三：基于MD的标准格式进行切分，但只向量化标题</strong><ul>
+<li>保证了每个文本块的连续性描述</li>
+<li>用户的问题往往很短且形式多样，做相似性匹配时只匹配标题，提高召回率</li>
+</ul>
+</li>
+<li><strong>方案四：在方案三的基础上，新增关键词提取向量化过程</strong><ul>
+<li>使用LLM针对答案进行关键词提取，约定关键词提取数量，比如最多提取5个</li>
+<li>提取关键词之后直接使用原始文本存入向量库中</li>
+<li>用户提问时一方面将Query向量化，另一方面实用LLM对Query进行关键词提取，即使用Query向量化 + Query关键词两个条件去向量库做相似性匹配，从而再次提高召回质量</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>几篇文档切分论文：</p>
+<ul>
+<li>“<a target="_blank" rel="noopener" href="https://www.mdpi.com/2078-2489/13/2/83#">A Survey on Text Segmentation Algorithms</a>“ - 这篇论文概述了文本分割算法的不同方法和技术，包括基于规则和统计的方法、深度学习方法等，对于了解该领域的研究现状和发展趋势有帮助。</li>
+<li>“Semantic Text Segmentation using Deep Learning” - 这篇论文提出了一种基于深度学习的语义文本分割方法，使用卷积神经网络（CNN）和长短时记忆网络（LSTM）对文本进行建模，实现了较好的分割效果。</li>
+<li>“Unsupervised Text Segmentation based on Semantic Similarity and Word Embedding” - 这篇论文提出了一种无监督的文本分割方法，利用语义相似度和词嵌入技术对文本进行分割，对于处理无标签的文本数据有一定的借鉴意义。</li>
+</ul>
+<h4 id="用户回答过程中"><a href="#用户回答过程中" class="headerlink" title="用户回答过程中"></a>用户回答过程中</h4><ul>
+<li>如何提高召回的质量<br>方案三中已经提到了可以通过只对标题向量化提高召回质量，实际上这里做了一个预设，预设用户提的问题都是和标题含义差不多的。但答案里边实际上会有更多的内容可以回答更多的问题，因此，我们还可以基于LLM的能力反向生成一些列问题，并向量化</li>
+</ul>
 
                 
               </div>
@@ -323,7 +398,7 @@
       
         <a href="/tags/LLM/" class="print-no-link">#LLM</a>
       
-        <a href="/tags/%E6%8E%A8%E8%8D%90/" class="print-no-link">#推荐</a>
+        <a href="/tags/RAG/" class="print-no-link">#RAG</a>
       
     </div>
   
@@ -335,8 +410,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>LLM调研</div>
-      <div>https://chunfei-he.github.io/2024/03/19/LLM调研/</div>
+      <div>基于embeddings+GPT的Q&amp;A探索</div>
+      <div>https://chunfei-he.github.io/2024/08/10/基于embeddings-GPT的Q&amp;A探索/</div>
     </div>
     <div class="license-meta">
       
@@ -348,7 +423,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2024年3月19日</div>
+          <div>2024年8月10日</div>
         </div>
       
       
@@ -380,9 +455,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2024/06/19/%E9%A2%84%E8%AE%AD%E7%BB%83%E8%AF%AD%E8%A8%80%E6%A8%A1%E5%9E%8B/" title="预训练语言模型">
+                      <a href="/2024/08/12/%E6%99%BA%E8%83%BD%E7%94%9F%E6%88%90/" title="智能生成">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">预训练语言模型</span>
+                        <span class="hidden-mobile">智能生成</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -390,8 +465,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2024/03/15/agent-for-recommendation/" title="agent for recommendation">
-                        <span class="hidden-mobile">agent for recommendation</span>
+                      <a href="/2024/08/06/%E8%AE%A1%E5%88%92%E5%92%8C%E8%A7%A3%E5%86%B3%E6%8F%90%E7%A4%BA%EF%BC%9A%E9%80%9A%E8%BF%87%E5%A4%A7%E5%9E%8B%E8%AF%AD%E8%A8%80%E6%A8%A1%E5%9E%8B%E6%94%B9%E8%BF%9B%E9%9B%B6%E6%A0%B7%E6%9C%AC%E6%80%9D%E7%BB%B4%E9%93%BE%E6%8E%A8%E7%90%86/" title="计划和解决提示：通过大型语言模型改进零样本思维链推理">
+                        <span class="hidden-mobile">计划和解决提示：通过大型语言模型改进零样本思维链推理</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
