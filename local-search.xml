@@ -250,5 +250,26 @@
   
   
   
+  <entry>
+    <title>LLM调研</title>
+    <link href="/2024/03/19/LLM%E8%B0%83%E7%A0%94/"/>
+    <url>/2024/03/19/LLM%E8%B0%83%E7%A0%94/</url>
+    
+    <content type="html"><![CDATA[<h2 id="一-推荐场景"><a href="#一-推荐场景" class="headerlink" title="一 推荐场景"></a>一 推荐场景</h2><p>Xu 等 - 2024 - Prompting Large Language Models for Recommender Sy.pdf</p><h3 id="1-LLM作为推荐模型"><a href="#1-LLM作为推荐模型" class="headerlink" title="1 LLM作为推荐模型"></a>1 LLM作为推荐模型</h3><p>1）判别式推荐discriminative recommendation</p><p>item scoring</p><p>re-ranking tasks</p><p>click-through rate prediction</p><p>[tips]<a href="https://github.com/RUCAIBox/LLMRank">https://github.com/RUCAIBox/LLMRank</a> for questions : (1)很难感知历史交互的顺序，(2)可能会受到提示符中流行度或项目位置的影响。</p><p>2）生成式推荐generative recommendation<br>Li 等 - 2023 - Large Language Models for Generative Recommendatio.pdf</p><p><em>A generative recommender system directly generates recommendations or recommendation-related content without the need to calculate each candidate’s ranking score one by one for sorting and ranking.</em></p><p>分类</p><ul><li><p>non-tuning paradigm</p></li><li><p>tuning paradigm</p></li></ul><p>计算成本高、推理时间慢</p><h3 id="2-LLM改进推荐模型"><a href="#2-LLM改进推荐模型" class="headerlink" title="2 LLM改进推荐模型"></a>2 LLM改进推荐模型</h3><p>1）LLM as feature encoder</p><p>2）LLM for data augmentation</p><p>如通过学习用户过往影视偏好，生成个性化摘要</p><h3 id="3-LLM作为推荐模拟器"><a href="#3-LLM作为推荐模拟器" class="headerlink" title="3 LLM作为推荐模拟器"></a>3 LLM作为推荐模拟器</h3><p>agent映射了真实世界用户的基本行为。</p><h3 id="4-case"><a href="#4-case" class="headerlink" title="4 case"></a>4 case</h3><p>1 </p><p>Xi 等 - 2023 - Towards Open-World Recommendation with Knowledge A.pdf<br>2 </p><p>Yin 等 - 2023 - Heterogeneous Knowledge Fusion A Novel Approach f.pdf<br>3 </p><p>Agent4Rec，一个拥有1000个 LLM 授权生成代理的推荐系统模拟器。这些代理从 MovieLens-1M 数据集初始化，包含不同的社会特征和偏好。每个代理以逐页的方式与个性化电影推荐进行交互，并采取各种行动，如观看、评级、评估、退出和面试。通过 Agent4Rec，我们希望探索 LLM 授权的生成代理在模拟推荐环境中真正独立的人类行为方面的潜力。</p><p>﻿<a href="https://github.com/LehengTHU/Agent4Rec">https://github.com/LehengTHU/Agent4Rec</a>﻿</p><p>5</p><p>使用开源 LLM，我们利用它们的深层作为内容编码器，丰富了内容在嵌入级别的表示。对于闭源 LLM，我们使用提示技术在令牌级别上丰富训练数据。</p><p>﻿<a href="https://github.com/Jyonn/ONCE">https://github.com/Jyonn/ONCE</a><br>﻿## 二 LLM功能归纳</p><p>﻿<a href="https://github.com/TamSiuhin/LLM-UM-Reading">https://github.com/TamSiuhin/LLM-UM-Reading</a>﻿</p><h3 id="LLMs-as-Predictors"><a href="#LLMs-as-Predictors" class="headerlink" title="LLMs as Predictors"></a>LLMs as Predictors</h3><h3 id="LLMs-as-Enhancer"><a href="#LLMs-as-Enhancer" class="headerlink" title="LLMs as Enhancer"></a>LLMs as Enhancer</h3><h3 id="LLMs-as-Controllers-Evaluators"><a href="#LLMs-as-Controllers-Evaluators" class="headerlink" title="LLMs as Controllers &amp;&amp; Evaluators"></a>LLMs as Controllers &amp;&amp; Evaluators</h3><h3 id="Applications-of-LLM-UM"><a href="#Applications-of-LLM-UM" class="headerlink" title="Applications of LLM-UM"></a>Applications of LLM-UM</h3><p><img src="https://obsidian-1319504291.cos.ap-beijing.myqcloud.com/Pasted%20image%2020240815161156.png" alt="Pasted image 20240815161156.png"></p>]]></content>
+    
+    
+    
+    <tags>
+      
+      <tag>LLM</tag>
+      
+      <tag>推荐</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
   
 </search>
