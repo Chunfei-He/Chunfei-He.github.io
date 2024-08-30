@@ -19,22 +19,25 @@
   <meta name="author" content="Chunfei He">
   <meta name="keywords" content="">
   
-    <meta name="description" content="除了基于常规的文档做问答，实际上还可以基于数据类做问答：  基于Mysql数据库：通过Embedding的方式将表的Schema、表数据全部向量化，然后用户可以问问题比如“查询王五的考试成绩”，模型根据上下文自动生成SQL查询语句，然后调用工具执行  基于数据仓库：同样是通过Embedding的方式将表的Schema、表数据全部向量化，然后用户可以问问题比如“查询某某团队的代码提交数据”，模型根据">
+    <meta name="description" content="项目地址GitHub地址：Chunfei-He&#x2F;MyRAG (github.com) 项目进度 数据处理pipeline done  目前数据源：项目README.md文件、阿里2023财报.pdf、斗破苍穹小说.txt、iPhone使用手册（ios5）.pdf、中华人民共和国消费者权益保护法.pdf  实现功能：搭建web demo页面可针对上述文件提问，对于没有相关信息的问题可以拒绝">
 <meta property="og:type" content="article">
-<meta property="og:title" content="智能生成">
-<meta property="og:url" content="https://chunfei-he.github.io/2024/08/12/%E6%99%BA%E8%83%BD%E7%94%9F%E6%88%90/index.html">
+<meta property="og:title" content="RAG项目总结V1.0">
+<meta property="og:url" content="https://chunfei-he.github.io/2024/08/30/RAG%E9%A1%B9%E7%9B%AE%E6%80%BB%E7%BB%93V1.0/index.html">
 <meta property="og:site_name" content="blog">
-<meta property="og:description" content="除了基于常规的文档做问答，实际上还可以基于数据类做问答：  基于Mysql数据库：通过Embedding的方式将表的Schema、表数据全部向量化，然后用户可以问问题比如“查询王五的考试成绩”，模型根据上下文自动生成SQL查询语句，然后调用工具执行  基于数据仓库：同样是通过Embedding的方式将表的Schema、表数据全部向量化，然后用户可以问问题比如“查询某某团队的代码提交数据”，模型根据">
+<meta property="og:description" content="项目地址GitHub地址：Chunfei-He&#x2F;MyRAG (github.com) 项目进度 数据处理pipeline done  目前数据源：项目README.md文件、阿里2023财报.pdf、斗破苍穹小说.txt、iPhone使用手册（ios5）.pdf、中华人民共和国消费者权益保护法.pdf  实现功能：搭建web demo页面可针对上述文件提问，对于没有相关信息的问题可以拒绝">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2024-08-12T14:06:03.000Z">
-<meta property="article:modified_time" content="2024-08-19T04:06:47.868Z">
+<meta property="og:image" content="https://obsidian-1319504291.cos.ap-beijing.myqcloud.com/20240830130822.png">
+<meta property="og:image" content="https://obsidian-1319504291.cos.ap-beijing.myqcloud.com/20240830130632.png">
+<meta property="article:published_time" content="2024-08-30T04:07:11.000Z">
+<meta property="article:modified_time" content="2024-08-30T06:30:58.295Z">
 <meta property="article:author" content="Chunfei He">
 <meta property="article:tag" content="LLM">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://obsidian-1319504291.cos.ap-beijing.myqcloud.com/20240830130822.png">
   
   
   
-  <title>智能生成 - blog</title>
+  <title>RAG项目总结V1.0 - blog</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -200,7 +203,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="智能生成"></span>
+            <span id="subtitle" data-typed-text="RAG项目总结V1.0"></span>
           
         </div>
 
@@ -211,8 +214,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2024-08-12 22:06" pubdate>
-          2024年8月12日 晚上
+        <time datetime="2024-08-30 12:07" pubdate>
+          2024年8月30日 中午
         </time>
       </span>
     
@@ -223,7 +226,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          193 字
+          737 字
         
       </span>
     
@@ -234,7 +237,7 @@
         
         
         
-          2 分钟
+          7 分钟
         
       </span>
     
@@ -271,19 +274,44 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">智能生成</h1>
+            <h1 id="seo-header">RAG项目总结V1.0</h1>
             
             
               <div class="markdown-body">
                 
-                <p>除了基于常规的文档做问答，实际上还可以基于数据类做问答：</p>
-<ul>
-<li><p><strong>基于Mysql数据库：</strong>通过Embedding的方式将表的Schema、表数据全部向量化，然后用户可以问问题比如“查询王五的考试成绩”，<strong>模型根据上下文自动生成SQL查询语句，然后调用工具执行</strong></p>
+                <h2 id="项目地址"><a href="#项目地址" class="headerlink" title="项目地址"></a>项目地址</h2><p><strong>GitHub地址：</strong><br><a target="_blank" rel="noopener" href="https://github.com/Chunfei-He/MyRAG">Chunfei-He&#x2F;MyRAG (github.com)</a></p>
+<h2 id="项目进度"><a href="#项目进度" class="headerlink" title="项目进度"></a>项目进度</h2><ol>
+<li><p>数据处理pipeline done</p>
 </li>
-<li><p>基于数据仓库：同样是通过Embedding的方式将表的Schema、表数据全部向量化，然后用户可以问问题比如“查询某某团队的代码提交数据”，<strong>模型根据上下文自动生成查询策略，然后调用工具执行</strong></p>
+<li><p>目前数据源：项目README.md文件、阿里2023财报.pdf、斗破苍穹小说.txt、iPhone使用手册（ios5）.pdf、中华人民共和国消费者权益保护法.pdf</p>
 </li>
-</ul>
-<p><strong>这里会引入一个新的问题：什么时候需要Embedding + LLM？什么时候只需要LLM？</strong></p>
+<li><p>实现功能：搭建web demo页面可针对上述文件提问，对于没有相关信息的问题可以拒绝回复。<br><img src="https://obsidian-1319504291.cos.ap-beijing.myqcloud.com/20240830130822.png" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+</li>
+<li><p>存在问题：</p>
+<ol>
+<li>iPhone使用手册版本较旧，缺少iPad使用手册。未考虑同一问题（如：如何拍照）可能来自两种设备持有者的情况</li>
+<li>阿里财报为繁体，导致回复时出现部分繁体字<br> <img src="https://obsidian-1319504291.cos.ap-beijing.myqcloud.com/20240830130632.png" srcset="/img/loading.gif" lazyload alt="image.png"></li>
+</ol>
+</li>
+<li><p>后续升级技术方案：</p>
+<ol>
+<li>针对问题一，计划在向量相似度计算之前加入router组件，先判断需要调用哪个向量库，再进行针对性调用</li>
+<li>针对问题二，修改prompt模板，强调使用简体中文回复</li>
+<li>待实现功能有：定义金融指标，利用财报数据计算。计划加到router组件中，判断是否需要使用数据查询功能（直接从表格中查询数据，而不是计算相似度）</li>
+<li>可升级方向有：<ol>
+<li>目前只从数据库中召回相似度排名top 1的数据作为上下文，后续可以优化召回内容，比如召回多条、多次问答再总结</li>
+<li>对于markdown这种结构化语言，包括使用手册这种每一块有明确主题的文档，可以使用标题作为检索key</li>
+<li>可以考虑加入召回后排序</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+<h2 id="项目架构"><a href="#项目架构" class="headerlink" title="项目架构"></a>项目架构</h2><p>component是RAG的组件，分为四大部分（数据切分，向量化，向量存储，大模型）<br>data用于存放需要嵌入的文件（兼容Pdf  TXT，md文件）<br>db用于存放向量化后的数据，也是数据库的加载路径<br>build.ipynb构建向量数据库<br>webdemo_by_gradio使用gradio基于嵌入的文件调用OpenAI的回答助手</p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs markdown">MyRAG<br>├─ build.ipynb<br>├─ component<br>│  ├─ databases.py<br>│  ├─ data<span class="hljs-emphasis">_chunker.py</span><br><span class="hljs-emphasis">│  ├─ embedding.py</span><br><span class="hljs-emphasis">│  └─ llms.py</span><br><span class="hljs-emphasis">├─ data</span><br><span class="hljs-emphasis">│  ├─ dpcq.txt</span><br><span class="hljs-emphasis">│  ├─ README.md</span><br><span class="hljs-emphasis">│  ├─ 中华人民共和国消费者权益保护法.pdf</span><br><span class="hljs-emphasis">│  ├─ iphone 5_</span>user<span class="hljs-emphasis">_guide_</span>ch.pdf<br>│  └─ alibaba.pdf<br>├─ db<br>│  ├─ doecment.json<br>│  └─ vectors.json<br>├─ README.md<br>└─ webdemo<span class="hljs-emphasis">_by_</span>gradio.ipynb<br><br></code></pre></td></tr></table></figure>
+
+<h2 id="什么是RAG？"><a href="#什么是RAG？" class="headerlink" title="什么是RAG？"></a>什么是RAG？</h2><p>检索增强生成(RAG) 是<strong>一种使用来自私有或专有数据源的信息来辅助文本生成的技术</strong>。<br>它将检索模型（设计用于搜索大型数据集或知识库）和生成模型（例如大型语言模型(LLM)，此类模型会使用检索到的信息生成可供阅读的文本回复）结合在一起。 </p>
+<h2 id="为什么需要RAG？"><a href="#为什么需要RAG？" class="headerlink" title="为什么需要RAG？"></a>为什么需要RAG？</h2><p>LLM会产生误导性的 “幻觉”，依赖的信息可能过时，处理特定知识时效率不高，缺乏专业领域的深度洞察，同时在推理能力上也有所欠缺。<br>正是在这样的背景下，检索增强生成技术（Retrieval-Augmented Generation，RAG）应时而生，成为 AI 时代的一大趋势。</p>
 
                 
               </div>
@@ -308,8 +336,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>智能生成</div>
-      <div>https://chunfei-he.github.io/2024/08/12/智能生成/</div>
+      <div>RAG项目总结V1.0</div>
+      <div>https://chunfei-he.github.io/2024/08/30/RAG项目总结V1.0/</div>
     </div>
     <div class="license-meta">
       
@@ -321,7 +349,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2024年8月12日</div>
+          <div>2024年8月30日</div>
         </div>
       
       
@@ -353,18 +381,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2024/08/30/RAG%E9%A1%B9%E7%9B%AE%E6%80%BB%E7%BB%93V1.0/" title="RAG项目总结V1.0">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">RAG项目总结V1.0</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2024/08/10/%E5%9F%BA%E4%BA%8Eembeddings-GPT%E7%9A%84Q&amp;A%E6%8E%A2%E7%B4%A2/" title="基于embeddings+GPT的Q&amp;A探索">
-                        <span class="hidden-mobile">基于embeddings+GPT的Q&amp;A探索</span>
+                      <a href="/2024/08/12/%E6%99%BA%E8%83%BD%E7%94%9F%E6%88%90/" title="智能生成">
+                        <span class="hidden-mobile">智能生成</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
