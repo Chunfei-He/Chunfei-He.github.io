@@ -227,6 +227,48 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h2 class="index-header">
         
+        <a href="/2024/09/30/QLoRA%E5%8E%9F%E7%90%86/" target="_self">
+          QLoRA原理
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2024/09/30/QLoRA%E5%8E%9F%E7%90%86/" target="_self">
+        <div>
+          QLoRA是一个使用量化思想对LoRA进行优化的量化算法，可以显著的降低训练大模型时所需要的显存资源。QLoRA的优化有三个核心要点：首先是定义了一种4位标准浮点数（Normal Float 4-bit，NF4）量化，基于分块的分位数量化的量化策略；其次是双重量化，包含对普通参数的一次量化和对量化常数的再一次量化，可以进一步减小缓存占用；最后是分页优化器（Page Optimizer），用来在显存
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2024-09-30 16:13" pubdate>
+              2024-09-30
+            </time>
+          </div>
+        
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/LLM/">#LLM</a>
+            
+              <a href="/tags/PEFT/">##PEFT</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
         <a href="/2024/09/22/LoRA%E5%8E%9F%E7%90%86/" target="_self">
           LoRA原理
         </a>
@@ -254,6 +296,8 @@
             <i class="iconfont icon-tags"></i>
             
               <a href="/tags/LLM/">#LLM</a>
+            
+              <a href="/tags/PEFT/">#PEFT</a>
             
           </div>
         
@@ -588,46 +632,6 @@
             <i class="iconfont icon-date"></i>
             <time datetime="2024-07-25 08:48" pubdate>
               2024-07-25
-            </time>
-          </div>
-        
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/LLM/">#LLM</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h2 class="index-header">
-        
-        <a href="/2024/07/23/%E6%8F%90%E7%A4%BA%E8%AF%8D%E5%B7%A5%E7%A8%8BPLUS/" target="_self">
-          提示词工程PLUS
-        </a>
-      </h2>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2024/07/23/%E6%8F%90%E7%A4%BA%E8%AF%8D%E5%B7%A5%E7%A8%8BPLUS/" target="_self">
-        <div>
-          prompt当前大模型是没有“心算”能力的，无法探知自然语言背后的“隐含信息”，对于中文隐含信息量又是及其庞大的。但我们可以通过提示词让模型将心算能力摆在前台，通过上下文将隐含信息摆在前台。举个例子：  36 * 12等于几，人类通过心算时大部分会拆成3610&#x3D;360放在心里某个位置，然后在算362&#x3D;72放在心里某个位置，最终相加得出结果，而模型没有地方可以放这个临时值  这种
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2024-07-23 16:30" pubdate>
-              2024-07-23
             </time>
           </div>
         

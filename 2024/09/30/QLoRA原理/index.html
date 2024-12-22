@@ -19,26 +19,23 @@
   <meta name="author" content="Chunfei He">
   <meta name="keywords" content="">
   
-    <meta name="description" content="LORA 是一种低资源微调大模型方法，出自论文 LoRA: Low-Rank Adaptation of Large Language Models。 使用 LORA，训练参数仅为整体参数的万分之一、GPU 显存使用量减少 2&#x2F;3 且不会引入额外的推理耗时。 高效微调（PEFT）的基本原理full fine-tuning：在微调过程中模型加载预训练参数进行初始化，并通过最大化语言模型概率">
+    <meta name="description" content="QLoRA是一个使用量化思想对LoRA进行优化的量化算法，可以显著的降低训练大模型时所需要的显存资源。QLoRA的优化有三个核心要点：首先是定义了一种4位标准浮点数（Normal Float 4-bit，NF4）量化，基于分块的分位数量化的量化策略；其次是双重量化，包含对普通参数的一次量化和对量化常数的再一次量化，可以进一步减小缓存占用；最后是分页优化器（Page Optimizer），用来在显存">
 <meta property="og:type" content="article">
-<meta property="og:title" content="LoRA原理">
-<meta property="og:url" content="https://chunfei-he.github.io/2024/09/22/LoRA%E5%8E%9F%E7%90%86/index.html">
+<meta property="og:title" content="QLoRA原理">
+<meta property="og:url" content="https://chunfei-he.github.io/2024/09/30/QLoRA%E5%8E%9F%E7%90%86/index.html">
 <meta property="og:site_name" content="blog">
-<meta property="og:description" content="LORA 是一种低资源微调大模型方法，出自论文 LoRA: Low-Rank Adaptation of Large Language Models。 使用 LORA，训练参数仅为整体参数的万分之一、GPU 显存使用量减少 2&#x2F;3 且不会引入额外的推理耗时。 高效微调（PEFT）的基本原理full fine-tuning：在微调过程中模型加载预训练参数进行初始化，并通过最大化语言模型概率">
+<meta property="og:description" content="QLoRA是一个使用量化思想对LoRA进行优化的量化算法，可以显著的降低训练大模型时所需要的显存资源。QLoRA的优化有三个核心要点：首先是定义了一种4位标准浮点数（Normal Float 4-bit，NF4）量化，基于分块的分位数量化的量化策略；其次是双重量化，包含对普通参数的一次量化和对量化常数的再一次量化，可以进一步减小缓存占用；最后是分页优化器（Page Optimizer），用来在显存">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://obsidian-1319504291.cos.ap-beijing.myqcloud.com/20241222160523.png">
-<meta property="og:image" content="https://obsidian-1319504291.cos.ap-beijing.myqcloud.com/20241222160708.png">
-<meta property="article:published_time" content="2024-09-22T02:39:54.000Z">
-<meta property="article:modified_time" content="2024-12-22T08:40:50.448Z">
+<meta property="article:published_time" content="2024-09-30T08:13:39.000Z">
+<meta property="article:modified_time" content="2024-12-22T10:34:35.561Z">
 <meta property="article:author" content="Chunfei He">
 <meta property="article:tag" content="LLM">
-<meta property="article:tag" content="PEFT">
+<meta property="article:tag" content="#PEFT">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://obsidian-1319504291.cos.ap-beijing.myqcloud.com/20241222160523.png">
   
   
   
-  <title>LoRA原理 - blog</title>
+  <title>QLoRA原理 - blog</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -204,7 +201,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="LoRA原理"></span>
+            <span id="subtitle" data-typed-text="QLoRA原理"></span>
           
         </div>
 
@@ -215,8 +212,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2024-09-22 10:39" pubdate>
-          2024年9月22日 上午
+        <time datetime="2024-09-30 16:13" pubdate>
+          2024年9月30日 下午
         </time>
       </span>
     
@@ -227,7 +224,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          709 字
+          1.5k 字
         
       </span>
     
@@ -238,7 +235,7 @@
         
         
         
-          6 分钟
+          13 分钟
         
       </span>
     
@@ -275,18 +272,21 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">LoRA原理</h1>
+            <h1 id="seo-header">QLoRA原理</h1>
             
             
               <div class="markdown-body">
                 
-                <p>LORA 是一种低资源微调大模型方法，出自论文 <a target="_blank" rel="noopener" href="https://arxiv.org/pdf/2106.09685">LoRA: Low-Rank Adaptation of Large Language Models</a>。 使用 LORA，训练参数仅为整体参数的万分之一、GPU 显存使用量减少 2&#x2F;3 且不会引入额外的推理耗时。</p>
-<h2 id="高效微调（PEFT）的基本原理"><a href="#高效微调（PEFT）的基本原理" class="headerlink" title="高效微调（PEFT）的基本原理"></a>高效微调（PEFT）的基本原理</h2><p>full fine-tuning：在微调过程中模型加载预训练参数进行初始化，并通过最大化语言模型概率进行参数更新，这种微调方式的主要缺点是我们学习到的参数增量的维度和预训练参数是一致的，需要的资源较多。<br>高效微调方法则通过选择性地调整少量参数或增加额外的小型模块来显著降低训练成本，同时保持良好的模型性能。</p>
-<h2 id="LoRA实现方式"><a href="#LoRA实现方式" class="headerlink" title="LoRA实现方式"></a>LoRA实现方式</h2><h3 id="Instrisic-Dimension"><a href="#Instrisic-Dimension" class="headerlink" title="Instrisic Dimension"></a>Instrisic Dimension</h3><ol>
-<li>为何用数千的样本就能将一个数十亿参数的模型微调得比较好？</li>
-<li>为何大模型表现出很好的 few-shot 能力？<br><a target="_blank" rel="noopener" href="https://arxiv.org/abs/2012.13255?utm_source=chatgpt.com">https://arxiv.org/abs/2012.13255?utm_source=chatgpt.com</a><br>Aghajanyan 的研究表明：预训练模型拥有极小的内在维度 (instrisic dimension)，即存在一个极低维度的参数，微调它和在全参数空间中微调能起到相同的效果。同时 Aghajanyan 发现在预训练后，越大的模型有越小的内在维度，这也解释了为何大模型都拥有很好的 few-shot 能力。</li>
-</ol>
-<h3 id="LoRA"><a href="#LoRA" class="headerlink" title="LoRA"></a>LoRA</h3><p><img src="https://obsidian-1319504291.cos.ap-beijing.myqcloud.com/20241222160523.png" srcset="/img/loading.gif" lazyload alt="image.png"><br>LoRA（Low-Rank Adaptation of Large Language Models） 的实现核心是通过 低秩矩阵分解 来对模型权重进行高效微调，而不需要更新模型的全部参数。<br>LoRA 假设模型的权重矩阵在微调过程中只需要少量的调整。<br>因此，可以将模型权重表示为：<br><img src="https://obsidian-1319504291.cos.ap-beijing.myqcloud.com/20241222160708.png" srcset="/img/loading.gif" lazyload alt="image.png"><br><strong>在训练过程中，低秩的适应矩阵</strong>ΔW<strong>仅仅放大了对下游任务有用的特征，而不是预训练模型中的主要特征。</strong><br>在初始化时，A使用高斯初始化，B使用零矩阵进行的初始化。因为 通常是一个非常小的值（实验证明1，2，4，8的效果就非常好），所以LoRA在训练时引入的参数量是非常小的，因此它的训练也是非常高效的，也不会带来显著的显存增加。<br>LoRA要求 或者 其中之一必须使用零矩阵进行初始化，这样当数据第一次通过网络时，它和预训练的结果是一致的，这样便保证了模型在初始阶段便有一个不错的效果。苏剑林老师指出，这种一个全零，一个非全零的方式带来了不对称的问题<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/663557294#ref_3">[3]</a>，其实我们也可以使用两个非全零矩阵进行初始化，但是需要事先将预训练权重减去初始化的值。</p>
+                <p><a target="_blank" rel="noopener" href="https://arxiv.org/abs/2305.14314">QLoRA</a>是一个使用量化思想对LoRA进行优化的量化算法，可以显著的降低训练大模型时所需要的显存资源。QLoRA的优化有三个核心要点：首先是定义了一种4位标准浮点数（Normal Float 4-bit，NF4）量化，基于分块的分位数量化的量化策略；其次是双重量化，包含对普通参数的一次量化和对量化常数的再一次量化，可以进一步减小缓存占用；最后是分页优化器（Page Optimizer），用来在显存过高时用一部分内存代替显存。</p>
+<h2 id="1-背景知识"><a href="#1-背景知识" class="headerlink" title="1 背景知识"></a>1 背景知识</h2><p>模型量化和大模型的PEFT（Parameter-Efficient Fine-Tuning）有一个共同点是它们都希望模型计算能够更快。</p>
+<h3 id="1-1-模型量化"><a href="#1-1-模型量化" class="headerlink" title="1.1 模型量化"></a>1.1 模型量化</h3><p>量化的本质是函数映射，根据量化过程是否线性我们可以把量化分为<strong>线性量化</strong>和<strong>非线性量化</strong>。量化过程是从一种数据类型“舍入”到另一种数据类型。举个例子，如果一种数据类型的范围为 <code>0..9</code>，而另一种数据类型的范围为 <code>0..4</code>，则第一种数据类型中的值 <code>4</code> 将舍入为第二种数据类型中的 <code>2</code> 。但是，如果在第一种数据类型中有值 <code>3</code>，它介于第二种数据类型的 <code>1</code> 和 <code>2</code> 之间，那么我们通常会四舍五入为 <code>2</code>。也就是说，第一种数据类型的值 <code>4</code> 和 <code>3</code> 在第二种数据类型中具有相同的值 <code>2</code>。这充分表明量化是一个有噪过程，会导致信息丢失，是一种有损压缩。</p>
+<h3 id="1-2-分位数量化"><a href="#1-2-分位数量化" class="headerlink" title="1.2 分位数量化"></a>1.2 分位数量化</h3><p>一种基于数据分布的量化方法，通过将数据按其分布的分位点划分成若干区间，并将每个区间的值映射为一个固定的量化值。这种方法特别适用于处理非均匀分布的数据，可以显著提高量化的表示能力和模型性能。<strong>分位数</strong>（Quantile）在数学上的定义指的是把<strong>顺序排列</strong>的一组数据分割为若干个相等块的分割点的数值。</p>
+<h3 id="1-3-分块k位量化"><a href="#1-3-分块k位量化" class="headerlink" title="1.3 分块k位量化"></a>1.3 分块k位量化</h3><p><strong>分块 k-位量化（Blockwise kkk-bit Quantization）</strong> 是一种针对大规模深度学习模型优化的量化方法，通过将模型参数或激活值划分为多个小块，对每个块分别进行 kkk-位量化，从而在保持模型性能的同时大幅减少内存占用和计算复杂度。</p>
+<h3 id="1-4-LoRA"><a href="#1-4-LoRA" class="headerlink" title="1.4 LoRA"></a>1.4 LoRA</h3><p>LoRA是一个基于适配器学习的PEFT算法。它指出模型往往是过参数化话，因此可以用两个低秩矩阵代替原来的密集连接，从而可以减少模型的参数量。另外LoRA的适配器是一个和原模型的网络块并行的结构，在推理时计算的是已经将适配器的参数加到原模型参数上的新参数，因此不会带来任何的推理时间的增加。</p>
+<h2 id="2-QLoRA"><a href="#2-QLoRA" class="headerlink" title="2 QLoRA"></a>2 QLoRA</h2><p>QLoRA的工作有三个，第一个工作是结合了分位数量化和分块量化的<strong>4位标准浮点数量化</strong>（4-bit NormalFloat Quantization）。第二个工作是对模型进行两次量化的<strong>双重量化</strong>（Double Quantization），它的第二次量化只作用在第一次量化产生的量化常数上，可以进一步节约显存占用。第三个工作是<strong>分页优化</strong>（Paged Optimizer），使用CPU内存代替GPU显存保存部分梯度参数。</p>
+<p>使用上面介绍的分位数量化方法我们可以将FP2精度量化到4bit的精度，但是直接这么用的一个问题是不能保证高精度的0一定被映射到低精度的0。为了确保零点映射到0并且使用4位数据类型的全部16位，我们通过估计正负两个范围的分位数来创建一个非对称的数据类型：负数部分映射其中7位，正数部分映射8位，0占据1位，总共用满了4位数的16位。另外我们也可以使用对称的量化，其中正数和负数均使用7位，0占用2个位。我这里和论文介绍的略有不同，论文说的是正数部分取9个值，负数部分取8个值，不过它们都会取到0，所以合并时再去掉一个重复的0，这两个说法其实是一样的，只是实现方式略有差异。</p>
+<p>当我们保存模型时我们不仅要保存量化后的结果，还要保存每个块的量化常数。虽然量化后的参数只有4bit的精度，但是这个量化常量的精度是float32。在QLoRA中，每个块的大小是64，因为块中的每个值占4比特。这相当于为了存储量化常数，模型要额外占用显存。QLoRA的双重量化就是对这个量化常数再做一次8bit的量化，在进行量化常数的量化时，QLoRA以每256个量化常数为一组再做一次量化。因此它额外增加的内存消耗有两部分组成，一部分是量化后的8bit的第一层的量化常数，第二部分是为量化常数做量化的第二层的32bit的量化常数。因为使用了双重量化，在进行反量化时我们也需要进行两次反量化才能把量化后的值还原。</p>
+<p>分页优化是针对梯度检查点做的进一步优化，以防止在显存使用峰值时发生显存OOM的问题。QLoRA分页优化其实就是当显存不足是，将保存的部分梯度检查点转移到CPU内存上，和计算机的内存数据转移到硬盘上的常规内存分页一个道理。</p>
 
                 
               </div>
@@ -301,7 +301,7 @@
       
         <a href="/tags/LLM/" class="print-no-link">#LLM</a>
       
-        <a href="/tags/PEFT/" class="print-no-link">#PEFT</a>
+        <a href="/tags/PEFT/" class="print-no-link">##PEFT</a>
       
     </div>
   
@@ -313,8 +313,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>LoRA原理</div>
-      <div>https://chunfei-he.github.io/2024/09/22/LoRA原理/</div>
+      <div>QLoRA原理</div>
+      <div>https://chunfei-he.github.io/2024/09/30/QLoRA原理/</div>
     </div>
     <div class="license-meta">
       
@@ -326,7 +326,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2024年9月22日</div>
+          <div>2024年9月30日</div>
         </div>
       
       
@@ -358,18 +358,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2024/09/30/QLoRA%E5%8E%9F%E7%90%86/" title="QLoRA原理">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">QLoRA原理</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2024/08/30/RAG%E9%A1%B9%E7%9B%AE%E6%80%BB%E7%BB%93V1.0/" title="RAG项目总结V1.0">
-                        <span class="hidden-mobile">RAG项目总结V1.0</span>
+                      <a href="/2024/09/22/LoRA%E5%8E%9F%E7%90%86/" title="LoRA原理">
+                        <span class="hidden-mobile">LoRA原理</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
