@@ -4,6 +4,19 @@
   
   
   <entry>
+    <title>Multi-Task Learning</title>
+    <link href="/2024/10/10/Multi-Task-Learning/"/>
+    <url>/2024/10/10/Multi-Task-Learning/</url>
+    
+    <content type="html"><![CDATA[<p>多任务学习（Multi-task learning）是和单任务学习（single-task learning）相对的一种机器学习方法。在机器学习领域，标准的算法理论是一次学习一个任务，也就是系统的输出为实数的情况。复杂的学习问题先被分解成理论上独立的子问题，然后分别对每个子问题进行学习，最后通过对子问题学习结果的组合建立复杂问题的数学模型。多任务学习是一种联合学习，多个任务并行学习，结果相互影响。<br>多任务学习的核心思想是<strong>共享知识</strong>。不同任务之间可能存在某种关联或共享特征，而这些共同点可以通过共享模型参数来捕捉。</p><ol><li><p>硬共享：多个任务共享底层网络参数，只有顶层的任务特定网络是独立的。<br>它可以应用到所有任务的所有隐层上，而保留任务相关的输出层。硬共享机制降低了过拟合的风险。越多任务同时学习，我们的模型就能捕捉到越多任务的同一个表示，从而导致在我们原始任务上的过拟合风险越小。<br><img src="https://obsidian-1319504291.cos.ap-beijing.myqcloud.com/20241222191238.png" alt="image.png"></p></li><li><p>软共享：各任务有自己的模型，但通过正则化约束或参数融合来共享信息。<br>每个任务都由自己的模型，自己的参数。我们对模型参数的距离进行正则化来保障参数的相似。<br><img src="https://obsidian-1319504291.cos.ap-beijing.myqcloud.com/20241222191330.png" alt="image.png"></p></li></ol><p>多任务学习（Multitask Learning）是一种推导迁移学习方法，主任务（main tasks）使用相关任务（related tasks）的训练信号（training signal）所拥有的领域相关信息（domain-specific information），做为一直推导偏差（inductive bias）来提升主任务（main tasks）泛化效果（generalization performance）的一种机器学习方法。多任务学习涉及多个相关的任务同时并行学习，梯度同时反向传播，多个任务通过底层的共享表示（shared representation）来互相帮助学习，提升泛化效果。简单来说：多任务学习把多个相关的任务放在一起学习（注意，一定要是相关的任务，后面会给出相关任务（related tasks）的定义，以及他们共享了那些信息），学习过程（training）中通过一个在浅层的共享（shared representation）表示来互相分享、互相补充学习到的领域相关的信息（domain information），互相促进学习，提升泛化的效果。</p><p>为什么把多个相关的任务放在一起学习，可以提高学习的效果？关于这个问题，有很多解释。这里列出其中一部分，以图2中由单隐含层神经网络表示的单任务和多任务学习对比为例。</p><p>　　（1）多人相关任务放在一起学习，有相关的部分，但也有不相关的部分。当学习一个任务（Main task）时，与该任务不相关的部分，在学习过程中相当于是噪声，因此，引入噪声可以提高学习的泛化（generalization）效果。</p><p>　　（2）单任务学习时，梯度的反向传播倾向于陷入局部极小值。多任务学习中不同任务的局部极小值处于不同的位置，通过相互作用，可以帮助隐含层逃离局部极小值。</p><p>　　（3）添加的任务可以改变权值更新的动态特性，可能使网络更适合多任务学习。比如，多任务并行学习，提升了浅层共享层（shared representation）的学习速率，可能，较大的学习速率提升了学习效果。</p><p>　　（4）正则化机制。多任务学习通过引入归纳偏置（inductive bias）起到与正则化相同的作用。正是如此，它减小了模型过拟合的风险，同时降低了模型的Rademacher复杂度，即拟合随机噪音的能力。</p><p>还有很多潜在的解释，为什么多任务并行学习可以提升学习效果（performance）。多任务学习有效，是因为它是建立在多个相关的，具有共享表示（shared representation）的任务基础之上的，因此，需要定义一下，什么样的任务之间是相关的。</p>]]></content>
+    
+    
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>QLoRA原理</title>
     <link href="/2024/09/30/QLoRA%E5%8E%9F%E7%90%86/"/>
     <url>/2024/09/30/QLoRA%E5%8E%9F%E7%90%86/</url>
