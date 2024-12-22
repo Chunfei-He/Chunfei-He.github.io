@@ -46,6 +46,27 @@
   
   
   <entry>
+    <title>PEFT概述</title>
+    <link href="/2024/09/17/PEFT%E6%A6%82%E8%BF%B0/"/>
+    <url>/2024/09/17/PEFT%E6%A6%82%E8%BF%B0/</url>
+    
+    <content type="html"><![CDATA[<p><strong>PEFT（Parameter-Efficient Fine-Tuning）</strong> 是一种针对大规模预训练模型（如 GPT、BERT 等）设计的高效微调技术框架。PEFT 的目标是在不更新或仅少量更新模型参数的情况下，使模型能够高效适配新任务。这种方法大幅降低了微调的计算和存储成本，并在多任务学习和领域适配中展现了强大的灵活性。</p><h2 id="1-LoRA（Low-Rank-Adaptation）"><a href="#1-LoRA（Low-Rank-Adaptation）" class="headerlink" title="1 LoRA（Low-Rank Adaptation）"></a>1 LoRA（Low-Rank Adaptation）</h2><p>对模型的权重调整部分使用低秩分解，只优化新增的低秩矩阵</p><h2 id="2-Prefix-Tuning"><a href="#2-Prefix-Tuning" class="headerlink" title="2 Prefix Tuning"></a>2 Prefix Tuning</h2><p>在输入序列前添加一段可训练的“前缀”，这些前缀参数独立于模型原始参数。<br><img src="https://obsidian-1319504291.cos.ap-beijing.myqcloud.com/20241222184025.png" alt="image.png"></p><h2 id="3-Adapter-Tuning"><a href="#3-Adapter-Tuning" class="headerlink" title="3 Adapter Tuning"></a>3 Adapter Tuning</h2><p>在预训练模型的中间层中插入小的可训练层或“适配器”。这些适配器通常包括一些全连接层、非线性激活函数等，它们被设计用来捕获特定任务的知识，而不需要对整个预训练模型进行大规模的微调。<br><img src="https://obsidian-1319504291.cos.ap-beijing.myqcloud.com/20241222184114.png" alt="image.png"></p><h2 id="4-Prompt-engineering"><a href="#4-Prompt-engineering" class="headerlink" title="4 Prompt engineering"></a>4 Prompt engineering</h2><p>优化输入中的提示（Prompt）部分，而非模型本身的参数。</p>]]></content>
+    
+    
+    
+    <tags>
+      
+      <tag>LLM</tag>
+      
+      <tag>PEFT</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>RAG项目总结V1.0</title>
     <link href="/2024/08/30/RAG%E9%A1%B9%E7%9B%AE%E6%80%BB%E7%BB%93V1.0/"/>
     <url>/2024/08/30/RAG%E9%A1%B9%E7%9B%AE%E6%80%BB%E7%BB%93V1.0/</url>

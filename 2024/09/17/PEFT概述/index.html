@@ -19,26 +19,26 @@
   <meta name="author" content="Chunfei He">
   <meta name="keywords" content="">
   
-    <meta name="description" content="项目地址GitHub地址：Chunfei-He&#x2F;MyRAG (github.com) 项目进度 数据处理pipeline done  目前数据源：项目README.md文件、阿里2023财报.pdf、斗破苍穹小说.txt、iPhone使用手册（ios5）.pdf、中华人民共和国消费者权益保护法.pdf  实现功能：搭建web demo页面可针对上述文件提问，对于没有相关信息的问题可以拒绝">
+    <meta name="description" content="PEFT（Parameter-Efficient Fine-Tuning） 是一种针对大规模预训练模型（如 GPT、BERT 等）设计的高效微调技术框架。PEFT 的目标是在不更新或仅少量更新模型参数的情况下，使模型能够高效适配新任务。这种方法大幅降低了微调的计算和存储成本，并在多任务学习和领域适配中展现了强大的灵活性。 1 LoRA（Low-Rank Adaptation）对模型的权重调整部分使">
 <meta property="og:type" content="article">
-<meta property="og:title" content="RAG项目总结V1.0">
-<meta property="og:url" content="https://chunfei-he.github.io/2024/08/30/RAG%E9%A1%B9%E7%9B%AE%E6%80%BB%E7%BB%93V1.0/index.html">
+<meta property="og:title" content="PEFT概述">
+<meta property="og:url" content="https://chunfei-he.github.io/2024/09/17/PEFT%E6%A6%82%E8%BF%B0/index.html">
 <meta property="og:site_name" content="blog">
-<meta property="og:description" content="项目地址GitHub地址：Chunfei-He&#x2F;MyRAG (github.com) 项目进度 数据处理pipeline done  目前数据源：项目README.md文件、阿里2023财报.pdf、斗破苍穹小说.txt、iPhone使用手册（ios5）.pdf、中华人民共和国消费者权益保护法.pdf  实现功能：搭建web demo页面可针对上述文件提问，对于没有相关信息的问题可以拒绝">
+<meta property="og:description" content="PEFT（Parameter-Efficient Fine-Tuning） 是一种针对大规模预训练模型（如 GPT、BERT 等）设计的高效微调技术框架。PEFT 的目标是在不更新或仅少量更新模型参数的情况下，使模型能够高效适配新任务。这种方法大幅降低了微调的计算和存储成本，并在多任务学习和领域适配中展现了强大的灵活性。 1 LoRA（Low-Rank Adaptation）对模型的权重调整部分使">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://obsidian-1319504291.cos.ap-beijing.myqcloud.com/20240830130822.png">
-<meta property="og:image" content="https://obsidian-1319504291.cos.ap-beijing.myqcloud.com/20240830130632.png">
-<meta property="og:image" content="https://obsidian-1319504291.cos.ap-beijing.myqcloud.com/20240901174958.png">
-<meta property="article:published_time" content="2024-08-30T04:07:11.000Z">
-<meta property="article:modified_time" content="2024-09-01T10:01:12.781Z">
+<meta property="og:image" content="https://obsidian-1319504291.cos.ap-beijing.myqcloud.com/20241222184025.png">
+<meta property="og:image" content="https://obsidian-1319504291.cos.ap-beijing.myqcloud.com/20241222184114.png">
+<meta property="article:published_time" content="2024-09-17T10:37:54.000Z">
+<meta property="article:modified_time" content="2024-12-22T10:42:03.284Z">
 <meta property="article:author" content="Chunfei He">
 <meta property="article:tag" content="LLM">
+<meta property="article:tag" content="PEFT">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://obsidian-1319504291.cos.ap-beijing.myqcloud.com/20240830130822.png">
+<meta name="twitter:image" content="https://obsidian-1319504291.cos.ap-beijing.myqcloud.com/20241222184025.png">
   
   
   
-  <title>RAG项目总结V1.0 - blog</title>
+  <title>PEFT概述 - blog</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -204,7 +204,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="RAG项目总结V1.0"></span>
+            <span id="subtitle" data-typed-text="PEFT概述"></span>
           
         </div>
 
@@ -215,8 +215,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2024-08-30 12:07" pubdate>
-          2024年8月30日 中午
+        <time datetime="2024-09-17 18:37" pubdate>
+          2024年9月17日 晚上
         </time>
       </span>
     
@@ -227,7 +227,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.6k 字
+          273 字
         
       </span>
     
@@ -238,7 +238,7 @@
         
         
         
-          14 分钟
+          3 分钟
         
       </span>
     
@@ -275,71 +275,16 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">RAG项目总结V1.0</h1>
+            <h1 id="seo-header">PEFT概述</h1>
             
             
               <div class="markdown-body">
                 
-                <h2 id="项目地址"><a href="#项目地址" class="headerlink" title="项目地址"></a>项目地址</h2><p><strong>GitHub地址：</strong><br><a target="_blank" rel="noopener" href="https://github.com/Chunfei-He/MyRAG">Chunfei-He&#x2F;MyRAG (github.com)</a></p>
-<h2 id="项目进度"><a href="#项目进度" class="headerlink" title="项目进度"></a>项目进度</h2><ol>
-<li><p>数据处理pipeline done</p>
-</li>
-<li><p>目前数据源：项目README.md文件、阿里2023财报.pdf、斗破苍穹小说.txt、iPhone使用手册（ios5）.pdf、中华人民共和国消费者权益保护法.pdf</p>
-</li>
-<li><p>实现功能：搭建web demo页面可针对上述文件提问，对于没有相关信息的问题可以拒绝回复。<br><img src="https://obsidian-1319504291.cos.ap-beijing.myqcloud.com/20240830130822.png" srcset="/img/loading.gif" lazyload alt="image.png"></p>
-</li>
-<li><p>存在问题：</p>
-<ol>
-<li>iPhone使用手册版本较旧，缺少iPad使用手册。未考虑同一问题（如：如何拍照）可能来自两种设备持有者的情况</li>
-<li>阿里财报为繁体，导致回复时出现部分繁体字<br> <img src="https://obsidian-1319504291.cos.ap-beijing.myqcloud.com/20240830130632.png" srcset="/img/loading.gif" lazyload alt="image.png"></li>
-</ol>
-</li>
-<li><p>后续升级技术方案：</p>
-<ol>
-<li>针对问题一，计划在向量相似度计算之前加入router组件，先判断需要调用哪个向量库，再进行针对性调用</li>
-<li>针对问题二，修改prompt模板，强调使用简体中文回复</li>
-<li>待实现功能有：定义金融指标，利用财报数据计算。计划加到router组件中，判断是否需要使用数据查询功能（直接从表格中查询数据，而不是计算相似度）</li>
-<li>可升级方向有：<ol>
-<li>目前只从数据库中召回相似度排名top 1的数据作为上下文，后续可以优化召回内容，比如召回多条、多次问答再总结</li>
-<li>对于markdown这种结构化语言，包括使用手册这种每一块有明确主题的文档，可以使用标题作为检索key</li>
-<li>可以考虑加入召回后排序</li>
-</ol>
-</li>
-</ol>
-</li>
-</ol>
-<h2 id="项目架构"><a href="#项目架构" class="headerlink" title="项目架构"></a>项目架构</h2><p>component是RAG的组件，分为四大部分（数据切分，向量化，向量存储，大模型）<br>data用于存放需要嵌入的文件（兼容Pdf  TXT，md文件）<br>db用于存放向量化后的数据，也是数据库的加载路径<br>build.ipynb构建向量数据库<br>webdemo_by_gradio使用gradio基于嵌入的文件调用OpenAI的回答助手</p>
-<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs markdown">MyRAG<br>├─ build.ipynb<br>├─ component<br>│  ├─ databases.py<br>│  ├─ data<span class="hljs-emphasis">_chunker.py</span><br><span class="hljs-emphasis">│  ├─ embedding.py</span><br><span class="hljs-emphasis">│  └─ llms.py</span><br><span class="hljs-emphasis">├─ data</span><br><span class="hljs-emphasis">│  ├─ dpcq.txt</span><br><span class="hljs-emphasis">│  ├─ README.md</span><br><span class="hljs-emphasis">│  ├─ 中华人民共和国消费者权益保护法.pdf</span><br><span class="hljs-emphasis">│  ├─ iphone 5_</span>user<span class="hljs-emphasis">_guide_</span>ch.pdf<br>│  └─ alibaba.pdf<br>├─ db<br>│  ├─ doecment.json<br>│  └─ vectors.json<br>├─ README.md<br>└─ webdemo<span class="hljs-emphasis">_by_</span>gradio.ipynb<br><br></code></pre></td></tr></table></figure>
-
-<h2 id="什么是RAG？"><a href="#什么是RAG？" class="headerlink" title="什么是RAG？"></a>什么是RAG？</h2><p>检索增强生成(RAG) 是<strong>一种使用来自私有或专有数据源的信息来辅助文本生成的技术</strong>。<br>它将检索模型（设计用于搜索大型数据集或知识库）和生成模型（例如大型语言模型(LLM)，此类模型会使用检索到的信息生成可供阅读的文本回复）结合在一起。 </p>
-<h2 id="为什么需要RAG？"><a href="#为什么需要RAG？" class="headerlink" title="为什么需要RAG？"></a>为什么需要RAG？</h2><p>LLM会产生误导性的 “幻觉”，依赖的信息可能过时，处理特定知识时效率不高，缺乏专业领域的深度洞察，同时在推理能力上也有所欠缺。<br>正是在这样的背景下，检索增强生成技术（Retrieval-Augmented Generation，RAG）应时而生，成为 AI 时代的一大趋势。<br>RAG 通过在语言模型生成答案之前，先从广泛的文档数据库中检索相关信息，然后利用这些信息来引导生成过程，极大地提升了内容的准确性和相关性。RAG 有效地缓解了幻觉问题，提高了知识更新的速度，并增强了内容生成的可追溯性，使得大型语言模型在实际应用中变得更加实用和可信。</p>
-<p>RAG的基本结构有哪些呢？</p>
-<ul>
-<li>要有一个向量化模块，用来将文档片段向量化。</li>
-<li>要有一个文档加载和切分的模块，用来加载文档并切分成文档片段。</li>
-<li>要有一个数据库来存放文档片段和对应的向量表示。</li>
-<li>要有一个检索模块，用来根据 Query （问题）检索相关的文档片段。</li>
-<li>要有一个大模型模块，用来根据检索出来的文档回答用户的问题。</li>
-</ul>
-<p>参考下图，RAG的基本流程有：</p>
-<ul>
-<li><strong>索引</strong>：将文档库分割成较短的 Chunk，并通过编码器构建向量索引。</li>
-<li><strong>检索</strong>：根据问题和 chunks 的相似度检索相关文档片段。</li>
-<li><strong>生成</strong>：以检索到的上下文为条件，生成问题的回答。<br><img src="https://obsidian-1319504291.cos.ap-beijing.myqcloud.com/20240901174958.png" srcset="/img/loading.gif" lazyload alt="image.png"></li>
-</ul>
-<h3 id="向量化"><a href="#向量化" class="headerlink" title="向量化"></a>向量化</h3><p>向量化的类主要是用来将文档片段向量化，将一段文本映射为一个向量。</p>
-<p><code>get_embedding</code>方法：获取文本的向量表示<br><code>cosine_similarity</code>方法：计算两个向量之间的余弦相似度</p>
-<h3 id="文档加载和切分"><a href="#文档加载和切分" class="headerlink" title="文档加载和切分"></a>文档加载和切分</h3><p>类主要是用来加载文档并切分成文档片段。这个文档可以是一篇文章，一本书，一段对话，一段代码等等。这个文档的内容可以是任何的，只要是文本就行。比如：pdf文件、md文件、txt文件等等。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">read_file_content</span>(<span class="hljs-params">cls, file_path: <span class="hljs-built_in">str</span></span>):<br>    <span class="hljs-comment"># 根据文件扩展名选择读取方法</span><br>    <span class="hljs-keyword">if</span> file_path.endswith(<span class="hljs-string">&#x27;.pdf&#x27;</span>):<br>        <span class="hljs-keyword">return</span> cls.read_pdf(file_path)<br>    <span class="hljs-keyword">elif</span> file_path.endswith(<span class="hljs-string">&#x27;.md&#x27;</span>):<br>        <span class="hljs-keyword">return</span> cls.read_markdown(file_path)<br>    <span class="hljs-keyword">elif</span> file_path.endswith(<span class="hljs-string">&#x27;.txt&#x27;</span>):<br>        <span class="hljs-keyword">return</span> cls.read_text(file_path)<br>    <span class="hljs-keyword">else</span>:<br>        <span class="hljs-keyword">raise</span> ValueError(<span class="hljs-string">&quot;Unsupported file type&quot;</span>)<br></code></pre></td></tr></table></figure>
-<p>按 Token 的长度来切分文档，可以设置一个最大的 Token 长度，然后根据这个最大的 Token 长度来切分文档。这样切分出来的文档片段就是一个一个的差不多相同长度的文档片段了。<br>在切分的时候要注意，片段与片段之间最好要有一些重叠的内容，这样才能保证检索的时候能够检索到相关的文档片段。还有就是切分文档的时候最好以句子为单位，也就是按 <code>\n</code> 进行粗切分，这样可以基本保证句子内容是完整的。</p>
-<h3 id="数据库-向量检索"><a href="#数据库-向量检索" class="headerlink" title="数据库&amp;&amp;向量检索"></a>数据库&amp;&amp;向量检索</h3><p>设计一个向量数据库用来存放文档片段和对应的向量表示了。<br>设计一个检索模块，用来根据 Query （问题）检索相关的文档片段。</p>
-<ul>
-<li><code>persist</code>：数据库持久化，本地保存</li>
-<li><code>load_vector</code>：从本地加载数据库</li>
-<li><code>get_vector</code>：获得文档的向量表示</li>
-<li><code>query</code>：根据问题检索相关的文档片段<br><code>query</code> 方法具体实现：<br>首先先把用户提出的问题向量化，然后去数据库中检索相关的文档片段，最后返回检索到的文档片段。</li>
-</ul>
-<h3 id="大模型"><a href="#大模型" class="headerlink" title="大模型"></a>大模型</h3><p>根据检索出来的文档回答用户的问题。</p>
+                <p><strong>PEFT（Parameter-Efficient Fine-Tuning）</strong> 是一种针对大规模预训练模型（如 GPT、BERT 等）设计的高效微调技术框架。PEFT 的目标是在不更新或仅少量更新模型参数的情况下，使模型能够高效适配新任务。这种方法大幅降低了微调的计算和存储成本，并在多任务学习和领域适配中展现了强大的灵活性。</p>
+<h2 id="1-LoRA（Low-Rank-Adaptation）"><a href="#1-LoRA（Low-Rank-Adaptation）" class="headerlink" title="1 LoRA（Low-Rank Adaptation）"></a>1 LoRA（Low-Rank Adaptation）</h2><p>对模型的权重调整部分使用低秩分解，只优化新增的低秩矩阵</p>
+<h2 id="2-Prefix-Tuning"><a href="#2-Prefix-Tuning" class="headerlink" title="2 Prefix Tuning"></a>2 Prefix Tuning</h2><p>在输入序列前添加一段可训练的“前缀”，这些前缀参数独立于模型原始参数。<br><img src="https://obsidian-1319504291.cos.ap-beijing.myqcloud.com/20241222184025.png" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<h2 id="3-Adapter-Tuning"><a href="#3-Adapter-Tuning" class="headerlink" title="3 Adapter Tuning"></a>3 Adapter Tuning</h2><p>在预训练模型的中间层中插入小的可训练层或“适配器”。这些适配器通常包括一些全连接层、非线性激活函数等，它们被设计用来捕获特定任务的知识，而不需要对整个预训练模型进行大规模的微调。<br><img src="https://obsidian-1319504291.cos.ap-beijing.myqcloud.com/20241222184114.png" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<h2 id="4-Prompt-engineering"><a href="#4-Prompt-engineering" class="headerlink" title="4 Prompt engineering"></a>4 Prompt engineering</h2><p>优化输入中的提示（Prompt）部分，而非模型本身的参数。</p>
 
                 
               </div>
@@ -354,6 +299,8 @@
       
         <a href="/tags/LLM/" class="print-no-link">#LLM</a>
       
+        <a href="/tags/PEFT/" class="print-no-link">#PEFT</a>
+      
     </div>
   
 </div>
@@ -364,8 +311,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>RAG项目总结V1.0</div>
-      <div>https://chunfei-he.github.io/2024/08/30/RAG项目总结V1.0/</div>
+      <div>PEFT概述</div>
+      <div>https://chunfei-he.github.io/2024/09/17/PEFT概述/</div>
     </div>
     <div class="license-meta">
       
@@ -377,7 +324,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2024年8月30日</div>
+          <div>2024年9月17日</div>
         </div>
       
       
@@ -409,9 +356,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2024/09/17/PEFT%E6%A6%82%E8%BF%B0/" title="PEFT概述">
+                      <a href="/2024/09/22/LoRA%E5%8E%9F%E7%90%86/" title="LoRA原理">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">PEFT概述</span>
+                        <span class="hidden-mobile">LoRA原理</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -419,8 +366,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2024/08/12/%E6%99%BA%E8%83%BD%E7%94%9F%E6%88%90/" title="智能生成">
-                        <span class="hidden-mobile">智能生成</span>
+                      <a href="/2024/08/30/RAG%E9%A1%B9%E7%9B%AE%E6%80%BB%E7%BB%93V1.0/" title="RAG项目总结V1.0">
+                        <span class="hidden-mobile">RAG项目总结V1.0</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
