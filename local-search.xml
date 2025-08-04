@@ -23,6 +23,27 @@
   
   
   <entry>
+    <title>Recommender Systems with Generative Retrieval</title>
+    <link href="/2024/11/04/Recommender-Systems-with-Generative-Retrieval/"/>
+    <url>/2024/11/04/Recommender-Systems-with-Generative-Retrieval/</url>
+    
+    <content type="html"><![CDATA[<p><a href="https://arxiv.org/pdf/2305.05065">https://arxiv.org/pdf/2305.05065</a><br><img src="https://obsidian-1319504291.cos.ap-beijing.myqcloud.com/20250804214111.png" alt="image.png"><br>现代推荐系统主要是通过在同一空间中构建查询emb和item的emb，然后通过大规模检索，在给定查询emb的情况下进行近似近邻搜索以选择最佳item。本文提出了一种新的生成检索方法Transformer Index for GEnerative Recommenders (TIGER) ，其中检索模型对目标item的标识符进行自回归解码。为此，作者构建了具有语义意义的码字（codeword）元组，作为每个item的语义ID。给定用户会话中item的语义ID，训练基于Transformer的seq-to-seq模型来预测用户将与之交互的下一个item的语义标识。<br>本文提出的TIGER主要分为两步：</p><ul><li>以内容特征生成语义ID：将item内容特征编码为emb向量，并将emb量化为语义码字的元组。由此产生的码字元组被称为item的语义ID</li><li>在语义ID上训练通用的推荐系统：构建transformer模型在语义id上训练用于序列推荐的模型</li></ul><h1 id="1-语义ID的生成"><a href="#1-语义ID的生成" class="headerlink" title="1 语义ID的生成"></a>1 语义ID的生成</h1><p>假设每个item都有相关的内容特征，这些特征捕捉有用的语义信息（例如标题或描述或图像）。采用预训练的内容编码器来生成语义emb。然后对语义emb进行量化，以生成每个item的语义ID。<br><img src="https://obsidian-1319504291.cos.ap-beijing.myqcloud.com/20250804220743.png" alt="image.png"><br>残差量化变分自动编码器（RQ-VAE）是一种多级向量量化器，在残差上进行量化来生成码字元组（语义ID）。通过更新量化码本和DNN编码器-解码器参数来联合训练自动编码器。为了防止RQ-VAE发生码本崩溃（大多数输入仅映射到少数码本向量），使用k均值聚类来初始化码本，将k-means算法应用于第一个训练批次（first training batch），并使用质心作为初始化。当然除了使用RQ-VAE，也可以使用其他的向量化方法，如LSH等。</p><h1 id="2-通过语义ID进行生成式retrival"><a href="#2-通过语义ID进行生成式retrival" class="headerlink" title="2 通过语义ID进行生成式retrival"></a>2 通过语义ID进行生成式retrival</h1><p><img src="https://obsidian-1319504291.cos.ap-beijing.myqcloud.com/20250804221416.png" alt="image.png"></p><p>推荐系统的“容错概率”要高于搜索，所以生成式召回可能会带来增益。</p>]]></content>
+    
+    
+    
+    <tags>
+      
+      <tag>LLM</tag>
+      
+      <tag>推荐</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>倒排索引</title>
     <link href="/2024/10/22/%E5%80%92%E6%8E%92%E7%B4%A2%E5%BC%95/"/>
     <url>/2024/10/22/%E5%80%92%E6%8E%92%E7%B4%A2%E5%BC%95/</url>
