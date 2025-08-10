@@ -19,27 +19,33 @@
   <meta name="author" content="Chunfei He">
   <meta name="keywords" content="">
   
-    <meta name="description" content="https:&#x2F;&#x2F;arxiv.org&#x2F;pdf&#x2F;2305.05065现代推荐系统主要是通过在同一空间中构建查询emb和item的emb，然后通过大规模检索，在给定查询emb的情况下进行近似近邻搜索以选择最佳item。本文提出了一种新的生成检索方法Transformer Index for GEnerative Recommenders (TIGER) ，其中检索模型对目标item的标识符进行自回归解码">
+    <meta name="description" content="https:&#x2F;&#x2F;github.com&#x2F;meta-recsys&#x2F;generative-recommenders 1. challenges 特征缺乏统一的结构描述: 推荐系统中的特征是异质的, 缺乏明确一致的结构描述, 比如交叉特征, 高基数id特征, 计数特征, 比率特征等, 这些特征有些是sparse的, 有些是dense的。 物料池规模大&amp;动态变化: 推荐系统中物料池经常是数以亿计的,">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Recommender Systems with Generative Retrieval">
-<meta property="og:url" content="https://chunfei-he.github.io/2024/11/04/Recommender-Systems-with-Generative-Retrieval/index.html">
+<meta property="og:title" content="Actions Speak Louder than Words: Trillion-Parameter Sequential Transducers">
+<meta property="og:url" content="https://chunfei-he.github.io/2024/12/05/Actions-Speak-Louder-than-Words-Trillion-Parameter-Sequential-Transducers/index.html">
 <meta property="og:site_name" content="blog">
-<meta property="og:description" content="https:&#x2F;&#x2F;arxiv.org&#x2F;pdf&#x2F;2305.05065现代推荐系统主要是通过在同一空间中构建查询emb和item的emb，然后通过大规模检索，在给定查询emb的情况下进行近似近邻搜索以选择最佳item。本文提出了一种新的生成检索方法Transformer Index for GEnerative Recommenders (TIGER) ，其中检索模型对目标item的标识符进行自回归解码">
+<meta property="og:description" content="https:&#x2F;&#x2F;github.com&#x2F;meta-recsys&#x2F;generative-recommenders 1. challenges 特征缺乏统一的结构描述: 推荐系统中的特征是异质的, 缺乏明确一致的结构描述, 比如交叉特征, 高基数id特征, 计数特征, 比率特征等, 这些特征有些是sparse的, 有些是dense的。 物料池规模大&amp;动态变化: 推荐系统中物料池经常是数以亿计的,">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://obsidian-1319504291.cos.ap-beijing.myqcloud.com/20250804214111.png">
-<meta property="og:image" content="https://obsidian-1319504291.cos.ap-beijing.myqcloud.com/20250804220743.png">
-<meta property="og:image" content="https://obsidian-1319504291.cos.ap-beijing.myqcloud.com/20250804221416.png">
-<meta property="article:published_time" content="2024-11-04T12:29:54.000Z">
-<meta property="article:modified_time" content="2025-08-04T14:14:53.334Z">
+<meta property="og:image" content="https://obsidian-1319504291.cos.ap-beijing.myqcloud.com/20250810113716.png">
+<meta property="og:image" content="https://obsidian-1319504291.cos.ap-beijing.myqcloud.com/20250810114141.png">
+<meta property="og:image" content="https://obsidian-1319504291.cos.ap-beijing.myqcloud.com/20250810114639.png">
+<meta property="og:image" content="https://obsidian-1319504291.cos.ap-beijing.myqcloud.com/20250810115056.png">
+<meta property="og:image" content="https://obsidian-1319504291.cos.ap-beijing.myqcloud.com/20250810115136.png">
+<meta property="og:image" content="https://obsidian-1319504291.cos.ap-beijing.myqcloud.com/20250810115153.png">
+<meta property="og:image" content="https://obsidian-1319504291.cos.ap-beijing.myqcloud.com/20250810115349.png">
+<meta property="og:image" content="https://obsidian-1319504291.cos.ap-beijing.myqcloud.com/20250810115418.png">
+<meta property="og:image" content="https://obsidian-1319504291.cos.ap-beijing.myqcloud.com/20250810115558.png">
+<meta property="article:published_time" content="2024-12-05T13:52:42.000Z">
+<meta property="article:modified_time" content="2025-08-10T04:01:30.322Z">
 <meta property="article:author" content="Chunfei He">
 <meta property="article:tag" content="LLM">
 <meta property="article:tag" content="推荐">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://obsidian-1319504291.cos.ap-beijing.myqcloud.com/20250804214111.png">
+<meta name="twitter:image" content="https://obsidian-1319504291.cos.ap-beijing.myqcloud.com/20250810113716.png">
   
   
   
-  <title>Recommender Systems with Generative Retrieval - blog</title>
+  <title>Actions Speak Louder than Words: Trillion-Parameter Sequential Transducers - blog</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -205,7 +211,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="Recommender Systems with Generative Retrieval"></span>
+            <span id="subtitle" data-typed-text="Actions Speak Louder than Words: Trillion-Parameter Sequential Transducers"></span>
           
         </div>
 
@@ -216,8 +222,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2024-11-04 20:29" pubdate>
-          2024年11月4日 晚上
+        <time datetime="2024-12-05 21:52" pubdate>
+          2024年12月5日 晚上
         </time>
       </span>
     
@@ -228,7 +234,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          535 字
+          689 字
         
       </span>
     
@@ -239,7 +245,7 @@
         
         
         
-          5 分钟
+          6 分钟
         
       </span>
     
@@ -276,20 +282,45 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">Recommender Systems with Generative Retrieval</h1>
+            <h1 id="seo-header">Actions Speak Louder than Words: Trillion-Parameter Sequential Transducers</h1>
             
             
               <div class="markdown-body">
                 
-                <p><a target="_blank" rel="noopener" href="https://arxiv.org/pdf/2305.05065">https://arxiv.org/pdf/2305.05065</a><br><img src="https://obsidian-1319504291.cos.ap-beijing.myqcloud.com/20250804214111.png" srcset="/img/loading.gif" lazyload alt="image.png"><br>现代推荐系统主要是通过在同一空间中构建查询emb和item的emb，然后通过大规模检索，在给定查询emb的情况下进行近似近邻搜索以选择最佳item。本文提出了一种新的生成检索方法Transformer Index for GEnerative Recommenders (TIGER) ，其中检索模型对目标item的标识符进行自回归解码。为此，作者构建了具有语义意义的码字（codeword）元组，作为每个item的语义ID。给定用户会话中item的语义ID，训练基于Transformer的seq-to-seq模型来预测用户将与之交互的下一个item的语义标识。<br>本文提出的TIGER主要分为两步：</p>
+                <p><img src="https://obsidian-1319504291.cos.ap-beijing.myqcloud.com/20250810113716.png" srcset="/img/loading.gif" lazyload alt="image.png"><br><a target="_blank" rel="noopener" href="https://github.com/meta-recsys/generative-recommenders">https://github.com/meta-recsys/generative-recommenders</a></p>
+<h1 id="1-challenges"><a href="#1-challenges" class="headerlink" title="1. challenges"></a>1. challenges</h1><ol>
+<li><strong>特征缺乏统一的结构描述</strong>: 推荐系统中的特征是异质的, 缺乏明确一致的结构描述, 比如交叉特征, 高基数id特征, 计数特征, 比率特征等, 这些特征有些是sparse的, 有些是dense的。</li>
+<li><strong>物料池规模大&amp;动态变化</strong>: 推荐系统中物料池经常是数以亿计的, 且物料池动态变化, 不像NLP那样只有相对静态的几十万量级词汇量, 这使得推荐系统训练和推理的开销都很高。</li>
+<li><strong>计算成本高是大规模序列模型落地的主要瓶颈</strong>: 推荐系统每天需要处理的token比GPT-3在1-2个月内处理的token还要多上几个数量级。</li>
+</ol>
+<h1 id="2-生成式推荐"><a href="#2-生成式推荐" class="headerlink" title="2. 生成式推荐"></a>2. 生成式推荐</h1><h2 id="2-1-Unifying-heterogeneous-feature-spaces-in-DLRMs"><a href="#2-1-Unifying-heterogeneous-feature-spaces-in-DLRMs" class="headerlink" title="2.1 Unifying heterogeneous feature spaces in DLRMs"></a>2.1 Unifying heterogeneous feature spaces in DLRMs</h2><p><img src="https://obsidian-1319504291.cos.ap-beijing.myqcloud.com/20250810114141.png" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<h3 id="Categotical-‘sparse’-features"><a href="#Categotical-‘sparse’-features" class="headerlink" title="Categotical (‘sparse’) features"></a>Categotical (‘sparse’) features</h3><p>比如用户收藏的item序列, 用户关注的作者ID, 人口统计信息等。</p>
 <ul>
-<li>以内容特征生成语义ID：将item内容特征编码为emb向量，并将emb量化为语义码字的元组。由此产生的码字元组被称为item的语义ID</li>
-<li>在语义ID上训练通用的推荐系统：构建transformer模型在语义id上训练用于序列推荐的模型</li>
+<li><strong>时序化（sequentialize）</strong><ul>
+<li>先找出<strong>最长的时间序列</strong>，通常是用户和物品交互的记录（比如点击、点赞等），作为<strong>主时间序列</strong>。</li>
+<li>其它特征（比如人口统计信息、关注的创作者等）通常变化比较慢，也以时间序列的形式存在。</li>
 </ul>
-<h1 id="1-语义ID的生成"><a href="#1-语义ID的生成" class="headerlink" title="1 语义ID的生成"></a>1 语义ID的生成</h1><p>假设每个item都有相关的内容特征，这些特征捕捉有用的语义信息（例如标题或描述或图像）。采用预训练的内容编码器来生成语义emb。然后对语义emb进行量化，以生成每个item的语义ID。<br><img src="https://obsidian-1319504291.cos.ap-beijing.myqcloud.com/20250804220743.png" srcset="/img/loading.gif" lazyload alt="image.png"><br>残差量化变分自动编码器（RQ-VAE）是一种多级向量量化器，在残差上进行量化来生成码字元组（语义ID）。通过更新量化码本和DNN编码器-解码器参数来联合训练自动编码器。为了防止RQ-VAE发生码本崩溃（大多数输入仅映射到少数码本向量），使用k均值聚类来初始化码本，将k-means算法应用于第一个训练批次（first training batch），并使用质心作为初始化。当然除了使用RQ-VAE，也可以使用其他的向量化方法，如LSH等。</p>
-<h1 id="2-通过语义ID进行生成式retrival"><a href="#2-通过语义ID进行生成式retrival" class="headerlink" title="2 通过语义ID进行生成式retrival"></a>2 通过语义ID进行生成式retrival</h1><p><img src="https://obsidian-1319504291.cos.ap-beijing.myqcloud.com/20250804221416.png" srcset="/img/loading.gif" lazyload alt="image.png"></p>
-<p>推荐系统的“容错概率”要高于搜索，所以生成式召回可能会带来增益。</p>
-
+</li>
+<li><strong>压缩（compress）</strong><ul>
+<li>对于这些变化缓慢的时间序列，不保留每一次记录，而是<strong>在每个连续时间段中只保留最早的那一个值</strong>。</li>
+<li>这样压缩后，把这些信息合并到主时间序列中</li>
+</ul>
+</li>
+</ul>
+<h3 id="Numerical-‘dense’-features"><a href="#Numerical-‘dense’-features" class="headerlink" title="Numerical (‘dense’) features"></a>Numerical (‘dense’) features</h3><p>舍弃：更新频繁</p>
+<h2 id="2-2-序列直推式任务-重塑召回与排序"><a href="#2-2-序列直推式任务-重塑召回与排序" class="headerlink" title="2.2 序列直推式任务:重塑召回与排序"></a>2.2 序列直推式任务:重塑召回与排序</h2><p><img src="https://obsidian-1319504291.cos.ap-beijing.myqcloud.com/20250810114639.png" srcset="/img/loading.gif" lazyload alt="image.png"><br><img src="https://obsidian-1319504291.cos.ap-beijing.myqcloud.com/20250810115056.png" srcset="/img/loading.gif" lazyload alt="image.png"><br>召回：模型学习分布<br><img src="https://obsidian-1319504291.cos.ap-beijing.myqcloud.com/20250810115136.png" srcset="/img/loading.gif" lazyload alt="image.png"><br>目标是从候选集 X_c 中选出能最大化 reward 的物品：<br><img src="https://obsidian-1319504291.cos.ap-beijing.myqcloud.com/20250810115153.png" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<p>排序：</p>
+<ul>
+<li>工业级推荐排序通常是 <strong>target-aware</strong>：排序时需要立刻考虑目标物品 Φᵢ₊₁ 与历史的交互关系。</li>
+<li>标准自回归做不到这一点，因为它往往在编码结束后才进行交互（比如 softmax）。</li>
+<li>论文的方法：<strong>交错（interleaving）</strong> 物品和行为，让 Φ 和 a 交替出现。</li>
+</ul>
+<h2 id="2-3-生成式训练"><a href="#2-3-生成式训练" class="headerlink" title="2.3 生成式训练"></a>2.3 生成式训练</h2><h1 id="3-HSTU：新的Self-Attention-Encoder"><a href="#3-HSTU：新的Self-Attention-Encoder" class="headerlink" title="3 HSTU：新的Self-Attention Encoder"></a>3 HSTU：新的Self-Attention Encoder</h1><p><img src="https://obsidian-1319504291.cos.ap-beijing.myqcloud.com/20250810115349.png" srcset="/img/loading.gif" lazyload alt="image.png"><br>HSTU由残差连接的层堆叠而成。每一层包含3个子层, 分别是Pointwise Projection(1)、Spatial Aggregation(2)、Pointwise Transformation(3)<br><img src="https://obsidian-1319504291.cos.ap-beijing.myqcloud.com/20250810115418.png" srcset="/img/loading.gif" lazyload alt="image.png"><br><img src="https://obsidian-1319504291.cos.ap-beijing.myqcloud.com/20250810115558.png" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<h2 id="3-2-优化细节"><a href="#3-2-优化细节" class="headerlink" title="3.2 优化细节"></a>3.2 优化细节</h2><h3 id="3-2-1-Pointwise-aggregated-attention"><a href="#3-2-1-Pointwise-aggregated-attention" class="headerlink" title="3.2.1 Pointwise aggregated attention"></a>3.2.1 Pointwise aggregated attention</h3><ol>
+<li>在推荐中，与目标相关的先验数据点的数量是一个强有力的特征，表明用户偏好的强度，这在 softmax 归一化后很难捕捉到, 而这是至关重要的，因为我们需要同时预测值和序。</li>
+<li>虽然softmax 激活对噪声具有鲁棒性，但它不太适合物料动态更新的流式训练。</li>
+</ol>
+<h3 id="3-2-2-提高稀疏性加速训练"><a href="#3-2-2-提高稀疏性加速训练" class="headerlink" title="3.2.2 提高稀疏性加速训练"></a>3.2.2 提高稀疏性加速训练</h3><h3 id="3-2-3-最小化Activation内存使用"><a href="#3-2-3-最小化Activation内存使用" class="headerlink" title="3.2.3 最小化Activation内存使用"></a>3.2.3 最小化Activation内存使用</h3><h3 id="3-2-4-推理侧优化"><a href="#3-2-4-推理侧优化" class="headerlink" title="3.2.4 推理侧优化"></a>3.2.4 推理侧优化</h3>
                 
               </div>
             
@@ -315,8 +346,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>Recommender Systems with Generative Retrieval</div>
-      <div>https://chunfei-he.github.io/2024/11/04/Recommender-Systems-with-Generative-Retrieval/</div>
+      <div>Actions Speak Louder than Words: Trillion-Parameter Sequential Transducers</div>
+      <div>https://chunfei-he.github.io/2024/12/05/Actions-Speak-Louder-than-Words-Trillion-Parameter-Sequential-Transducers/</div>
     </div>
     <div class="license-meta">
       
@@ -328,7 +359,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2024年11月4日</div>
+          <div>2024年12月5日</div>
         </div>
       
       
@@ -360,9 +391,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2024/12/05/Actions-Speak-Louder-than-Words-Trillion-Parameter-Sequential-Transducers/" title="Actions Speak Louder than Words: Trillion-Parameter Sequential Transducers">
+                      <a href="/2025/08/03/GPTQ%EF%BC%9A%E4%BB%8E%E9%87%8F%E5%8C%96%E8%B0%88%E8%B5%B7/" title="GPTQ：从量化谈起">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">Actions Speak Louder than Words: Trillion-Parameter Sequential Transducers</span>
+                        <span class="hidden-mobile">GPTQ：从量化谈起</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -370,8 +401,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2024/10/22/%E5%80%92%E6%8E%92%E7%B4%A2%E5%BC%95/" title="倒排索引">
-                        <span class="hidden-mobile">倒排索引</span>
+                      <a href="/2024/11/04/Recommender-Systems-with-Generative-Retrieval/" title="Recommender Systems with Generative Retrieval">
+                        <span class="hidden-mobile">Recommender Systems with Generative Retrieval</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

@@ -23,6 +23,27 @@
   
   
   <entry>
+    <title>Actions Speak Louder than Words: Trillion-Parameter Sequential Transducers</title>
+    <link href="/2024/12/05/Actions-Speak-Louder-than-Words-Trillion-Parameter-Sequential-Transducers/"/>
+    <url>/2024/12/05/Actions-Speak-Louder-than-Words-Trillion-Parameter-Sequential-Transducers/</url>
+    
+    <content type="html"><![CDATA[<p><img src="https://obsidian-1319504291.cos.ap-beijing.myqcloud.com/20250810113716.png" alt="image.png"><br><a href="https://github.com/meta-recsys/generative-recommenders">https://github.com/meta-recsys/generative-recommenders</a></p><h1 id="1-challenges"><a href="#1-challenges" class="headerlink" title="1. challenges"></a>1. challenges</h1><ol><li><strong>特征缺乏统一的结构描述</strong>: 推荐系统中的特征是异质的, 缺乏明确一致的结构描述, 比如交叉特征, 高基数id特征, 计数特征, 比率特征等, 这些特征有些是sparse的, 有些是dense的。</li><li><strong>物料池规模大&amp;动态变化</strong>: 推荐系统中物料池经常是数以亿计的, 且物料池动态变化, 不像NLP那样只有相对静态的几十万量级词汇量, 这使得推荐系统训练和推理的开销都很高。</li><li><strong>计算成本高是大规模序列模型落地的主要瓶颈</strong>: 推荐系统每天需要处理的token比GPT-3在1-2个月内处理的token还要多上几个数量级。</li></ol><h1 id="2-生成式推荐"><a href="#2-生成式推荐" class="headerlink" title="2. 生成式推荐"></a>2. 生成式推荐</h1><h2 id="2-1-Unifying-heterogeneous-feature-spaces-in-DLRMs"><a href="#2-1-Unifying-heterogeneous-feature-spaces-in-DLRMs" class="headerlink" title="2.1 Unifying heterogeneous feature spaces in DLRMs"></a>2.1 Unifying heterogeneous feature spaces in DLRMs</h2><p><img src="https://obsidian-1319504291.cos.ap-beijing.myqcloud.com/20250810114141.png" alt="image.png"></p><h3 id="Categotical-‘sparse’-features"><a href="#Categotical-‘sparse’-features" class="headerlink" title="Categotical (‘sparse’) features"></a>Categotical (‘sparse’) features</h3><p>比如用户收藏的item序列, 用户关注的作者ID, 人口统计信息等。</p><ul><li><strong>时序化（sequentialize）</strong><ul><li>先找出<strong>最长的时间序列</strong>，通常是用户和物品交互的记录（比如点击、点赞等），作为<strong>主时间序列</strong>。</li><li>其它特征（比如人口统计信息、关注的创作者等）通常变化比较慢，也以时间序列的形式存在。</li></ul></li><li><strong>压缩（compress）</strong><ul><li>对于这些变化缓慢的时间序列，不保留每一次记录，而是<strong>在每个连续时间段中只保留最早的那一个值</strong>。</li><li>这样压缩后，把这些信息合并到主时间序列中</li></ul></li></ul><h3 id="Numerical-‘dense’-features"><a href="#Numerical-‘dense’-features" class="headerlink" title="Numerical (‘dense’) features"></a>Numerical (‘dense’) features</h3><p>舍弃：更新频繁</p><h2 id="2-2-序列直推式任务-重塑召回与排序"><a href="#2-2-序列直推式任务-重塑召回与排序" class="headerlink" title="2.2 序列直推式任务:重塑召回与排序"></a>2.2 序列直推式任务:重塑召回与排序</h2><p><img src="https://obsidian-1319504291.cos.ap-beijing.myqcloud.com/20250810114639.png" alt="image.png"><br><img src="https://obsidian-1319504291.cos.ap-beijing.myqcloud.com/20250810115056.png" alt="image.png"><br>召回：模型学习分布<br><img src="https://obsidian-1319504291.cos.ap-beijing.myqcloud.com/20250810115136.png" alt="image.png"><br>目标是从候选集 X_c 中选出能最大化 reward 的物品：<br><img src="https://obsidian-1319504291.cos.ap-beijing.myqcloud.com/20250810115153.png" alt="image.png"></p><p>排序：</p><ul><li>工业级推荐排序通常是 <strong>target-aware</strong>：排序时需要立刻考虑目标物品 Φᵢ₊₁ 与历史的交互关系。</li><li>标准自回归做不到这一点，因为它往往在编码结束后才进行交互（比如 softmax）。</li><li>论文的方法：<strong>交错（interleaving）</strong> 物品和行为，让 Φ 和 a 交替出现。</li></ul><h2 id="2-3-生成式训练"><a href="#2-3-生成式训练" class="headerlink" title="2.3 生成式训练"></a>2.3 生成式训练</h2><h1 id="3-HSTU：新的Self-Attention-Encoder"><a href="#3-HSTU：新的Self-Attention-Encoder" class="headerlink" title="3 HSTU：新的Self-Attention Encoder"></a>3 HSTU：新的Self-Attention Encoder</h1><p><img src="https://obsidian-1319504291.cos.ap-beijing.myqcloud.com/20250810115349.png" alt="image.png"><br>HSTU由残差连接的层堆叠而成。每一层包含3个子层, 分别是Pointwise Projection(1)、Spatial Aggregation(2)、Pointwise Transformation(3)<br><img src="https://obsidian-1319504291.cos.ap-beijing.myqcloud.com/20250810115418.png" alt="image.png"><br><img src="https://obsidian-1319504291.cos.ap-beijing.myqcloud.com/20250810115558.png" alt="image.png"></p><h2 id="3-2-优化细节"><a href="#3-2-优化细节" class="headerlink" title="3.2 优化细节"></a>3.2 优化细节</h2><h3 id="3-2-1-Pointwise-aggregated-attention"><a href="#3-2-1-Pointwise-aggregated-attention" class="headerlink" title="3.2.1 Pointwise aggregated attention"></a>3.2.1 Pointwise aggregated attention</h3><ol><li>在推荐中，与目标相关的先验数据点的数量是一个强有力的特征，表明用户偏好的强度，这在 softmax 归一化后很难捕捉到, 而这是至关重要的，因为我们需要同时预测值和序。</li><li>虽然softmax 激活对噪声具有鲁棒性，但它不太适合物料动态更新的流式训练。</li></ol><h3 id="3-2-2-提高稀疏性加速训练"><a href="#3-2-2-提高稀疏性加速训练" class="headerlink" title="3.2.2 提高稀疏性加速训练"></a>3.2.2 提高稀疏性加速训练</h3><h3 id="3-2-3-最小化Activation内存使用"><a href="#3-2-3-最小化Activation内存使用" class="headerlink" title="3.2.3 最小化Activation内存使用"></a>3.2.3 最小化Activation内存使用</h3><h3 id="3-2-4-推理侧优化"><a href="#3-2-4-推理侧优化" class="headerlink" title="3.2.4 推理侧优化"></a>3.2.4 推理侧优化</h3>]]></content>
+    
+    
+    
+    <tags>
+      
+      <tag>LLM</tag>
+      
+      <tag>推荐</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>Recommender Systems with Generative Retrieval</title>
     <link href="/2024/11/04/Recommender-Systems-with-Generative-Retrieval/"/>
     <url>/2024/11/04/Recommender-Systems-with-Generative-Retrieval/</url>
