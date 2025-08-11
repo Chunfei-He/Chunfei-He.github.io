@@ -19,23 +19,28 @@
   <meta name="author" content="Chunfei He">
   <meta name="keywords" content="">
   
-    <meta name="description" content="When Large Language Model based Agent Meets User Behavior Analysis: A Novel User Simulation Paradigma profiling module, a memory module and an action module  用户配置文件包括ID、姓名、性别、年龄、特征、职业、兴趣和行为特征。  （Featu">
+    <meta name="description" content="LLM 应用到推荐有三个问题需要评估：  LLM预训练权重的真正价值：模型权重蕴含着世界知识，但是如何激活这些知识，只能使用文本输入吗？这也为之后使用 feature 输入埋下伏笔； 对推荐任务进行微调是有有必要性？直接使用 pretrain 还是说要进一步微调？ LLM 是否可以应用在推荐系统中并呈现 scaling law？  传统推荐问题：推荐重要的是建模 user、item feature">
 <meta property="og:type" content="article">
-<meta property="og:title" content="agent for recommendation">
-<meta property="og:url" content="https://chunfei-he.github.io/2024/03/15/agent-for-recommendation/index.html">
+<meta property="og:title" content="HLLM: Enhancing Sequential Recommendations via Hierarchical Large Language Models for Item and User Modeling">
+<meta property="og:url" content="https://chunfei-he.github.io/2025/01/11/HLLM-Enhancing-Sequential-Recommendations-via-Hierarchical-Large-Language-Models-for-Item-and-User-Modeling/index.html">
 <meta property="og:site_name" content="blog">
-<meta property="og:description" content="When Large Language Model based Agent Meets User Behavior Analysis: A Novel User Simulation Paradigma profiling module, a memory module and an action module  用户配置文件包括ID、姓名、性别、年龄、特征、职业、兴趣和行为特征。  （Featu">
+<meta property="og:description" content="LLM 应用到推荐有三个问题需要评估：  LLM预训练权重的真正价值：模型权重蕴含着世界知识，但是如何激活这些知识，只能使用文本输入吗？这也为之后使用 feature 输入埋下伏笔； 对推荐任务进行微调是有有必要性？直接使用 pretrain 还是说要进一步微调？ LLM 是否可以应用在推荐系统中并呈现 scaling law？  传统推荐问题：推荐重要的是建模 user、item feature">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2024-03-15T13:55:51.000Z">
-<meta property="article:modified_time" content="2024-08-19T04:04:19.344Z">
+<meta property="og:image" content="https://obsidian-1319504291.cos.ap-beijing.myqcloud.com/20250811215819.png">
+<meta property="og:image" content="https://obsidian-1319504291.cos.ap-beijing.myqcloud.com/20250811224524.png">
+<meta property="og:image" content="https://obsidian-1319504291.cos.ap-beijing.myqcloud.com/20250811224925.png">
+<meta property="og:image" content="https://obsidian-1319504291.cos.ap-beijing.myqcloud.com/20250811224946.png">
+<meta property="og:image" content="https://obsidian-1319504291.cos.ap-beijing.myqcloud.com/20250811225006.png">
+<meta property="og:image" content="https://obsidian-1319504291.cos.ap-beijing.myqcloud.com/20250811225019.png">
+<meta property="article:published_time" content="2025-01-11T13:56:56.000Z">
+<meta property="article:modified_time" content="2025-08-11T14:51:14.591Z">
 <meta property="article:author" content="Chunfei He">
-<meta property="article:tag" content="推荐">
-<meta property="article:tag" content="LLM">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://obsidian-1319504291.cos.ap-beijing.myqcloud.com/20250811215819.png">
   
   
   
-  <title>agent for recommendation - blog</title>
+  <title>HLLM: Enhancing Sequential Recommendations via Hierarchical Large Language Models for Item and User Modeling - blog</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -201,7 +206,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="agent for recommendation"></span>
+            <span id="subtitle" data-typed-text="HLLM: Enhancing Sequential Recommendations via Hierarchical Large Language Models for Item and User Modeling"></span>
           
         </div>
 
@@ -212,8 +217,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2024-03-15 21:55" pubdate>
-          2024年3月15日 晚上
+        <time datetime="2025-01-11 21:56" pubdate>
+          2025年1月11日 晚上
         </time>
       </span>
     
@@ -224,7 +229,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          2.3k 字
+          373 字
         
       </span>
     
@@ -235,7 +240,7 @@
         
         
         
-          19 分钟
+          4 分钟
         
       </span>
     
@@ -272,103 +277,31 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">agent for recommendation</h1>
+            <h1 id="seo-header">HLLM: Enhancing Sequential Recommendations via Hierarchical Large Language Models for Item and User Modeling</h1>
             
             
               <div class="markdown-body">
                 
-                <h3 id="When-Large-Language-Model-based-Agent-Meets-User-Behavior-Analysis-A-Novel-User-Simulation-Paradigm"><a href="#When-Large-Language-Model-based-Agent-Meets-User-Behavior-Analysis-A-Novel-User-Simulation-Paradigm" class="headerlink" title="When Large Language Model based Agent Meets User Behavior Analysis: A Novel User Simulation Paradigm"></a>When Large Language Model based Agent Meets User Behavior Analysis: A Novel User Simulation Paradigm</h3><p>a profiling module, a memory module and an action module</p>
-<ul>
-<li><p>用户配置文件包括ID、姓名、性别、年龄、特征、职业、兴趣和行为特征。</p>
-<ul>
-<li>（Feature：为了更准确地描述推荐域中的用户，我们使用ChatGPT来总结在线用户的五种显著行为特征，并将其纳入用户简档中。包括：</li>
-</ul>
-</li>
-</ul>
-<p>“(1) Watcher: the users with this feature will actively provide feedback and ratings to the interacted items. 将主动对交互项目提供反馈和评级</p>
-<p>(2) Explorer: the users with this feature will actively search for items they have heard before, and produce detailed experiences. 将主动搜索他们以前听过的项目，并产生详细的体验</p>
-<p>(3) Critic: the users with this feature demands high standards for items, and may criticize both the recommendation system and the items.</p>
-<p>(4) Chatter: the users with this feature will always engage in private conversations, and trust friends’ recommendations. 将始终参与私人对话，并相信朋友的推荐</p>
-<p>(5) Poster: the users with this feature enjoy publicly posting on social media and sharing content and insights with his friends.喜欢在社交媒体上公开发帖和分享内容）</p>
-<ul>
-<li><p>memory：感觉记忆、短期记忆和长期记忆</p>
-<ul>
-<li><p>感觉记忆：Two individuals, David Smith and David Miller, engage in a conversation about their shared passion for mind-blowing movies, discussing and recommending films such as Interstellar, Inception, The Matrix, Blade Runner, and The Prestige, ultimately planning a movie night and inviting others to join them for a movie marathon.</p>
-</li>
-<li><p>短期记忆：</p>
-<ul>
-<li><p>“Prompt: There are some memories {MR, OB}. Can you infer from the above memories the high-level insight for this person’s character? The insight needs to be significantly different from the content and structure of the original memories. Respond in one sentence. Response in one line.” </p>
-</li>
-<li><p>“Insight: David Miller is a curious and open-minded individual who actively seeks recommendations and discussions about mind-bending movies.”</p>
-</li>
-</ul>
-</li>
-<li><p>长期记忆：</p>
-</li>
-</ul>
-</li>
-<li><p>action：</p>
-<ul>
-<li><p>推荐系统内：(1)搜索行为：通过这些行为，代理可以主动搜索感兴趣的项目。（2）浏览行为：通过这些行为，代理可以被动地接收来自系统的推荐。（3）点击行为：通过这些行为，代理可以选择他们想要观看&#x2F;购买的项目。（4）下一页行为：当用户对当前推荐&#x2F;搜索的项目不满意，并希望看到更多结果时，会触发这些行为。</p>
-</li>
-<li><p>推荐系统之外的行为：（社交网络）实际上，在推荐系统中可能有大量的外部因素影响用户行为。我们认为社会影响可能是最重要的因素之一，例如，真实用户总是相互影响，人们很容易受到商品广告的影响。从不同的社会行为中，我们抽象出两种一般模式：（1）一对一聊天，两个用户讨论和交换他们的信息。这种模式包括用户行为，如通过Twitter、微信等在线聊天，或在咖啡店离线聊天。这些行为可能会触发用户与讨论的项目进行交互，或者改变他们的记忆以影响后续行动。（2）一对多发布，其中一个用户与其他用户共享信息。这种模式包括在社交媒体上发表意见或发送商业广告等用户行为。这些行为可能影响接收共享信息的用户的记忆和行动。</p>
-</li>
-</ul>
-</li>
-</ul>
-<p>引入社交网络，多个agent互动–&gt; 搜索query补足</p>
-<p>记忆体系：感知、短期、长期</p>
-<h4 id="Recommender-AI-Agent-Integrating-Large-Language-Models-for-Interactive-Recommendations"><a href="#Recommender-AI-Agent-Integrating-Large-Language-Models-for-Interactive-Recommendations" class="headerlink" title="Recommender AI Agent: Integrating Large Language Models for Interactive Recommendations"></a>Recommender AI Agent: Integrating Large Language Models for Interactive Recommendations</h4><p><strong>对话式推荐系统</strong></p>
-<ul>
-<li><p>提出了InteRecAgent，一个紧凑的框架，通过将LLMs与三组传统推荐模型整合，实现了对话式推荐系统的民主化。</p>
-</li>
-<li><p>为了确保LLMs和推荐系统的有效结合，引入了InteRecAgent内的共享内存总线、动态演示增强的先规划后执行策略和反思策略。</p>
-</li>
-</ul>
-<p>用户通过自然语言与LLMs交互，LLMs解释用户意图并判断当前对话是否需要工具的帮助。在轻松对话中，LLMs基于自身知识回应，而在领域内的推荐任务中，LLMs通过调用一系列工具API并观察工具执行结果生成回应。</p>
-<p>作者提出的最小工具集涵盖了以下方面：</p>
+                <p><img src="https://obsidian-1319504291.cos.ap-beijing.myqcloud.com/20250811215819.png" srcset="/img/loading.gif" lazyload alt="image.png"><br>LLM 应用到推荐有三个问题需要评估：</p>
 <ol>
-<li><p><strong>信息查询（Information Query）：</strong> 在对话互动中，InteRecAgent不仅要处理物品推荐任务，还要频繁应对用户的查询。作者引入了一个LLMs配备的项目信息查询模块，通过结构化查询语言（SQL）表达式，从后端项目信息数据库中高效检索详细的项目信息。<br> 例如，在游戏平台上，用户可能会问类似于“这个游戏的发布日期是什么时候？价格是多少？”的问题。为了处理这些查询，LLMs被配置了一个Item Information Query模块，可以通过结构化查询语言（SQL）表达式高效地从后端物品信息数据库中检索详细的物品信息。</p>
-</li>
-<li><p><strong>项目检索（Item Retrieval）：</strong> 用于提出在当前对话中满足用户意图的项目候选列表。工具分为两种类型：硬条件和软条件。硬条件是对项目的明确要求，比如“我想要一些受欢迎的体育游戏”或“推荐我一些价格低于100美元的RPG游戏”。软条件涉及无法用离散属性明确表达的需求，需要使用语义匹配模型，比如“我想要一些类似于《使命召唤》和《堡垒之夜》的游戏”。为了满足这两种条件，InteRecAgent使用SQL工具处理硬条件，从项目数据库中找到候选项目；对于软条件，采用项目到项目工具，基于潜在嵌入匹配相似项目。</p>
-</li>
-<li><p><strong>项目排序（Item Ranking）：</strong> 在对话中，通过分析用户的历史数据和对话中表达的偏好，排名工具对用户进行个性化推荐。排名模块设计为分析用户的历史和对话中提到的具体兴趣，将这些信息作为输入，优先考虑候选集合中的项目。通过有效地对项目进行排序，InteRecAgent可以提供更引人入胜和令人满意的用户体验，从而增强推荐系统的整体效果。</p>
-</li>
+<li>LLM预训练权重的真正价值：模型权重蕴含着世界知识，但是如何激活这些知识，<strong>只能使用文本输入吗？这也为之后使用 feature 输入埋下伏笔</strong>；</li>
+<li>对推荐任务进行微调是有有必要性？直接使用 pretrain 还是说要进一步微调？</li>
+<li>LLM 是否可以应用在推荐系统中并呈现 scaling law？</li>
 </ol>
-<p>例：</p>
-<p>当用户询问“我已经玩过Fortnite和Call of Duty，现在我想玩一些在Fortnite之后发布的益智游戏，你有什么推荐？”时，工具的执行路径如下：</p>
+<p><strong>传统推荐问题</strong>：推荐重要的是建模 user、item feature，主流方法是 ID-based，将 user、item 转为 ID 并创建对应的 embedding table，然而一般都是 embedding 参数很大而模型参数较小，这会导致以下问题：</p>
 <ol>
-<li><ol>
-<li><p><strong>信息查询（Information Query）：</strong> 首先，InteRecAgent通过LLMs解析用户的意图。LLMs会理解用户提到了已经玩过的游戏，以及他们想尝试一些在Fortnite之后发布的益智游戏。在这一阶段，InteRecAgent的LLMs可能使用信息查询工具，通过SQL表达式从后端项目信息数据库中高效检索有关这些游戏的详细信息。</p>
-</li>
-<li><p><strong>项目检索（Item Retrieval）：</strong> 接下来，由于用户表达了明确的需求，即在Fortnite之后发布的益智游戏，InteRecAgent使用SQL检索工具处理硬性条件，从项目数据库中找到符合条件的候选项。此时，候选项将通过Candidate Memory Bus传递，确保不会将所有项附加到提示输入中。</p>
-</li>
-<li><p><strong>项目排名（Item Ranking）：</strong> 最后，InteRecAgent使用排名工具对这些候选项进行排序，考虑用户在对话中提到的历史数据和兴趣。这确保推荐不仅符合用户当前的意图，还符合他们的整体偏好和口味。排序后的结果将成为LLMs生成响应的观察输入，以提供更有吸引力和令人满意的用户体验。</p>
-</li>
+<li>严重依赖 ID feature 在冷启动时表现不好</li>
+<li>模型较小难以建模复杂且多样的用户兴趣</li>
 </ol>
-</li>
+<p><strong>过往 LLM 探索方向</strong>：大致分为三种：</p>
+<ol>
+<li>利用 LLM 提供一些信息给推荐系统</li>
+<li>将推荐系统转变为对话驱动的形式</li>
+<li>修改 LLM 不再只是文本输入&#x2F;输出，比如直接输入 ID feature 给 LLM</li>
 </ol>
-<h4 id="On-Generative-Agents-in-Recommendation"><a href="#On-Generative-Agents-in-Recommendation" class="headerlink" title="On Generative Agents in Recommendation"></a>On Generative Agents in Recommendation</h4><p>（i）用户配置模块：用户配置模块包含两个组成部分，一是社会特征，二是独特的品味</p>
-<p>社会特征包含三个关键特征，活跃性，一致性和多样性，活跃性就代表了用户和产品交互的频率和广度，一致性代表了用户的评分这些和平均情况的差异，多样性反映了用户对各种电影类型的倾向，是否是专注于一个方向。</p>
-<p>用户独特品味：</p>
-<p>（ii）内存模块：该模块主要是存储用户的“记忆”，本文将记忆划分为两类，一种是事实记忆，另一种是情感记忆。</p>
-<p>事实记忆是为推荐任务量身定制的，它封装了推荐系统中的交互行为，</p>
-<p>而情感记忆则捕捉了源于这些交互的心理感受。</p>
-<p>具体来说，事实记忆主要包含推荐电影列表，以及用户反馈。反馈涵盖了用户是否观看电影、他相应的评级以及潜在的退出行为等方面。另一方面，情绪记忆记录了用户在系统交互过程中的感受，如疲劳程度和总体满意度。我们的目标是确保生成代理不仅基于过去的事实互动做出反应，而且考虑到感觉，从而更接近地反映真实的人类行为。</p>
-<p>（iii）动作模块：该模块负责用户的行动，一种是受到用户偏好驱动的，一种是受到用户情感驱动的。</p>
-<p>用户偏好驱动</p>
-<p>情感驱动：疲劳度，退出推荐系统后追访。</p>
-<h2 id="基础属性"><a href="#基础属性" class="headerlink" title="基础属性"></a>基础属性</h2><p>——通过前序prompt固定提供</p>
-<p>年龄、性别</p>
-<p>推荐整体满意程度：点展比均值，高、中、低</p>
-<p>探索欲：点击资源的类别数&#x2F;点击资源数，高、中、低</p>
-<p>从众性：点击资源平均分发量</p>
-<p>活跃程度：高活、中活、低活、沉默</p>
-<p>资源质量偏好：点击资源质量分均值</p>
-<p>资源类别偏好</p>
-<h2 id="“记忆”"><a href="#“记忆”" class="headerlink" title="“记忆”"></a>“记忆”</h2><p>——需要时查表</p>
-<p>（ubs_feed.feed_dim_user_dau_shoubai_expand_di）</p>
-<p>城市、资产状况、星座、消费水平、手机型号、教育水平、兴趣偏好、职业、人生阶段、婚姻状态</p>
+<h1 id="Hierarchical-Large-Language-Model-Architecture"><a href="#Hierarchical-Large-Language-Model-Architecture" class="headerlink" title="Hierarchical Large Language Model Architecture"></a>Hierarchical Large Language Model Architecture</h1><p><img src="https://obsidian-1319504291.cos.ap-beijing.myqcloud.com/20250811224524.png" srcset="/img/loading.gif" lazyload alt="image.png"><br>Item LLM：使用 item 的描述作为输入，包括 Title、Tag、Description，最后再加上一个特殊 token：[ITEM]，特殊 token 对应输出的代表该 item 的 embedding；<br>User LLM：输入是用户历史交互序列，输入序列中每个 item 就来自于 Item LLM 的输出。由于输入并非文本 token，所以会去除预训练模型的 word embedding；</p>
+<h1 id="Training-for-Recommendation-Objectives"><a href="#Training-for-Recommendation-Objectives" class="headerlink" title="Training for Recommendation Objectives"></a>Training for Recommendation Objectives</h1><p>生成式：<br><img src="https://obsidian-1319504291.cos.ap-beijing.myqcloud.com/20250811224925.png" srcset="/img/loading.gif" lazyload alt="image.png"><br>判别式：<br><img src="https://obsidian-1319504291.cos.ap-beijing.myqcloud.com/20250811224946.png" srcset="/img/loading.gif" lazyload alt="image.png"><br><img src="https://obsidian-1319504291.cos.ap-beijing.myqcloud.com/20250811225006.png" srcset="/img/loading.gif" lazyload alt="image.png"><br><img src="https://obsidian-1319504291.cos.ap-beijing.myqcloud.com/20250811225019.png" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/722159726">https://zhuanlan.zhihu.com/p/722159726</a><br><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/14074487300">https://zhuanlan.zhihu.com/p/14074487300</a></p>
 
                 
               </div>
@@ -378,15 +311,6 @@
               <div class="post-metas my-3">
   
   
-    <div class="post-meta">
-      <i class="iconfont icon-tags"></i>
-      
-        <a href="/tags/%E6%8E%A8%E8%8D%90/" class="print-no-link">#推荐</a>
-      
-        <a href="/tags/LLM/" class="print-no-link">#LLM</a>
-      
-    </div>
-  
 </div>
 
 
@@ -395,8 +319,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>agent for recommendation</div>
-      <div>https://chunfei-he.github.io/2024/03/15/agent-for-recommendation/</div>
+      <div>HLLM: Enhancing Sequential Recommendations via Hierarchical Large Language Models for Item and User Modeling</div>
+      <div>https://chunfei-he.github.io/2025/01/11/HLLM-Enhancing-Sequential-Recommendations-via-Hierarchical-Large-Language-Models-for-Item-and-User-Modeling/</div>
     </div>
     <div class="license-meta">
       
@@ -408,7 +332,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2024年3月15日</div>
+          <div>2025年1月11日</div>
         </div>
       
       
@@ -440,15 +364,21 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2024/03/19/LLM%E8%B0%83%E7%A0%94/" title="LLM调研">
+                      <a href="/2025/06/03/GPTQ%EF%BC%9A%E4%BB%8E%E9%87%8F%E5%8C%96%E8%B0%88%E8%B5%B7/" title="GPTQ：从量化谈起">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">LLM调研</span>
+                        <span class="hidden-mobile">GPTQ：从量化谈起</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
                   </article>
                   <article class="post-next col-6">
                     
+                    
+                      <a href="/2024/12/05/Actions-Speak-Louder-than-Words-Trillion-Parameter-Sequential-Transducers/" title="Actions Speak Louder than Words: Trillion-Parameter Sequential Transducers">
+                        <span class="hidden-mobile">Actions Speak Louder than Words: Trillion-Parameter Sequential Transducers</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
                     
                   </article>
                 </div>
