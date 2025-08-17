@@ -4,6 +4,19 @@
   
   
   <entry>
+    <title>OneRec: Unifying Retrieve and Rank with Generative Recommender and Preference Alignment</title>
+    <link href="/2025/08/12/OneRec-Unifying-Retrieve-and-Rank-with-Generative-Recommender-and-Preference-Alignment/"/>
+    <url>/2025/08/12/OneRec-Unifying-Retrieve-and-Rank-with-Generative-Recommender-and-Preference-Alignment/</url>
+    
+    <content type="html"><![CDATA[<p><img src="https://obsidian-1319504291.cos.ap-beijing.myqcloud.com/20250817181553.png" alt="image.png"><br><img src="https://obsidian-1319504291.cos.ap-beijing.myqcloud.com/20250817181612.png" alt="image.png"></p><h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p><img src="https://obsidian-1319504291.cos.ap-beijing.myqcloud.com/20250817181655.png" alt="image.png"></p><p>过去十多年里，推荐系统大规模应用于短视频、电商、信息流等场景。主流方案几乎都是 **多阶段级联 (cascaded)**：</p><ol><li><strong>召回（Recall）</strong>：从海量库 (~10¹⁰ 级别) 中快速筛出候选。</li><li><strong>粗排（Pre-ranking）</strong>：进一步缩小范围。</li><li><strong>精排（Ranking）</strong>：用复杂模型精细打分。</li></ol><p>这种架构的优点是 <strong>效率高</strong>，能在超大规模库里低延迟返回结果。但也存在一些 <strong>固有问题</strong>：</p><ul><li><strong>计算碎片化</strong>：大量资源浪费在通信和存储，真正算力利用率很低（训练 MFU 只有 4.6%，推理 11.2%</li><li><strong>目标冲突</strong>：不同阶段、不同模型优化的目标不一致，导致上下游之间相互掣肘，整体优化困难。</li><li><strong>滞后于 AI 发展</strong>：LLM&#x2F;VLM 领域已经有了 Scaling law、RLHF、DPO 等成熟经验，但多阶段结构使这些技术难以直接应用到推荐中</li></ul><p>受到 <strong>生成式信息检索 (Generative Retrieval, GR)</strong> 的启发，学界和业界开始尝试把推荐建模为 <strong>序列生成问题</strong>。</p><ul><li>用 <strong>语义 ID (semantic token)</strong> 表示物品，通过 <strong>自回归生成</strong> 的方式直接产出候选列表。</li><li>代表工作如 <strong>TIGER、LC-Rec</strong> 等，证明了这种思路的可行性，但此前多停留在“生成 &#x3D; 召回”，并没有真正统一排序阶段</li></ul><p>为了解决上述挑战，论文提出了一种统一的端到端单阶段生成式推荐框架OneRec，包括以下三个关键设计：</p><p><strong>1.编码-解码结构</strong>：用于编码用户的历史行为序列，并逐步解码出用户可能感兴趣的视频。引入了稀疏专家混合模型MoE，在不显著增加计算量的前提下扩展模型容量。</p><p><strong>2.基于会话的生成方式</strong>：与传统的“下一个物品预测”不同，提出了一种基于会话的生成方法，避免了依赖手工规则将生成结果拼接的繁琐过程。</p><p><strong>3.偏好对齐模块与直接偏好优化DPO结合</strong>：用于增强生成结果的质量,设计了一个奖励模型来模拟用户的生成行为，并根据推荐系统在线学习的特性定制了采样策略。</p><p>大量实验表明，即便只使用少量DPO样本，也能有效对齐用户兴趣偏好，并显著提升生成结果的质量。已在快手主推荐场景中部署了OneRec，最终将用户观看时长提升了**1.6%**。</p><h1 id="Methods"><a href="#Methods" class="headerlink" title="Methods"></a>Methods</h1><p><img src="https://obsidian-1319504291.cos.ap-beijing.myqcloud.com/20250817182631.png" alt="image.png"></p><h2 id="tokenization"><a href="#tokenization" class="headerlink" title="tokenization"></a>tokenization</h2><p><img src="https://obsidian-1319504291.cos.ap-beijing.myqcloud.com/20250817184821.png" alt="image.png"><br><img src="https://obsidian-1319504291.cos.ap-beijing.myqcloud.com/20250817184850.png" alt="image.png"></p><h2 id="Session-wise-List-Generation"><a href="#Session-wise-List-Generation" class="headerlink" title="Session-wise List Generation"></a>Session-wise List Generation</h2><p><img src="https://obsidian-1319504291.cos.ap-beijing.myqcloud.com/20250817184948.png" alt="image.png"></p><h2 id="Iterative-Preference-Alignment-with-RM"><a href="#Iterative-Preference-Alignment-with-RM" class="headerlink" title="Iterative Preference Alignment with RM"></a>Iterative Preference Alignment with RM</h2><p><img src="https://obsidian-1319504291.cos.ap-beijing.myqcloud.com/20250817185045.png" alt="image.png"><br><img src="https://obsidian-1319504291.cos.ap-beijing.myqcloud.com/20250817185107.png" alt="image.png"></p>]]></content>
+    
+    
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>GPTQ：从量化谈起</title>
     <link href="/2025/06/03/GPTQ%EF%BC%9A%E4%BB%8E%E9%87%8F%E5%8C%96%E8%B0%88%E8%B5%B7/"/>
     <url>/2025/06/03/GPTQ%EF%BC%9A%E4%BB%8E%E9%87%8F%E5%8C%96%E8%B0%88%E8%B5%B7/</url>
